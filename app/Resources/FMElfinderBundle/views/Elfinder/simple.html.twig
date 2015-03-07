@@ -1,0 +1,42 @@
+{% extends 'AseagleAdminBundle::layout.html.twig' %} 
+
+{% block stylesheet %}
+    {{ parent() }}   
+    {% if includeAssets %}
+        {% include "FMElfinderBundle:Elfinder:helper/assets_css.html.twig" %}
+    {% endif %}
+{% endblock %}
+
+{% block breadcrumb %}{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {% javascripts output='assetic/js/compiled/fmelfinder/main.min.js'
+        '@FMElfinderBundle/Resources/public/js/elfinder.min.js'
+        '@FMElfinderBundle/Resources/public/js/i18n/*'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript" charset="utf-8">
+        $().ready(function() {
+            var $f = $('.elfinder').elfinder({
+                url : '{{path('ef_connect', { 'instance': instance } )}}',
+                lang : '{{locale}}'
+            });
+    
+            {% if fullscreen %}
+            var $window = $(window);
+            $window.resize(function(){
+                var $win_height = $window.height();
+                if( $f.height() != $win_height ){
+                    $f.height($win_height).resize();
+                }
+            });
+            {% endif %}
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="elfinder"></div>
+{% endblock %}

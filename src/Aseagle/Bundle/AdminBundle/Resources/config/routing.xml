@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="admin_homepage" path="/">
+        <default key="_controller">AseagleAdminBundle:Default:index</default>
+    </route>
+    <route id="admin_js_lang" path="/lang.js">
+        <default key="_controller">AseagleAdminBundle:Default:jsTranslate</default>
+    </route>
+    <route id="admin_login" path="/login">
+        <default key="_controller">AseagleAdminBundle:Security:login</default>
+    </route>    
+    <route id="admin_logout" path="/logout">
+        <default key="_controller">AseagleAdminBundle:Security:logout</default>
+    </route>
+    <route id="admin_logincheck" path="/login_check">
+        <default key="_controller">AseagleAdminBundle:Security:check</default>
+    </route>
+    <route id="admin_switch_language" path="/switch-language/{lang}">
+        <default key="_controller">AseagleAdminBundle:Default:switchLanguage</default>
+    </route>
+    <import resource="@AseagleAdminBundle/Resources/config/routing/user.xml" prefix="/user" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/group.xml" prefix="/group" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/article.xml" prefix="/post" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/category.xml" prefix="/category" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/productcategory.xml" prefix="/category-product" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/page.xml" prefix="/page" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/brand.xml" prefix="/brand" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/product.xml" prefix="/product" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/acl.xml" prefix="/acl" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/order.xml" prefix="/order" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/setting.xml" prefix="/setting" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/banner.xml" prefix="/banner" />
+</routes>

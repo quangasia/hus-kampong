@@ -1,0 +1,35 @@
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th> &nbsp;{#{ 'acl.table.name'|trans({}, 'SMAdminBundle') }#}</th>
+            <th width="15%">{{ 'acl.table.view'|trans({}, 'SMAdminBundle') }}</th>
+            <th width="15%">{{ 'acl.table.edit'|trans({}, 'SMAdminBundle') }}</th>          
+            <th width="15%">{{ 'acl.table.all'|trans({}, 'SMAdminBundle') }}</th>
+        </tr>
+    </thead>       
+    <tbody>
+        {% set group = 0 %}
+        {% for acl in aclData %}
+            
+            <tr>
+                <th colspan="6"><h4>{{ acl.name| trans({}, 'SMAdminBundle')  }}</h4></th>
+            </tr>                
+            
+            {% for key, name in acl.fields %}
+            <tr>
+                <td> -- <strong>{{ name|trans({}, 'SMFrontBundle') }}</strong></td>
+                <td><input type="checkbox" {% if acls[acl.class][key]['view'] is defined and acls[acl.class][key]['view'] == true %} checked="checked" {% endif %} 
+                           class="aclCheckbox" value="{{aclMask['view']}}" name="permission[{{acl.class}}][{{key}}][]" ></td>                
+                <td><input type="checkbox" {% if acls[acl.class][key]['edit'] is defined and acls[acl.class][key]['edit'] == true %} checked="checked" {% endif %} 
+                           class="aclCheckbox" value="{{aclMask['edit']}}" name="permission[{{acl.class}}][{{key}}][]" ></td>               
+                <td><input type="checkbox" {% if acls[acl.class][key]['owner'] is defined and acls[acl.class][key]['owner'] == true %} checked="checked" {% endif %} 
+                           class="aclCheckbox aclAll" value="{{aclMask['owner']}}" name="permission[{{acl.class}}][{{key}}][]" ></td>
+            </tr>
+            {% endfor %}
+            
+        {% endfor %}
+    </tbody>    
+</table>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary btn-submit">{{ 'form.button.save'|trans({}, 'SMAdminBundle') }}</button>
+</div>

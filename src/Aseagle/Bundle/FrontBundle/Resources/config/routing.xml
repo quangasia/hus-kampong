@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="front_homepage" path="/">
+        <default key="_controller">AseagleFrontBundle:Default:index</default>
+    </route>
+    
+    <route id="front_homepage_menu" path="/">
+        <default key="_controller">AseagleFrontBundle:Default:menu</default>
+    </route>
+    
+    <route id="front_consultant" path="/tu-van.html">
+        <default key="_controller">AseagleFrontBundle:Page:consultant</default>
+        <default key="id">1</default>
+    </route>
+    
+    <route id="front_consultant_list" path="/{id}-tu-van.html">
+        <default key="_controller">AseagleFrontBundle:Page:consultant</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="front_consultant_detail" path="/tu-van/{id}-{alias}.html">
+        <default key="_controller">AseagleFrontBundle:Page:detail</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="front_about_us" path="/gioi-thieu.html">
+        <default key="_controller">AseagleFrontBundle:Page:detail</default>
+        <default key="id">9</default>
+    </route>
+    <route id="front_faq" path="/hoi-dap.html">
+        <default key="_controller">AseagleFrontBundle:Page:detail</default>
+        <default key="id">5</default>
+    </route>
+    <route id="front_recruitment" path="/tuyen-dung.html">
+        <default key="_controller">AseagleFrontBundle:Page:detail</default>
+        <default key="id">7</default>
+    </route>
+    <route id="front_policy" path="/quy-che.html">
+        <default key="_controller">AseagleFrontBundle:Page:detail</default>
+        <default key="id">6</default>
+    </route>
+    <route id="front_terms" path="/chinh-sach.html">
+        <default key="_controller">AseagleFrontBundle:Page:detail</default>
+        <default key="id">10</default>
+    </route>
+    
+    <route id="front_product_brand" path="/thuong-hieu/{id}-{alias}.html">
+        <default key="_controller">AseagleFrontBundle:Product:productByBrand</default>
+        <default key="alias">brand</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    <route id="front_product_detail" path="/san-pham/{id}-{alias}.html">
+        <default key="_controller">AseagleFrontBundle:Product:detail</default>
+        <default key="brand-alias">chi-tiet</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    <route id="front_product_list" path="/danh-muc/{id}-{alias}.html">
+        <default key="_controller">AseagleFrontBundle:Product:list</default>
+        <default key="brand-alias">chi-tiet</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="front_product_search" path="/tim-kiem.html">
+        <default key="_controller">AseagleFrontBundle:Product:search</default>       
+    </route>
+    
+    <route id="front_register" path="/dang-ky.html">
+        <default key="_controller">AseagleFrontBundle:Auth:register</default>
+    </route>   
+    <route id="front_profile" path="/thong-tin-ca-nhan.html">
+        <default key="_controller">AseagleFrontBundle:Auth:register</default>
+    </route>  
+     <route id="front_login" path="/dang-nhap.html">
+        <default key="_controller">AseagleFrontBundle:Auth:login</default>
+    </route>    
+    <route id="front_fb_login" path="/fb-login.html">
+        <default key="_controller">AseagleFrontBundle:Auth:fbLogin</default>
+    </route> 
+    <route id="front_logout" path="dang-xuat.html">
+        <default key="_controller">AseagleFrontBundle:Auth:logout</default>
+    </route>
+    <route id="front_logincheck" path="/login_check">
+        <default key="_controller">AseagleFrontBundle:Auth:check</default>
+    </route>
+    
+    <route id="front_cart_add" path="/gio-hang/them/{pid}">
+        <default key="_controller">AseagleFrontBundle:Cart:addToCart</default>
+        <requirement key="pid">\d+</requirement>
+    </route>
+    <route id="front_cart" path="/gio-hang.html">
+        <default key="_controller">AseagleFrontBundle:Cart:viewCart</default>
+    </route>
+    <route id="front_checkout" path="/checkout.html">
+        <default key="_controller">AseagleFrontBundle:Cart:checkout</default>
+    </route>
+    <route id="front_checkout_success" path="/checkout-success.html">
+        <default key="_controller">AseagleFrontBundle:Cart:checkoutSuccess</default>
+    </route>
+    <route id="front_cart_remove_item" path="/gio-hang/xoa/{pid}">
+        <default key="_controller">AseagleFrontBundle:Cart:removeCartItem</default>
+        <requirement key="pid">\d+</requirement>
+    </route>
+</routes>

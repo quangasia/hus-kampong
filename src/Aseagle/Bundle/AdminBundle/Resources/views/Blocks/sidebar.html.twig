@@ -1,0 +1,76 @@
+{% set aclMapping = {
+    'admin_group' : 'Aseagle\Bundle\AdminBundle\Controller\GroupController',
+    'admin_user' : 'Aseagle\Bundle\AdminBundle\Controller\UserController',
+    'admin_acl' : 'Aseagle\Bundle\AdminBundle\Controller\AclController',
+    'admin_brand' : 'Aseagle\Bundle\AdminBundle\Controller\BrandController',
+    'admin_productcategory' : 'Aseagle\Bundle\AdminBundle\Controller\ProductCategoryController',
+    'admin_product' : 'Aseagle\Bundle\AdminBundle\Controller\ProductController',
+    'admin_article' : 'Aseagle\Bundle\AdminBundle\Controller\ArticleController',
+    'admin_page' : 'Aseagle\Bundle\AdminBundle\Controller\PageController',
+    'elfinder' : ''    
+} %}
+
+<div class="page-sidebar-wrapper">
+    <div class="page-sidebar navbar-collapse collapse" data-auto-scroll="false">
+        <ul class="page-sidebar-menu page-sidebar-menu-compact" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <li class="start {% if app.request.get('_route') == 'admin_homepage'%}active{% endif %}"><a href="{{ path('admin_homepage') }}"> <i class="icon-home"></i> <span class="title">{{ 'Dashboard'|trans }}</span>
+            </a></li>
+            
+            {% if app.request.get('_route') in ['admin_group', 'admin_group_new', 'admin_user', 'admin_user_new', 'admin_acl'] %}
+            <li class="active open"><a href="javascript:;"> <i class="icon-user"></i> <span class="title">{{ 'User Manager'|trans }}</span> 
+                <span class="selected"></span> 
+                <span class="arrow open"></span>
+            {% else %}
+            <li><a href="javascript:;"> <i class="icon-user"></i> <span class="title">{{ 'User Manager'|trans }}</span> 
+                <span class="arrow "></span>
+            {% endif %}
+            </a>
+                <ul class="sub-menu">                   
+                    {{ menuItem('admin_group', ['admin_group', 'admin_group_new'], 'Group Manager'|trans, "icon-users")|raw }}
+                    {{ menuItem('admin_user', ['admin_user', 'admin_user_new'], 'User Manager'|trans, "icon-user")|raw }}
+                    {{ menuItem('admin_acl', ['admin_acl'], 'Permission'|trans, "icon-key")|raw }}                  
+                </ul>
+            </li>
+           
+            {% if app.request.get('_route') in ['admin_article', 'admin_article_new', 'admin_category', 'admin_category_new', 'admin_page', 'admin_page_new', 'elfinder', 'admin_banner', 'admin_banner_new'] %}
+            <li class="active open"><a href="javascript:;"> <i class="icon-pin"></i> <span class="title">{{ 'Content Manager'|trans }}</span> 
+                 <span class="selected"></span>  
+                 <span class="arrow open"></span>
+            {% else %}    
+            <li><a href="javascript:;"> <i class="icon-pin"></i> <span class="title">{{ 'Content Manager'|trans }}</span> <span class="arrow "></span>
+            {% endif %}
+            </a>
+                <ul class="sub-menu">
+                    {{ menuItem('admin_category', ['admin_category', 'admin_category_new'], 'Category Manager'|trans, "icon-docs")|raw }}
+                    {{ menuItem('admin_article', ['admin_article', 'admin_article_new'], 'Post Manager'|trans, "icon-doc")|raw }}
+                    {{ menuItem('admin_page', ['admin_page', 'admin_page_new'], 'Page Manager'|trans, "icon-globe")|raw }}
+                    {{ menuItem('admin_banner', ['admin_banner', 'admin_banner_new'], 'Banner Manager'|trans, "icon-picture")|raw }}
+                    <li class="{% if app.request.get('_route') in ['elfinder'] %}active{% endif %}">
+                        <a href="{{ path('elfinder', {instance: 'simple'}) }}"> <i class="icon-picture"></i> {{ 'Media'|trans }}</a>
+                    </li>
+                </ul>
+            </li>   
+            {% if app.request.get('_route') in ['admin_setting', 'admin_setting_new'] %}
+            <li class="last active">
+				<a href="javascript:;">
+					<i class="icon-equalizer"></i>
+					<span class="title">{{ 'System Manager'|trans }}</span>
+					 <span class="selected"></span>  
+					<span class="arrow open"></span>
+			{% else %}
+		    <li class="last">
+				<a href="javascript:;">
+					<i class="icon-equalizer"></i>
+					<span class="title">{{ 'System Manager'|trans }}</span>
+					<span class="arrow "></span>
+			{% endif %}
+				</a>
+				<ul class="sub-menu">
+				    {{ menuItem('admin_setting', ['admin_setting', 'admin_setting_new'], 'Setting Manager'|trans, "icon-settings")|raw }}
+				</ul>
+			</li>
+                    
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+</div>

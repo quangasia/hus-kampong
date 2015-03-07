@@ -1,0 +1,202 @@
+Page: Trang
+Prev: Lùi
+Next: Tới
+Last: Sau
+First: Trước
+of: của
+"_TOTAL_ records selected:  ": "Đã chọn _TOTAL_:  "
+Could not complete request. Please check your internet connection: Gửi yêu cầu không thành công, vui lòng kiểm tra đường truyền internet
+<span class='seperator'>|</span>View _MENU_ records: <span class='seperator'>|</span>Xem _MENU_ dòng
+<span class='seperator'>|</span>Found total _TOTAL_ records: <span class='seperator'>|</span>Tổng số _TOTAL_ dòng
+No records found to show: Không tìm thấy dữ liệu
+No data available in table: Không có dữ liệu
+No matching records found: Không tìm thấy dữ liệu phù hợp
+
+#Common
+Publish: Xuất bản
+Un-publish: Không xuất bản
+Delete: Xóa
+Select...: Chọn...
+Submit: Gửi
+Date Created: Ngày tạo
+Created: Ngày tạo
+Edit: Sửa
+Search: Lọc
+Reset: Reset
+Save: Lưu
+Cancel: Thoát
+Enabled: Công khai
+New: Tạo mới
+From: Từ
+To: Đến
+View: Xem
+Create: Tạo mới
+Save & Continute Edit: Lưu & Tiếp tục sửa
+
+#Message
+Updated successful: Cập nhật thành công
+Deleted successful: Xóa thành công
+Created successful: Thêm mới thành công
+Error has occurred while saving object: Đã có lỗi xảy ra
+%d records published: %d dòng đã được bật thành công
+%d records unpublished: %d dòng đã được tắt thành công
+%d records deleted: %d dòng đã được xóa thành công
+Error! please deteted or updated the related items before remove this records: Lỗi! vui lòng xóa hoặc thay đổi những dữ liệu có liên quan đến những dòng mà bạn muốn xóa
+You have some form errors. Please check below.: Bạn có một số lỗi nhập liệu. Vui lòng kiểm tra lại.
+Error! this is a object of system, you can't delete this record: Lỗi! Bạn không thể xóa dòng này
+
+#Sidebar
+Group Manager: Nhóm thành viên
+Users: Thành viên
+User Manager: Quản lý thành viên
+Permission: Phân quyền
+Shop Manager: Thương mại điện tử
+Content Manager: Quản lý nội dung
+Product Manager: Quản lý sản phẩm
+Product Category Manager: Thể loại sản phẩm
+Category Manager: Quản lý thể loại
+Orders: Đơn đặt hàng
+Brand Manager: Quản lý nhãn hiệu
+Dashboard: Bảng điều khiển
+Post Manager: Quản lý bài viết
+Media: Quản lý hình ảnh
+Page Manager: Quản lý trang
+Order Manager: Quản lý đặt hàng
+System Manager: Quản lý hệ thống
+Setting Manager: Cấu hình chung
+
+#User manager
+users listing: danh sách thành viên
+Username: Tên người dùng
+Full Name: Họ tên
+Email: Email
+Date Registered: Ngày đăng ký
+Status: Trạng thái
+Actions: Thao tác
+New User: Tạo thành viên
+Tools: Công cụ
+Export to Excel: Xuất file Excel
+Repeat Password: Nhập lại mật khẩu
+Profile: Thông tin cá nhân
+Birthday: Ngày sinh
+Phone Number: Số điện thoại
+
+#Group manager
+User Level: Nhóm người dùng
+Manager Level: Nhóm quản lý web
+Group Name: Tên nhóm
+Group Type: Loại
+Description: Mô tả
+Role Name: Vai trò
+groups listing: danh sách nhóm
+Add Group: Nhóm
+New Group: Tạo nhóm
+Add or edit group: Thêm hoặc sửa nhóm
+Group: Nhóm thành viên
+Groups: Nhóm thành viên
+
+#Article manager
+Select Image: Chọn hình ảnh
+Title: Tiêu đề
+Slug: Alias
+Content: Nội dung
+Featured Image: Hình ảnh thu nhỏ
+Tags: Tags
+Article: Bài viết
+add or edit article: Thêm hoặc sửa bài viết 
+New Article: Tạo bài viết
+Articles: Bài viết
+articles listing: danh sách bài viết
+Author: Tác giả
+Hits: Lượt xem
+Posts: Bài viết
+
+#Category manager
+Parent Category: Thể loại cha
+Category: Thể loại
+add or edit category: Thêm hoặc sửa thể loại
+categories listing: danh sách thể loại
+New Category: Thêm thể loại
+Order: Thứ tự
+
+
+#Login page
+Login to your account: Đăng nhập quản trị
+Remember me: Ghi nhớ
+Username: Tên đăng nhập
+Password: Mật khẩu
+Login: Đăng nhập
+
+#Page manager
+New Page: Tạo page
+
+
+#Product
+Categories of Product: Thể loại sản phẩm
+New Category Product: Thêm mới thể loại sản phẩm
+Product Name: Tên sản phẩm
+Product Price: Giá
+Product Quantity: Số lượng
+Images: Hình ảnh
+General: Thông tin
+Meta: Meta
+Select Files: Chọn file
+Upload Files: Tải lên
+New Product: Thêm mới sản phẩm
+Image: Hình ảnh
+Image Name: Tên
+Ordering: Thứ tự
+Base Image: Hình lớn
+Small Image: Hình nhỏ
+Products: Sản phẩm
+Thumbnail: Thumbnail
+Categories: Danh mục
+Product Sku: Sku
+Short Description: Mô tả ngắn
+Price: Giá
+Reviews: Đánh giá
+Customer: Khách hàng
+Product Description: Chi tiết sản phẩm
+Product Supplement: Thông tin bổ sung
+Show on Homepage: Hiển thị trên trang chủ
+
+
+#Order
+Total Price: Tổng tiền
+Completed: Hoàn thành
+Pending: Chờ xác nhận
+Closed: Hủy
+Product Orders: Thông tin sản phẩm
+Customer Information: Thông tin khách hàng
+Quantity: Số lượng
+Address: Địa chỉ
+Phone: Số điện thoại
+
+#Brand
+Brand Name: Tên nhãn hiệu
+Brand Picture: Hình ảnh
+Brand: Nhãn hiệu
+Introduction: Giới thiệu
+Brands: Nhãn hiệu
+
+#system
+System: Quản lý hệ thống
+Settings: Cấu hình chung
+Clear Cache: Xóa cache
+Setting Name: Tên
+Setting Value: Giá trị
+
+#Banner
+Banner Name: Tiêu đề
+Banner Picture: Hình ảnh
+Level: Tầng
+Banner Manager: Quản lý Banner
+Picture: Hình ảnh
+
+#Dashboard
+Total Products: Sản phẩm
+Total Orders: Đơn đặt hàng
+Total Customers: Khách hàng
+Total Moneys: Doanh thu (vnd)
+
+

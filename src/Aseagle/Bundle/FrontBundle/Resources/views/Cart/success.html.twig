@@ -1,0 +1,13 @@
+{% extends "AseagleFrontBundle::layout.html.twig" %} 
+{% block classbody %}class="detail-page"{% endblock %} 
+{% block content %} 
+<section class="two-col">
+    <section class="col left">{{ render(controller('AseagleFrontBundle:Default:leftSidebar')) }}</section>
+    <section class="col right">
+        <h2 class="title">{{ 'Cart'|trans }}</h2>
+        <div class="feature-block news-block">
+            <h3>Bạn đã đặt hàng thành công. <br>Cám ơn bạn, chúng tôi sẽ liên lạc với bạn sớm nhất</h3>
+        </div>
+    </section>
+</section>
+{% endblock %}

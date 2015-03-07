@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+ 
+    <route id="admin_brand_new" path="/new/{id}">
+        <default key="_controller">AseagleAdminBundle:Base:new</default>
+        <default key="_class">Aseagle\Bundle\AdminBundle\Controller\BrandController</default>
+        <default key="_manager">brand_manager</default>
+        <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Type\BrandType</default>
+        <default key="_view">AseagleAdminBundle:Brand:new.html.twig</default>
+        <default key="id" xsi:nil="true" />
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="admin_brand" path="/">
+        <default key="_controller">AseagleAdminBundle:Brand:index</default>
+        <default key="_class">Aseagle\Bundle\AdminBundle\Controller\BrandController</default>
+        <default key="_manager">brand_manager</default>
+        <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\BrandFilter</default>
+        <default key="_columns">["id","name","created","enabled"]</default>    
+        <default key="_view">AseagleAdminBundle:Brand:index.html.twig</default>    
+    </route>
+</routes>

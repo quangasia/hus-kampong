@@ -1,0 +1,113 @@
+{% extends "AseagleFrontBundle::layout.html.twig" %}
+{% block content %}
+<section class="two-col">
+    <section class="col left">
+        <nav class="nav-main">
+            <h2>Danh mục</h2>
+            <ul>
+                {% if categories[0] is defined %}            
+                    {% for item in categories[0] %}
+                    <li {% if loop.first %}class="active"{% endif %}><a href="{{ path('front_product_list', {id: item.id, alias: item.slug}) }}" title="{{ item.title }}">{{ item.title }}</a></li>
+                    {% endfor %}
+                {% endif %}
+                <li><a href="{{ path('front_consultant') }}" title="Dịch vụ tư vấn">Dịch vụ tư vấn</a></li>
+            </ul>
+        </nav>
+    </section>
+    <section class="col right">
+        <h2 class="title">Sản phẩm và dịch vụ mới</h2>
+        <section>
+            <div class="banner">
+                <div class="wrap">
+                    {% if banners[0] is defined and banners[0].image != '' %}
+                    <a href="{{ banners[0].link }}"  title="{{ banners[0].name }}"><img width="490" src="{{ asset('/uploads/' ~ banners[0].image) }}" alt="{{ banners[0].name }}" /></a> 
+                    {% endif %}
+                </div>
+            </div>
+            <div class="hot-pro">
+                {% for product in productRand %}
+                    {% if loop.index <= 2 %}
+                     <div class="item">
+                        <a href="{{ path('front_product_detail', {id:product['id'], alias:product['slug']}) }}" title="{{ product['name'] }}">
+                            <h4 class="name">{{ product['name'] }}</h4>
+                            <figure>                                
+                                <img style="max-width: 150px; max-height:84px" src="{{ asset('/uploads/products/' ~ product['thumbnail']) }}" alt="" />
+                            </figure>
+                        </a>
+                    </div>
+                    {% endif %}
+                {% endfor %}               
+            </div>
+        </section>
+    </section>
+</section>
+{% if categories[0] is defined %}            
+    {% for item in categories[0] %}
+    <section class="floor">
+        <div class="outer">
+            <div class="inner">
+                <span class="number">Tầng<i>{{ loop.index }}</i></span>
+                <h2 class="title">{{ item.title }}</h2>
+                <a href="{{ path('front_product_list', {id: item.id, alias:item.slug}) }}" title="Xem tất cả" class="see-all"><i class="icon icon-arrow"></i>Xem tất cả</a>
+                
+                {% if categories[item.id] is defined %}
+                <nav>
+                    <ul>
+                        {% for catLv1 in categories[item.id] %}
+                        <li><a href="{{ path('front_product_list', {id:catLv1.id, alias:catLv1.slug}) }}" title="{{ catLv1.title }}">{{ catLv1.title }}</a>
+                            <ul>
+                                {% if categories[catLv1.id] is defined %}
+                                    {% for catLv2 in categories[catLv1.id] %}
+                                    <li><a href="{{ path('front_product_list', {id:catLv2.id, alias:catLv2.slug}) }}" title="TV">{{ catLv2.title }}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul></li>
+                        {% endfor %}                              
+                    </ul>
+                </nav>
+                {% endif %}
+                
+                <article>
+                    <ul class="brand-logo">
+                        {% if brandByCat[item.id] is defined %}
+                            {% for brand in brandByCat[item.id] %}
+                            <li>
+                                <a href="{{ path('front_product_brand', {id:brand.id, alias:brand.slug}) }}" title="{{ brand.name }}">
+                                {% if brand.picture != '' %}
+                                <img width="117" src="{{ asset('/uploads/' ~ brand.picture)}}" alt="{{ brand.name }}" />
+                                {% else %}
+                                {{ brand.name }}
+                                {% endif %}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                    <figure>
+                        {% if banners[loop.index] is defined and banners[loop.index].image != '' %}
+                        <a href="{{ banners[loop.index].link }}" title="{{ banners[loop.index].name }}"><img  width="330" src="{{ asset('/uploads/' ~ banners[loop.index].image) }}" alt="{{ banners[loop.index].name }}" /></a>
+                        {% endif %}
+                    </figure>
+                    <div class="hot-pro">  
+                        {% if productHomepage[item.id] is defined %}
+                            {% for product in productHomepage[item.id] %}
+                                {% if loop.index <= 2 %}
+                                <div class="item">
+                                    <a href="{{ path('front_product_detail', {id:product['id'], alias:product['slug']}) }}" title="{{ product['name'] }}">
+                                        <h4 class="name">{{ product['name'] }}</h4>
+                                        <figure>
+                                            <img style="max-width: 150px; max-height:85px" src="{{ asset('/uploads/products/' ~ product['thumbnail']) }}" alt="" />
+                                        </figure>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}                        
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    {% endfor %}           
+  {% endif %}
+{% endblock %}

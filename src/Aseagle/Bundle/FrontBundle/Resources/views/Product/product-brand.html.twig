@@ -1,0 +1,26 @@
+{% extends 'AseagleFrontBundle::layout.html.twig' %} 
+
+{% block content %}
+<section class="col left">{{ render(controller('AseagleFrontBundle:Default:leftSidebar')) }}</section>
+<section class="col right">
+    <div class="category-block">
+        <h2>{{ brand.name }}</h2>
+        <div class="content cate-list">
+            {% for product in products %}
+            <div class="cate-item">
+                <a href="{{ path('front_product_detail', {id: product.id, alias: product.slug}) }}" title="item">
+                    <figure>
+                        <p>
+                            <img style="max-width: 250px; max-height:140px" src="{{ asset('/uploads/products/' ~ product.thumbnail)}}" alt="{{ product.name }}" />
+                        </p>
+                    </figure>
+                    <p class="cate-name">{{ product.name }}</p>
+                    <p class="cate-price">{{ product.price|number_format(0, ',', '.') }} VND</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {{ paging|raw }}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+	<route id="admin_product" path="/">
+		<default key="_controller">AseagleAdminBundle:Product:index</default>
+		<default key="_class">Aseagle\Bundle\AdminBundle\Controller\ProductController</default>
+		<default key="_manager">product_manager</default>
+		<default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\ProductFilter</default>
+		<default key="_columns">["id","name","price","quantity","created","enabled"]</default>
+		<default key="_view">AseagleAdminBundle:Product:index.html.twig</default>
+	</route>
+	<route id="admin_product_upload" path="/upload">
+		<default key="_controller">AseagleAdminBundle:Product:upload</default>
+	</route>
+	<route id="admin_product_new" path="/new/{id}">
+		<default key="_controller">AseagleAdminBundle:Product:new</default>
+		<default key="_class">Aseagle\Bundle\AdminBundle\Controller\ProductController</default>
+		<default key="_manager">product_manager</default>
+		<default key="_form">\Aseagle\Bundle\AdminBundle\Form\Type\ProductType</default>
+		<default key="_view">AseagleAdminBundle:Product:new.html.twig</default>
+		<default key="id" xsi:nil="true" />
+		<requirement key="id">\d+</requirement>
+	</route>
+	<route id="admin_product_image_delete" path="/remove/image/{id}">
+		<default key="_controller">AseagleAdminBundle:Product:deleteImage</default>
+	</route>
+	<route id="admin_product_review" path="/review/{pid}">
+        <default key="_controller">AseagleAdminBundle:ProductReview:index</default>
+        <default key="_class">Aseagle\Bundle\AdminBundle\Controller\ProductController</default>
+        <default key="_manager">product_review_manager</default>
+        <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\ProductReviewFilter</default>
+        <default key="_columns">["id","message","user","created","enabled"]</default>
+        <default key="pid" xsi:nil="true" />
+        <requirement key="pid">\d+</requirement>
+    </route>
+    <route id="admin_product_review_delete" path="/remove/review/{id}">
+        <default key="_controller">AseagleAdminBundle:ProductReview:delete</default>
+    </route>
+</routes>

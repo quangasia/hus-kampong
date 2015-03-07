@@ -1,0 +1,44 @@
+var L10N = {
+    valid: {
+        required: '{{'This field is required.'|trans({}, 'messages')}}',
+        email: '{{'Please enter a valid email address.'|trans({}, 'messages')}}',
+        url: '{{'Please enter a valid URL.'|trans({}, 'messages')}}',
+        date: '{{'Please enter a valid date.'|trans({}, 'messages')}}',
+        number: '{{'Please enter a valid number.'|trans({}, 'messages')}}',
+    },  
+    confirm: {
+        remove: '{{ "Are you sure you want to delete?"|trans}}'
+    },  
+    month: {
+        january: '{{'January'|trans({}, 'messages')}}',
+        february: '{{'February'|trans({}, 'messages')}}',
+        march: '{{'March'|trans({}, 'messages')}}',
+        april: '{{'April'|trans({}, 'messages')}}',
+        may: '{{'May'|trans({}, 'messages')}}',
+        june: '{{'June'|trans({}, 'messages')}}',
+        july: '{{'July'|trans({}, 'messages')}}',
+        august: '{{'August'|trans({}, 'messages')}}',
+        september: '{{'September'|trans({}, 'messages')}}',
+        october: '{{'October'|trans({}, 'messages')}}',
+        november: '{{'November'|trans({}, 'messages')}}',
+        december: '{{'December'|trans({}, 'messages')}}'
+    },
+    message: {
+        error: '{{ "Delete failed"|trans }}'
+    },
+    datatable: {
+        metronicGroupActions: '{{ "_TOTAL_ records selected:  "|trans }}',
+        metronicAjaxRequestGeneralError: '{{ "Could not complete request. Please check your internet connection"|trans }}',
+        lengthMenu: "{{ "<span class='seperator'>|</span>View _MENU_ records"|trans|raw }}",
+        info: "{{ "<span class='seperator'>|</span>Found total _TOTAL_ records"|trans|raw }}",
+        infoEmpty: '{{ "No records found to show"|trans }}',
+        emptyTable: '{{ "No data available in table"|trans }}',
+        zeroRecords: '{{ "No matching records found"|trans }}',
+        previous: '{{ "Prev"|trans }}',
+        next: '{{ "Next"|trans }}',
+        last: '{{ "Last"|trans }}',
+        first: '{{ "First"|trans }}',
+        page: '{{ "Page"|trans }}',
+        pageOf: '{{ "of"|trans }}',
+    }
+};

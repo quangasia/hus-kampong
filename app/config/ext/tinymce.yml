@@ -1,0 +1,52 @@
+stfalcon_tinymce:
+    include_jquery: false
+    tinymce_jquery: true
+    selector: ".tinymce"  
+    language: "%locale%"
+    
+    
+
+    external_plugins:
+#       eqneditor:
+#            url: "asset[tinymce/plugins/eqneditor/plugin.min.js]"   
+#        images:
+#            url: "asset[static/backend/editor_plugin/images/plugin.min.js]"
+          
+    theme:
+        # Simple theme as same as default theme
+        simple: 
+            menubar: false
+            statusbar: false
+            toolbar_items_size: 'small' 
+            skin: light
+            content_css: '/bundles/aseaglefront/css/style.css'   
+            skin_url: '/tinymce/skin/light'   
+            
+        product: 
+            #file_browser_callback : elFinderBrowser
+            menubar: false
+            statusbar: false
+            toolbar_items_size: 'small' 
+            skin: light
+            skin_url: '/tinymce/skin/light'
+            height : "150px"
+            content_css: '/bundles/aseaglefront/css/style.css'  
+            plugins: "advlist autolink lists link image charmap print preview hr anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table contextmenu directionality emoticons template paste textcolor colorpicker textpattern"
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | table | forecolor backcolor code"
+            
+        # Advanced theme with almost all enabled plugins
+        advanced:
+            file_browser_callback : "elFinderBrowser"
+            menubar: false
+            statusbar: false
+            relative_urls: false
+            skin_url: '/tinymce/skin/light' 
+            skin: light
+            toolbar_items_size: 'small'
+            content_css: '/bundles/aseaglefront/css/style.css'        
+            height : "450px"
+            plugins: "advlist autolink lists link image charmap print preview hr anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table contextmenu directionality emoticons template paste textcolor colorpicker textpattern"
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | table | forecolor backcolor code" 
+        # Medium number of enabled plugins + spellchecker
+       
+            

@@ -1,0 +1,77 @@
+{% extends 'AseagleFrontBundle::layout.html.twig' %} 
+
+{% block content %}
+<section class="col left">{{ render(controller('AseagleFrontBundle:Default:leftSidebar')) }}</section>
+<section class="col right">
+    <h2 class="title">{{ product.name }}</h2>
+    <div class="feature-block detail-block">
+        {% include 'AseagleFrontBundle:Blocks:messages.html.twig' %}    
+        <div class="content border-bt">
+            <figure>
+                <img style="max-width: 320px;" src="{{ asset('/uploads/products/' ~ product.thumbnail) }}" alt="product-1" />
+            </figure>
+            <div class="info">
+                <h3 class="pro-name border-bt">{{ product.name }}</h3>
+                <div class="social border-bt">
+                    <div class="addthis_native_toolbox"></div>
+                </div>
+                <div></div>
+                <div class="short-desc border-bt">
+                    {{ product.intro|raw }}     
+                </div>
+                {% set url =  app.request.scheme ~'://' ~ app.request.httpHost ~ path('front_product_detail', {id:product.id, alias:product.slug})%}
+                {% set message = 'SKU: ' ~ product.sku ~ '\nTên sản phẩm: ' ~ product.name ~ ' \nGiá: ' ~ product.price ~ ' VNĐ\nThông tin: \n' ~ product.description|striptags%}
+                <img style="float:right" src="{{ qrcode_data_uri( message, size=120, padding=10) }}" />
+                <div class="price"><font color="red">{{ product.price|number_format(0, ',', '.') }} VND</font></div>
+                <a href="{{ path('front_cart_add', {pid: product.id}) }}" title="Mua ngay" class="btn-1 buy-btn">Mua ngay</a>
+                
+            </div>
+        </div>
+        <div id="tab" class="sub-content">
+            <ul id="mytab" class="nav nav-tabs tab">
+                <li class="active"><a href="#tab1" role="tab" title="Chi tiết sản phẩm" data-toggle="tab">Chi tiết sản phẩm</a></li>
+                <li><a href="#tab2" role="tab" title="Thông tin sản phẩm" data-toggle="tab">Thông tin sản phẩm</a></li>
+                <li><a href="#tab3" role="tab" title="Nhận xét của khách hàng" data-toggle="tab">Nhận xét của khách hàng</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div id="tab1" class="block tab-pane fade active">
+                    <h4>Chi tiết sản phẩm</h4>
+                    <div class="fck">{{ product.description|raw }}</div>
+                </div>
+                <div id="tab2" class="block tab-pane fade">
+                    <h4>Thông tin sản phẩm</h4>
+                    <div class="fck">{{ product.supplement|raw }}</div>
+                </div>
+                <div id="tab3" class="block tab-pane fade">
+                    <div class="fck">
+                        {% for review in product.reviews %}
+                            {% if review.enabled %}
+                            <div class="review-item">
+                                <strong>{{ review.user.fullname }}: </strong>{{ review.message|raw }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% set user = app.security.getToken().getUser() %}
+                        
+                        {% if user and user.fullname is defined %}
+                        <div class="message-form" style="margin-top:10px">
+                            <h4 style="border-bottom:none">Nhận xét</h4>
+                            <form action="" method="post">
+                                {{ form_widget(form.message) }}
+                                {{ form_widget(form) }}
+                                <button type="submit" style="margin-top:10px" class="btn btn-default" style="border:none">{{ 'Submit'|trans }}</button>
+                            </form>
+                        </div>
+                        {% else %}
+                        <p style="padding-top:10px;">Vui lòng đăng nhập trước khi viết nhận xét của bạn</p>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ render(controller('AseagleFrontBundle:Default:productInCart')) }}
+    </div>
+</section>
+{% endblock %}

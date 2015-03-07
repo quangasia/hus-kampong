@@ -1,0 +1,24 @@
+{% extends 'AseagleAdminBundle::layout.html.twig' %} 
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link href="{{ asset('/bundles/aseagleadmin/admin/pages/css/error.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-12 page-500">
+		<div class="number">
+			 {{ status_code }}
+		</div>
+		<div class="details">
+			<h3>{{ 'Oops!'|trans ~ ' ' ~ exception.message }}.</h3>
+			<p>
+				<a href="{{ path('admin_homepage') }}">
+				{{ 'Return home'|trans }} </a>				
+			</p>			
+		</div>
+	</div>
+</div>
+{% endblock %}
+

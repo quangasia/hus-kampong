@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+
+{% block metadata %}
+    <title>Administration</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+{% endblock %}
+
+{% block stylesheet %}
+ {#{% stylesheets 
+            'bundles/aseagleadmin/global/css/googlefont.css'
+            'bundles/aseagleadmin/global/plugins/font-awesome/css/font-awesome.min.css'
+            'bundles/aseagleadmin/global/plugins/simple-line-icons/simple-line-icons.min.css'
+            'bundles/aseagleadmin/global/plugins/bootstrap/css/bootstrap.min.css'
+            'bundles/aseagleadmin/global/plugins/uniform/css/uniform.default.css'
+            'bundles/aseagleadmin/global/css/components.css'
+            'bundles/aseagleadmin/global/css/plugins.css'
+            'bundles/aseagleadmin/admin/layout2/css/layout.css'
+            'bundles/aseagleadmin/admin/layout2/css/themes/default.css'
+            'bundles/aseagleadmin/admin/layout2/css/custom.css'
+            'bundles/aseagleadmin/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css'
+            'bundles/aseagleadmin/global/plugins/bootstrap-datepicker/css/datepicker.css'
+            'bundles/aseagleadmin/global/plugins/fancybox/source/jquery.fancybox.css'
+
+            filter='cssrewrite' 
+            output='css/backend/style.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+ #}       
+ 
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/css/googlefont.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/bootstrap/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/uniform/css/uniform.default.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/css/components.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/css/plugins.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/admin/layout2/css/layout.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/admin/layout2/css/themes/default.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/admin/layout2/css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/bootstrap-datepicker/css/datepicker.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/fancybox/source/jquery.fancybox.css') }}" />
+{% endblock %}
+
+
+<link rel="shortcut icon" href="favicon.ico" />
+</head>
+<body class="page-header-fixed page-container-bg-solid page-sidebar-closed-hide-logo">
+    <!-- BEGIN HEADER -->
+    {% include 'AseagleAdminBundle:Blocks:header.html.twig' %}
+    <!-- END HEADER -->
+    <div class="clearfix"></div>
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            {% include 'AseagleAdminBundle:Blocks:sidebar.html.twig' %}
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    {% include 'AseagleAdminBundle:Blocks:messages.html.twig' %}
+                    {% block breadcrumb %}                   
+                     {% endblock %}
+                     
+                    <div class="row">
+                        <div class="col-md-12">
+                        {% block content %}
+                        {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <div class="page-footer-inner">2014 &copy; Power by aseagle.com.</div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+    </div>
+    
+    {% block javascript %}
+        <!--[if lt IE 9]>
+        {#{% javascripts
+            '@AseagleAdminBundle/Resources/public/global/plugins/respond.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/excanvas.min.js'
+    
+            output='js/backend/ie.lib.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}#}
+        <script src="asset('bundles/aseagleadmin/global/plugins/respond.min.js')"></script>
+        <script src="asset('bundles/aseagleadmin/global/plugins/excanvas.min.js')"></script>
+        <![endif]-->
+        <script type="text/javascript" src="{{ path('admin_js_lang') }}"></script>
+        
+        {#{% javascripts
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery-migrate.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js' 
+            '@AseagleAdminBundle/Resources/public/global/plugins/bootstrap/js/bootstrap.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery.blockui.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery.cokie.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/uniform/jquery.uniform.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery-validation/js/jquery.validate.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery-validation/js/additional-methods.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/datatables/media/js/jquery.dataTables.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/fancybox/source/jquery.fancybox.pack.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/plupload/js/plupload.full.min.js'
+            '@AseagleAdminBundle/Resources/public/admin/pages/scripts/form-validation.js'
+            '@AseagleAdminBundle/Resources/public/global/scripts/datatable.js'
+            '@AseagleAdminBundle/Resources/public/admin/pages/scripts/table-ajax.js'
+            '@AseagleAdminBundle/Resources/public/global/scripts/metronic.js'
+            '@AseagleAdminBundle/Resources/public/admin/layout2/scripts/layout.js'
+    
+            output='js/backend/lib.js'
+        %}
+        
+        
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %} #}
+        
+        
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery-migrate.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js')}}"></script> 
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery.blockui.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery.cokie.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/uniform/jquery.uniform.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery-validation/js/jquery.validate.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery-validation/js/additional-methods.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/fancybox/source/jquery.fancybox.pack.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/plupload/js/plupload.full.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/admin/pages/scripts/form-validation.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/scripts/datatable.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/admin/pages/scripts/table-ajax.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/scripts/metronic.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/admin/layout2/scripts/layout.js')}}"></script>
+        
+        <script src="{{ asset('/js/app.js')}}"></script>
+        <script>
+        jQuery(document).ready(function() {    
+            Metronic.init(); 
+            Layout.init(); 
+            Application.init();
+            FormValidation.init();
+            TableAjax.init();        
+            Backend.init();  
+        });
+       </script>
+   {% endblock %}
+</body>
+</html>

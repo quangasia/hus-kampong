@@ -1,0 +1,24 @@
+{% if lastPage > 1 %} 
+    {% set url = app.request.getRequestURI()|replace({('?page=' ~ currentPage) : '', ('&page=' ~ currentPage) : '', ('&page=' ~ currentPage) : ''}) %} 
+    {% if '?' in url %} 
+        {% set url = url ~ '&' %} 
+    {% else %} 
+        {% set url = url ~ '?' %} 
+    {% endif %}
+    <div class="paging">
+        <span>Trang</span>
+        <div class="wrap">
+            <a href="{{ url ~ 'page=' ~ previousPage }}" title="Trước" class="prev">Trước</a>
+            <ul>
+                {% for page in 1..lastPage %}
+                    {% if page == currentPage %}
+                    <li class="active"><a href="{{ url ~ 'page=' ~ page }}">{{ page }}</a></li>
+                    {% else %}
+                     <li><a href="{{ url ~ 'page=' ~ page }}">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}          
+            </ul>
+            <a href="{{ url ~ 'page=' ~ nextPage }}" title="Sau" class="next">Sau</a>
+        </div>
+    </div>
+{% endif %}

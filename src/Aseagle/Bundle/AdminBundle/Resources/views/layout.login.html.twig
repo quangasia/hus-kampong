@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Administrator | Login</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        
+        {% stylesheets 
+            'bundles/aseagleadmin/global/css/googlefont.css'
+            'bundles/aseagleadmin/global/plugins/font-awesome/css/font-awesome.min.css'
+            'bundles/aseagleadmin/global/plugins/simple-line-icons/simple-line-icons.min.css'
+            'bundles/aseagleadmin/global/plugins/bootstrap/css/bootstrap.min.css'
+            'bundles/aseagleadmin/global/plugins/uniform/css/uniform.default.css'
+            'bundles/aseagleadmin/admin/pages/css/login-soft.css'
+            'bundles/aseagleadmin/global/css/components.css'
+            'bundles/aseagleadmin/admin/layout2/css/layout.css'
+            'bundles/aseagleadmin/admin/layout2/css/themes/default.css'
+            'bundles/aseagleadmin/admin/layout2/css/custom.css'
+            filter='cssrewrite' 
+            output='css/backend/login.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}      
+        <link rel="shortcut icon" href="favicon.ico"/>
+    </head>
+    <!-- BEGIN BODY -->
+    <!-- DOC: Apply "page-header-menu-fixed" class to set the mega menu fixed  -->
+    <!-- DOC: Apply "page-header-top-fixed" class to set the top menu fixed  -->
+    <body class="login">
+        <!-- BEGIN LOGO -->
+        <div class="logo">
+{#             <a href="{{ path('admin_homepage') }}">#}
+{#                 <img src="{{asset('/img/alogo.png') }}" alt=""/>#}
+{#             </a>#}
+        </div>
+        <div class="menu-toggler sidebar-toggler">
+        </div>
+        <div class="content">
+            {% block body %} {% endblock %}            
+        </div>
+        <div class="copyright">
+            Aseagle &copy; 2014
+        </div>
+        <!--[if lt IE 9]>
+        {% javascripts
+            '@AseagleAdminBundle/Resources/public/global/plugins/respond.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/excanvas.min.js'
+
+            output='js/backend/ie.lib.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}    
+        <![endif]-->
+        
+        {% javascripts
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery-migrate.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js' 
+            '@AseagleAdminBundle/Resources/public/global/plugins/bootstrap/js/bootstrap.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery.blockui.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery.cokie.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/uniform/jquery.uniform.min.js'
+            '@AseagleAdminBundle/Resources/public/global/scripts/metronic.js'
+            '@AseagleAdminBundle/Resources/public/admin/layout2/scripts/layout.js'
+            '@AseagleAdminBundle/Resources/public/admin/pages/scripts/login-soft.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/backstretch/jquery.backstretch.min.js'
+            '@AseagleAdminBundle/Resources/public/global/plugins/jquery-validation/js/jquery.validate.min.js'
+
+            output='js/backend/login.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}  
+        <!-- END PAGE LEVEL SCRIPTS -->
+        <script>
+            jQuery(document).ready(function () {
+                Metronic.init(); // init metronic core components
+                Layout.init(); // init current layout
+                Login.init();                
+                $.backstretch([
+                    "{{asset('/bundles/aseagleadmin/admin/pages/media/bg/1.jpg') }}",
+                    "{{asset('/bundles/aseagleadmin/admin/pages/media/bg/2.jpg') }}",
+                    "{{asset('/bundles/aseagleadmin/admin/pages/media/bg/3.jpg') }}",
+                    "{{asset('/bundles/aseagleadmin/admin/pages/media/bg/4.jpg') }}"
+                    ], {
+                      fade: 1000,
+                      duration: 8000
+                    }
+                );
+            });
+        </script>
+        <!-- END JAVASCRIPTS -->
+
+    </body>
+    <!-- END BODY -->
+</html>

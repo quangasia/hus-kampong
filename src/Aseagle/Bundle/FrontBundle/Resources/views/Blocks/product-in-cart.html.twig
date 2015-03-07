@@ -1,0 +1,14 @@
+{% if products|length > 0 %}
+<div class="slideshow-pro">
+    <h3>Sản phẩm được mua sau khi xem</h3>
+    <div class="slideshow">
+        <div class="wrap">
+            <ul class="slides">
+                {% for product in products %}
+                <li><a href="{{ path('front_product_detail', {id:product.id, alias:product.slug}) }}" title="{{ product.name }}"><img style="max-width: 160px; max-height:100px" src="{{ asset('/uploads/products/' ~ product.thumbnail)}}" alt="{{ product.name }}" /></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}

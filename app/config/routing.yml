@@ -1,0 +1,15 @@
+aseagle_front:
+    resource: "@AseagleFrontBundle/Resources/config/routing.xml"
+    prefix:   /
+
+aseagle_admin:
+    resource: "@AseagleAdminBundle/Resources/config/routing.xml"
+    prefix:   /admin
+
+elfinder:
+    resource: "@FMElfinderBundle/Resources/config/routing.yml"
+    prefix:   /admin
+    
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+    

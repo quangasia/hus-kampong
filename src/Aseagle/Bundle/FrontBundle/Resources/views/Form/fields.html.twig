@@ -1,0 +1,42 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block field_row %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}       
+   </div>
+{% endblock field_row %}
+
+{% block form_label %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+    <label class="control-label" for="{{ id }}">
+        {% if translation_domain is defined%}
+            {{ label|trans({}, translation_domain)|raw }}:
+        {% else %}
+            {{ label|trans|raw }}:
+        {% endif %}
+        {% if required and name != 'trail' %}
+            <span class="required">*</span>
+        {% endif %}
+    </label>
+{% endblock %}
+
+{% block form_rows %}
+    {% for child in form %}
+        {{ form_row(child) }}
+    {% endfor %}
+{% endblock %}
+
+{% block form_row %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}       
+   </div>
+{% endblock form_row %}
+
+
+

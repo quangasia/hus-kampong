@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html lang="en" class="no-js ie ie8"><![endif]-->
+<!--[if IE 9]><html lang="en" class="no-js ie ie9"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><![endif]-->
+{% set settings = settings.getAll() %}
+
+{% block metadata %}
+<title>{{ settings['page_title'] }}</title>
+<meta name="description" content="{{ settings['meta_description'] }}">
+<meta name="keywords" content="{{ settings['meta_keywords'] }}">
+<meta name="robots" content="index, follow">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+{% endblock %}
+
+{% block stylesheet %} 
+<!--[if lt IE 8]><link rel="stylesheet" href="{{ asset('bundles/aseaglefront/css/ie.css') }}"><![endif]-->
+<link rel="stylesheet" href="{{ asset('bundles/aseaglefront/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('bundles/aseaglefront/css/print.css') }}" media="print">
+<link rel="stylesheet" href="{{ asset('colorbox/colorbox.css') }}">
+{% endblock %}
+
+</head>
+<body {% block classbody %}class="home"{% endblock %}>
+    <div id="wrapper">
+        <header id="header">
+            <section class="header-top">
+                <div class="outer">
+                    <div class="inner">
+                        <h1>
+                            <a href="{{ path('front_homepage') }}" title="{{ settings['page_title'] }}" class="logo"><img src="{{ asset('/bundles/aseaglefront/images/logo-lifecare.png') }}" alt="{{ settings['page_title'] }}" /></a>
+                        </h1>
+                        <div class="block">
+                            {% include 'AseagleFrontBundle:Blocks:auth.html.twig' %}
+                            <ul class="info-block">
+                                <li><a href="mail:{{ settings['contact_email'] }}" title="{{ settings['contact_email'] }}" class="lifecare-email"><i class="icon icon-email"></i><span>{{ settings['contact_email'] }}</span></a></li>
+                                <li>
+                                    <p class="phone">
+                                        <i class="icon icon-phone"></i><span>{{ settings['contact_phone'] }}</span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="header-bottom">
+                <div class="outer">
+                    <div class="inner">
+                        <div class="block">
+                            <form method="get" action="{{ path('front_product_search') }}" name="searchFrm" id="searchFrm" class="search-frm">
+                                <div class="search-block">
+                                    <p class="field">
+                                        <input type="text" name="keyword" id="searchTxt" placeholder="Tìm kiếm theo sản phẩm, danh mục hay nhãn hàng mong muốn"> 
+                                        <input type="submit" id="submit" name="submit" value="Tìm kiếm" title="Tìm kiếm" class="btn">
+                                    </p>
+                                </div>
+                                <div class="shopping-cart">
+                                    <a id="shoppingCart" href="{{ path('front_cart') }}" name="shoppingCart" title="Giỏ hàng" class="btn"><i class="icon icon-cart"></i>Giỏ hàng</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </header>
+        <div class="container">
+            <main id="main">
+            {% block banner %}{% endblock %}
+            {% block content %}
+            
+            {% endblock %}            
+            </main>
+        </div>
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="inner">
+                    <div class="information-block">
+                        <div class="customer-center">
+                            <h2>Trung tâm khách hàng</h2>
+                           {{ settings['customer_center']|raw }}
+                        </div>
+                        <div class="all-in-one">
+                            <h2>Thông tin chung</h2>
+                            <p>
+                                <a href="{{ path('front_about_us') }}" title="Life Care là gì?">Life Care là gì?</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('front_faq') }}" title="Hỏi đáp">Hỏi đáp</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('front_policy') }}" title="Qui chế hoạt động">Qui chế hoạt động</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('front_recruitment') }}" title="Tuyển dụng">Tuyển dụng</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('front_terms') }}" title="Chính sách bảo mật thông tin">Chính sách bảo mật thông tin</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="facebook-block">
+                        <p>
+                            <div class="fb-like-box" data-href="{{ settings['facebook_page'] }}" data-colorscheme="dark" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="inner">
+                    <span class="copyright">© Copyright Life Care 2014</span>
+                    <p class="hotline">
+                        <i class="icon icon-phone-2"></i><span>HOTLINE:</span><span class="number">{{ settings['hotline'] }}</span>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    {% block javascript %} 
+        {% javascripts '@AseagleFrontBundle/Resources/public/js/modernizr.js' 
+                        '@AseagleFrontBundle/Resources/public/js/l10n.js' 
+                        '@AseagleFrontBundle/Resources/public/js/libs.js'
+                        '@AseagleFrontBundle/Resources/public/js/script.js' 
+        output='js/frontend/lib.js' %}
+        
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script src="{{ asset('colorbox/jquery.colorbox-min.js') }}"></script>
+    {% endblock %}
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1474795049458708&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <!--[if lt IE 8]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+    <noscript>JavaScript is off. Please enable to view full site.</noscript>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5472ec2b381f2d5e" async="async"></script>
+    
+</body>
+</html>

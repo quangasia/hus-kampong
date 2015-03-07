@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Aseagle\Bundle\UserBundle\Entity\User" table="users" repository-class="Aseagle\Bundle\UserBundle\Repository\UserRepository">
+    <indexes>
+      <index name="fk_user_group_idx" columns="group_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="email_UNIQUE" columns="email"/>
+      <unique-constraint name="username_UNIQUE" columns="username"/>
+      <unique-constraint name="fb_id_UNIQUE" columns="fb_id"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="username" type="string" column="username" length="45" nullable="true"/>
+    <field name="fullname" type="string" column="fullname" length="128" nullable="false"/>
+    <field name="email" type="string" column="email" length="128" nullable="false"/>
+    <field name="password" type="string" column="password" length="255" nullable="true"/>
+    <field name="salt" type="string" column="salt" length="255" nullable="true"/>
+    <field name="occupation" type="string" length="255" column="occupation" nullable="true"/>
+    <field name="interests" type="string" length="255" column="interests" nullable="true"/>
+    <field name="about" type="text" column="about" nullable="true"/>
+    <field name="website" type="string" column="website" length="255" nullable="true"/>
+    <field name="enabled" type="boolean" column="enabled" nullable="true"/>
+    <field name="lastLogin" type="datetime" column="last_login" nullable="true"/>
+    <field name="locked" type="boolean" column="locked" nullable="true"/>
+    <field name="expired" type="boolean" column="expired" nullable="true"/>
+    <field name="expiresAt" type="datetime" column="expires_at" nullable="true"/>
+    <field name="fbId" type="string" column="fb_id" length="45" nullable="true"/>
+    <field name="avatar" type="string" column="avatar" length="50" nullable="true"/>
+    <field name="gender" type="boolean" column="gender" nullable="true"/>
+    <field name="created" type="datetime" column="created" nullable="true"/>
+    <field name="dob" type="date" column="dob" nullable="true"/>
+    <field name="phone" type="string" column="phone" length="45" nullable="true"/>
+    <field name="address" type="string" column="address" length="45" nullable="true"/>
+    <field name="system" type="boolean" column="is_system" nullable="true"/>
+    <many-to-one field="group" target-entity="UserGroup">
+      <join-columns>
+        <join-column name="group_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <lifecycle-callbacks>
+        <lifecycle-callback type="prePersist" method="updatedTimestamp"/>
+        <lifecycle-callback type="preUpdate" method="updatedTimestamp"/>
+    </lifecycle-callbacks>
+  </entity>
+</doctrine-mapping>

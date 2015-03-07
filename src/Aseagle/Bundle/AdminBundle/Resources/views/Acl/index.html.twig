@@ -1,0 +1,36 @@
+{% extends 'AseagleAdminBundle::layout.html.twig' %}
+
+{% block content %}    
+<form action="#" name="roleList" id="roleList" class="form-inline" method="post" >
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-doc font-green-sharp"></i> <span class="caption-subject font-green-sharp bold uppercase">{{ 'Permission'|trans }}</span>
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn-circle green-haze"><i class="fa fa-check"></i> {{ 'Save'|trans }}</button>
+            <button type="submit" name="saveedit" class="btn btn-circle green-haze"><i class="fa fa-check-circle"></i> {{ 'Save & Continute Edit'|trans }}</button>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="form-group">
+            <label>{{ 'Role'|trans()}} : </label>
+            {{ form_widget(form.role, {attr: {'data-url' : path('admin_acl_ajax') } })}}
+            {{ form_widget(form) }}
+        </div>
+        <div class="table-container" style="margin-top:10px">
+            {% form_theme form 'AseagleAdminBundle:Form:fields.html.twig' %}
+            {% include 'AseagleAdminBundle:Blocks:messages.html.twig' %} 
+            <div class="aclContainer">            
+                {% if rid != null %}
+                    {{ render(controller('AseagleAdminBundle:Acl:loadAclOfRole', {'rid' : rid})) }}
+                {% endif %}           
+            </div>
+        </div>
+    </div>
+    
+</div>
+</form>
+{% endblock %}
+    
+        

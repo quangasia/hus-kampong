@@ -1,0 +1,28 @@
+{% extends 'AseagleFrontBundle::layout.lock.html.twig' %}
+{% block title %}
+    <title>EDUTODAY</title>
+{% endblock %}
+{% block body %}
+<img class="page-lock-img" src="{#{user.getAvatarSrc()|imagine_filter('avatar')}#}" alt="">
+<div class="page-lock-info">
+    <h1>{{user.fullname}}</h1>    
+    <span class="email">{{user.email}} </span>
+    <span class="locked">Locked </span>
+    <form class="login-form" action="{{ path('aseagle_front_logincheck') }}" method="post">
+        <div class="input-group input-medium">
+            <input class="form-control placeholder-no-fix" type="hidden" autocomplete="off" placeholder="Email" value="{{user.email}}" name="_username"/>
+            <input class="form-control" type="password" autocomplete="off" placeholder="Password" name="_password"/>
+            <span class="input-group-btn">
+                <input type="hidden" name="token" value="{{ csrf_token('') }}">
+                <button type="submit" class="btn blue icn-only"><i class="m-icon-swapright m-icon-white"></i></button>
+            </span>
+        </div>
+        <!-- /input-group -->
+        <div class="relogin">
+            <a href="{{path('qt_front_switch_login')}}">
+                Not {{user.fullname}} ? 
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

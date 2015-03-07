@@ -1,0 +1,94 @@
+Page: Page
+Prev: Prev
+Next: Next
+Last: Last
+First: First
+of: of
+"_TOTAL_ records selected:  ": "_TOTAL_ records selected:  "
+Could not complete request. Please check your internet connection: Could not complete request. Please check your internet connection
+<span class='seperator'>|</span>View _MENU_ records: <span class='seperator'>|</span>View _MENU_ records
+<span class='seperator'>|</span>Found total _TOTAL_ records: <span class='seperator'>|</span>Found total _TOTAL_ records
+No records found to show: No records found to show
+No data available in table: No data available in table
+No matching records found: No matching records found
+
+#Common
+Publish: Published
+Un-publish: Not Published
+Delete: Delete
+Select...: Select...
+Submit: Submit
+Date Created: Date Created
+Edit: Edit
+Search: Search
+Reset: Reset
+Save: Save
+Cancel: Cancel
+Enabled: Enabled
+
+#Sidebar
+Groups: Groups
+Users: Users
+User Manager: User Manager
+Permission: Permission
+Shop Manager: Shop Manager
+Content Manager: Content Manager
+Products: Products
+Categories: Categories
+Orders: Orders
+Brands: Brands
+Dashboard: Dashboard
+Posts: Posts
+Media: Media
+
+#User manager
+users listing: users listing
+Username: Username
+Full Name: Full Name
+Email: Email
+Date Registered: Date Registered
+Status: Status
+Actions: Actions
+New User: New User
+Tools: Tools
+Export to Excel: Export to Excel
+
+#Group manager
+User Level: User Level
+Manager Level: Manager Level
+Group Name: Group Name
+Group Type: Type
+Description: Description
+Role Name: Role Name
+groups listing: groups listing
+Add Group: Add Group
+New Group: New Group
+Add or edit group: Add or edit group
+
+#Article manager
+Select Image: Select Image
+Title: Title
+Slug: Alias
+Content: Nội dung
+Featured Image: Featured Image
+Tags: Tags
+Article: Article
+add or edit article: add or edit article
+New Article: New Article
+Articles: Articles
+articles listing: articles listing
+Author: Author
+
+#Category manager
+Parent Category: Parent Category
+Category: Category
+add or edit category: add or edit category
+categories listing: categories listing
+New Category: New Category
+
+#Login page
+Login to your account: Login to your account
+Remember me: Remember me
+Username: Username
+Password: Password
+Login: Login

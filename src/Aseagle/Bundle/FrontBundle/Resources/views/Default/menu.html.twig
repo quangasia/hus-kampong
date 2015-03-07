@@ -1,0 +1,3 @@
+{% for item in categories %}
+<li {% if loop.first %}class="active"{% endif %}><a href="category.html" title="{{ item.title }}">{{ item.title }}</a></li>
+{% endfor %}

@@ -1,0 +1,23 @@
+{% extends "AseagleFrontBundle::layout.html.twig" %} 
+
+
+{% block classbody %}class="detail-page"{% endblock %}
+
+{% block content %}
+{% form_theme form 'AseagleFrontBundle:Form:fields.html.twig' %}
+<section class="two-col">
+    <section class="col left">
+        {{ render(controller('AseagleFrontBundle:Default:leftSidebar')) }}  
+    </section>
+    <section class="col right">
+        <h2 class="title">{{ title|trans }}</h2>
+        <div class="feature-block news-block"> 
+            {% include 'AseagleFrontBundle:Blocks:messages.html.twig' %}   
+            <form role="form" action="" method="post" class="full-width">
+                {{ form_widget(form) }}
+                <button type="submit" class="btn btn-default">{{ 'Submit'|trans }}</button>                
+            </form>
+        </div>
+    </section>
+</section>
+{% endblock %}

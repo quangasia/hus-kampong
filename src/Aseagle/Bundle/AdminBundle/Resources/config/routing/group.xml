@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    
+    <route id="admin_group" path="/">
+        <default key="_controller">AseagleAdminBundle:Group:index</default>
+        <default key="_class">Aseagle\Bundle\AdminBundle\Controller\GroupController</default>
+    </route>   
+    <route id="admin_group_new" path="/new/{id}">
+        <default key="_controller">AseagleAdminBundle:Base:new</default>
+        <default key="_class">Aseagle\Bundle\AdminBundle\Controller\GroupController</default>
+        <default key="_manager">user_group_manager</default>
+        <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Type\GroupType</default>
+        <default key="_view">AseagleAdminBundle:Group:new.html.twig</default>
+        <default key="id" xsi:nil="true" />
+        <requirement key="id">\d+</requirement>
+    </route>
+</routes>

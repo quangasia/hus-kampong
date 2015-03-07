@@ -1,0 +1,25 @@
+{% extends 'AseagleFrontBundle::layout.html.twig' %} 
+{% block content %}
+<section class="col left">
+    {{ render(controller('AseagleFrontBundle:Default:leftSidebar')) }}  
+</section>
+<section class="col right">
+    <h2 class="title">Tư vấn</h2>
+    <div class="feature-block news-block">
+        {% for post in posts %}
+        <div class="item">
+            <h4 class="title">
+                <a href="{{ path('front_consultant_detail',{id:post.id, alias:post.slug}) }}">{{ post.title }}<span class="date">({{ post.created|date('d/m/Y') }})</span></a>
+            </h4>
+            <div class="description">
+                <figure>
+                    <img style="max-width: 135px;" src="{{ asset('/uploads/' ~ post.picture) }}" alt="{{ post.title }}" />
+                </figure>
+                <div class="short-desc">{{ post.shortDescription|raw }}</div>
+            </div>
+        </div>
+        {% endfor %}  
+        {{ paging|raw }}       
+    </div>
+</section>
+{% endblock %}

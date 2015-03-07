@@ -1,0 +1,61 @@
+{% extends 'AseagleAdminBundle::layout.html.twig' %} 
+{% block content %}
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-user font-green-sharp"></i> <span class="caption-subject font-green-sharp bold uppercase">{{ 'Profile'|trans }}</span>
+        </div>       
+        <div class="actions">
+            <button type="submit" class="btn btn-circle green-haze"><i class="fa fa-check"></i> {{ 'Save'|trans }}</button>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        {% form_theme form 'AseagleAdminBundle:Form:fields.html.twig' %}
+        <form action="" id="form_validated_2" method="POST" class="horizontal-form" novalidate="novalidate">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.username) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.fullname) }}
+                    </div>
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.email) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.group) }}
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.password.first) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.password.second) }}
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.phone) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.dob) }}
+                    </div>
+                </div>            
+            </div>
+            <div class="form-actions right">
+                {{ form_row(form._token) }}
+                <button type="submit" class="btn blue">
+                    <i class="fa fa-check"></i> {{ 'Save'|trans }}
+                </button>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+{% endblock %}

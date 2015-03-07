@@ -1,0 +1,24 @@
+{% extends 'SMAdminBundle::layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h1>{{ 'acl.field.h1.title'|trans({}, 'SMAdminBundle')}} </h1>
+    </div>
+
+    <form action="#" name="roleList" id="roleList" method="post" >
+        <div class="well form-inline">
+            <label>{{ 'acl.choose.role'|trans({}, 'SMAdminBundle')}} : </label>
+            {{ form_widget(form.role, {attr: {'data-url' : path('SMAdminBundle_acl_ajax_field') } })}}
+            {{ form_widget(form) }}
+        </div>
+        <div class="aclContainer">            
+            {% if rid != null %}
+                {{ render(controller('SMAdminBundle:Acl:loadAclFieldsOfRole', {'rid' : rid})) }}
+            {% endif %}           
+        </div>
+    </form>
+    
+{% endblock %}
+    
+        

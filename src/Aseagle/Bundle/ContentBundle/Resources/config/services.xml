@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+     <parameters>
+        <parameter key="content_manager.class">Aseagle\Bundle\ContentBundle\Manager\ContentManager</parameter>
+        <parameter key="category_manager.class">Aseagle\Bundle\ContentBundle\Manager\CategoryManager</parameter>
+        <parameter key="setting_manager.class">Aseagle\Bundle\ContentBundle\Manager\SettingManager</parameter>
+        <parameter key="banner_manager.class">Aseagle\Bundle\ContentBundle\Manager\BannerManager</parameter>
+    </parameters>
+    
+    <services>
+        <service id="content_manager" class="%content_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />            
+        </service>        
+        <service id="category_manager" class="%category_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />            
+        </service>
+        <service id="setting_manager" class="%setting_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />            
+        </service>
+        <service id="banner_manager" class="%banner_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />            
+        </service>
+    </services>
+</container>

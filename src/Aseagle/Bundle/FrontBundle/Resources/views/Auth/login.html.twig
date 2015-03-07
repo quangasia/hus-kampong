@@ -1,0 +1,37 @@
+{% extends "AseagleFrontBundle::layout.html.twig" %} 
+
+
+{% block classbody %}class="detail-page"{% endblock %}
+
+{% block content %}
+<section class="two-col">
+    <section class="col left">
+        {{ render(controller('AseagleFrontBundle:Default:leftSidebar')) }}  
+    </section>
+    <section class="col right">
+        <h2 class="title">{{ 'Login'|trans }}</h2>
+        <div class="feature-block news-block">       
+            {% if error %}
+                <div class="alert alert-error">
+                    <button class="close" data-close="alert"></button>
+                    <span>{{ error.message|trans }} </span>            
+                </div>
+            {% endif %}  
+            
+            {% include 'AseagleFrontBundle:Blocks:messages.html.twig' %}   
+            
+            <form role="form" action="{{ path('front_logincheck') }}" method="post" class="half-width">
+                <div class="form-group">
+                    <label for="email">{{ 'Email'|trans }}</label> 
+                    <input id="email" type="email" placeholder="{{ 'Email'|trans }}" autocomplete="off"  name="_username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password">{{ 'Password'|trans }}</label> 
+                    <input id="password" type="password" placeholder="{{ 'Password'|trans }}" autocomplete="off"  name="_password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-default">{{ 'Login'|trans }}</button>
+            </form>
+        </div>
+    </section>
+</section>
+{% endblock %}

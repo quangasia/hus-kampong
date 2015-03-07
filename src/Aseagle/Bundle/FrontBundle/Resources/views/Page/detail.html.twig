@@ -1,0 +1,29 @@
+{% extends 'AseagleFrontBundle::layout.html.twig' %} 
+{% block content %} 
+{% if app.request.get('_route') != 'front_about_us' %}
+<section class="col left">{{ render(controller('AseagleFrontBundle:Default:leftSidebar')) }}</section>
+{% endif %}
+<section class="col right"  {% if app.request.get('_route') == 'front_about_us' %} style="width: 100%" {% endif %}>
+    <div class="feature-block news-detail">
+        <div class="share-tool">
+            <div class="addthis_sharing_toolbox"></div>
+        </div>
+        <div class="content">
+            <h3 class="title">{{ page.title|raw }}</h3>
+            <div class="description">
+                {{ page.content|raw }}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block javascript %} 
+    {{  parent() }}
+    {% if app.request.get('_route') == 'front_about_us' %}
+    <script>
+       $('.abus a').colorbox({inline:true, width:"80%",onLoad: function() {
+           // $('#cboxClose').remove();
+        }});             
+    </script>
+    {% endif %}
+{% endblock %}
