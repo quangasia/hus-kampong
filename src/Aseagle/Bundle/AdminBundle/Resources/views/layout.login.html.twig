@@ -13,7 +13,7 @@
         <meta content="" name="author"/>
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         
-        {% stylesheets 
+        {#{% stylesheets 
             'bundles/aseagleadmin/global/css/googlefont.css'
             'bundles/aseagleadmin/global/plugins/font-awesome/css/font-awesome.min.css'
             'bundles/aseagleadmin/global/plugins/simple-line-icons/simple-line-icons.min.css'
@@ -28,7 +28,18 @@
             output='css/backend/login.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}      
+        {% endstylesheets %}  #}
+        
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/css/googlefont.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/bootstrap/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/plugins/uniform/css/uniform.default.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/global/css/components.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/admin/pages/css/login-soft.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/admin/layout2/css/layout.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/admin/layout2/css/themes/default.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/aseagleadmin/admin/layout2/css/custom.css') }}" />
         <link rel="shortcut icon" href="favicon.ico"/>
     </head>
     <!-- BEGIN BODY -->
@@ -50,16 +61,18 @@
             Aseagle &copy; 2014
         </div>
         <!--[if lt IE 9]>
-        {% javascripts
+        {#{% javascripts
             '@AseagleAdminBundle/Resources/public/global/plugins/respond.min.js'
             '@AseagleAdminBundle/Resources/public/global/plugins/excanvas.min.js'
 
             output='js/backend/ie.lib.js'
         %}
         <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}    
+        {% endjavascripts %}   #} 
+        <script src="asset('bundles/aseagleadmin/global/plugins/respond.min.js')"></script>
+        <script src="asset('bundles/aseagleadmin/global/plugins/excanvas.min.js')"></script>
         <![endif]-->
-        
+      {#  
         {% javascripts
             '@AseagleAdminBundle/Resources/public/global/plugins/jquery.min.js'
             '@AseagleAdminBundle/Resources/public/global/plugins/jquery-migrate.min.js'
@@ -79,7 +92,23 @@
             output='js/backend/login.js'
         %}
         <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}  
+        {% endjavascripts %}  #}
+        
+         <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery-migrate.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js')}}"></script> 
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery.blockui.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery.cokie.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/uniform/jquery.uniform.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/scripts/metronic.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/admin/layout2/scripts/layout.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/admin/pages/scripts/login-soft.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/backstretch/jquery.backstretch.min.js')}}"></script>
+        <script src="{{asset('bundles/aseagleadmin/global/plugins/jquery-validation/js/jquery.validate.min.js')}}"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <script>
             jQuery(document).ready(function () {
