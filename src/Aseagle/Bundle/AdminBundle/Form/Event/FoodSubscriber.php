@@ -82,7 +82,7 @@ class FoodSubscriber implements EventSubscriberInterface
             foreach ($imgList as $image) {
                 if (!$article->getImages()->contains($image)) {
                     if (file_exists($imageDir . $image->getPath())) {
-//                        unlink($imageDir . $image->getPath());
+                        unlink($imageDir . $image->getPath());
                         $this->container->get('backend')->getMediaManager()->delete($image);
                     }
                 }

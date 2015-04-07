@@ -49,7 +49,7 @@ class BlockController extends Controller
         ));
     }
 
-    public function leftMenuAction()
+    public function leftMenuAction($id = null)
     {
         $entities = $this->get('backend')->getCategoryManager()->getRepository()->findBy(array(
             'enabled' => true,
@@ -66,7 +66,8 @@ class BlockController extends Controller
         }
 
         return $this->render('KampongSiteBundle:Block:left-menu.html.twig', array(
-                    'categories' => $categories
+            'categories' => $categories,
+            'id' => $id != null ? $id : 0
         ));
     }
     

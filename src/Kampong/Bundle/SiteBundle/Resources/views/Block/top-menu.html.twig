@@ -12,10 +12,10 @@
             <li {%if route == 'kampong_site_aboutus'%}class="active"{%endif%} >
                 <a href="{{path('kampong_site_aboutus')}}" title="Giới thiệu">Giới thiệu</a>
             </li>
-            <li {%if route == 'kampong_site_food_all'%}class="active"{%endif%}>
+            <li {%if route in ['kampong_site_food_all','kampong_site_food','kampong_site_food_detail']%}class="active"{%endif%}>
                 <a href="{{path('kampong_site_food_all')}}" title="Thực đơn">Thực đơn</a>
             </li>
-            <li {%if route == 'kampong_site_news'%}class="active"{%endif%}>
+            <li {%if route in ['kampong_site_news_detail','kampong_site_news']%}class="active"{%endif%}>
                 <a href="{{path('kampong_site_news')}}" title="Tin tức &amp; Sự kiện">Tin tức & Sự kiện</a>
             </li>
             <li {%if route == 'kampong_site_gallery'%}class="active"{%endif%}>

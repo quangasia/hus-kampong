@@ -1,6 +1,6 @@
 {% extends "KampongSiteBundle::layout.html.twig" %}
 {% block slider %}
-    <div id="banner" class="banner"><img alt="" src="{{asset("bundles/kampongsite/images/upload/banner-detail.jpg")}}" class="img-responsive"></div>
+{{render(controller('KampongSiteBundle:Block:headBanner', {position:4}))}} 
     {% endblock %}
     {% block body %}
 
@@ -29,14 +29,7 @@
             {{paging|raw}}
         </div>
         <div class="col-sm-3 col-sm-pull-9">
-            <div id="search" class="search">
-                <form role="search" class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" placeholder="Search for recipes" class="form-control">            
-                        <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
-                    </div>
-                </form>
-            </div>
+            {% include "KampongSiteBundle:Block:search.html.twig" %}
             <aside id="sidebar">
                 {{ render(controller("KampongSiteBundle:Block:leftMenu")) }}
             </aside>

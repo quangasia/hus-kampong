@@ -6,9 +6,9 @@
                 <div id="collapseListGroupHeading1" role="tab" class="panel-heading">
                     <h4 class="panel-title">
                         {%if categories[parentCat.id] is defined%}
-                        <a data-toggle="collapse" href="#collapseListGroup{{key}}" aria-expanded="true" aria-controls="collapseListGroup{{key}}" class="collapsed"><span>{{parentCat.title}}</span><span class="fa fa-plus"></span></a>
+                        <a data-toggle="collapse" href="#collapseListGroup{{key}}" aria-expanded="true" aria-controls="collapseListGroup{{key}}" class="collapsed{%if id==parentCat.id%} active{%endif%}"><span>{{parentCat.title}}</span><span class="fa fa-plus"></span></a>
                         {%else%}
-                        <a class="collapsed" href="{{path('kampong_site_food', {catid:parentCat.id, slug:parentCat.slug})}}"><span>{{parentCat.title}}</span></a>
+                        <a class="collapsed{%if id==parentCat.id%} active{%endif%}" href="{{path('kampong_site_food', {catid:parentCat.id, slug:parentCat.slug})}}"><span>{{parentCat.title}}</span></a>
                         {%endif%}
                     </h4>
                 </div>
