@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="kampong_site_homepage" path="/">
+        <default key="_controller">KampongSiteBundle:Default:index</default>
+    </route>
+    
+    <route id="kampong_site_contact" path="/lien-he">
+        <default key="_controller">KampongSiteBundle:Default:contact</default>
+    </route>
+    
+    <route id="kampong_site_aboutus" path="/gioi-thieu">
+        <default key="_controller">KampongSiteBundle:Default:aboutUs</default>
+    </route>
+    <route id="kampong_site_news" path="/tin-tuc-su-kien">
+        <default key="_controller">KampongSiteBundle:News:index</default>
+    </route>
+    <route id="kampong_site_news_detail" path="/tin-tuc-su-kien/{id}-{slug}">
+        <default key="_controller">KampongSiteBundle:News:detail</default>
+    </route>
+    <route id="kampong_site_food" path="/thuc-don/{catid}-{slug}">
+        <default key="_controller">KampongSiteBundle:Food:index</default>
+    </route>
+    <route id="kampong_site_food_all" path="/thuc-don">
+        <default key="_controller">KampongSiteBundle:Food:all</default>
+    </route>
+    <route id="kampong_site_food_detail" path="/mon-an/{id}-{slug}">
+        <default key="_controller">KampongSiteBundle:Food:detail</default>
+    </route>
+    <route id="kampong_site_gallery" path="/gallery">
+        <default key="_controller">KampongSiteBundle:Default:gallery</default>
+    </route>
+    <route id="kampong_site_comment_add" path="/add-comment/{pid}/{cid}">
+        <default key="_controller">KampongSiteBundle:Comment:add</default>
+        <default key="cid" xsi:nil="true" />
+        <requirement key="pid">\d+</requirement>
+        <requirement key="cid">\d+</requirement>
+    </route>
+</routes>

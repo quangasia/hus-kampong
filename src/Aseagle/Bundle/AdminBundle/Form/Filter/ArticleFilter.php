@@ -12,11 +12,8 @@ namespace Aseagle\Bundle\AdminBundle\Form\Filter;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
-use Aseagle\Bundle\AdminBundle\Form\Event\ArticleSubscriber;
-use Aseagle\Bundle\ContentBundle\Entity\Category;
+use Aseagle\Backend\Entity\Category;
 
 /**
  * ArticleFilter
@@ -40,13 +37,13 @@ class ArticleFilter extends AbstractType {
                 'placeholder' => 'Author'
             ) 
         ))->add('category', 'entity', array (
-            'class' => 'AseagleContentBundle:Category',
+            'class' => 'AseagleBackend:Category',
             'property' => 'propertyName',
             'empty_value' => 'Category',
             'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('o')
                 ->where('o.type = :type')
-                ->setParameter(':type', 'post')
+                ->setParameter(':type', Category::TYPE_POST)
                 ->orderBy('o.root, o.lft, o.ordering', 'ASC');
             }, 
             'attr' => array ( 

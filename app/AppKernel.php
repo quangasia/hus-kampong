@@ -24,8 +24,9 @@ class AppKernel extends Kernel
             new Aseagle\Bundle\UserBundle\AseagleUserBundle(),
             new Aseagle\Bundle\CoreBundle\AseagleCoreBundle(),
             new Aseagle\Bundle\AdminBundle\AseagleAdminBundle(),
-            new Aseagle\Bundle\ContentBundle\AseagleContentBundle(),
+//            new Aseagle\Bundle\ContentBundle\AseagleContentBundle(),
             new Aseagle\Bundle\FrontBundle\AseagleFrontBundle(),
+            new Kampong\Bundle\SiteBundle\KampongSiteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

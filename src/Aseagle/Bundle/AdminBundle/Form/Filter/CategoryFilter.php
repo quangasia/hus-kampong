@@ -12,9 +12,6 @@ namespace Aseagle\Bundle\AdminBundle\Form\Filter;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * CategoryFitler

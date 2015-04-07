@@ -1,0 +1,17 @@
+<form class="row" action="{{path('kampong_site_comment_add', {pid: pid, cid:cid})}}" method="post">
+    <div class="col-sm-6 form-group">
+        <label for="name">Tên</label>   
+        <input name="comment['fullname']" type="text" class="form-control">
+    </div>
+    <div class="col-sm-6 form-group">
+        <label for="email">Email</label>        
+        <input name="comment['email']" type="text" class="form-control">
+    </div>
+    <div class="col-sm-12 form-group">
+        <label for="msg">Viết nhận xét</label> 
+        <textarea name="comment['comment']" rows="3" class="form-control"></textarea>
+    </div>
+    <div class="col-sm-12">
+        <button type="submit" class="btn btn-submit">Trả lời</button>
+    </div>
+</form>

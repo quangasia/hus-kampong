@@ -1,0 +1,51 @@
+{% extends "KampongSiteBundle::layout.html.twig" %}
+{% block slider %}
+<div id="banner" class="banner"><img alt="" src="{{asset("bundles/kampongsite/images/upload/banner-new.jpg")}}" class="img-responsive"></div>
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-9 col-sm-push-3">
+            <h2 class="title">Hình ảnh</h2>
+            <div class="product-block">
+                <div class="row">
+                    {% for image in images%}
+                    <div class="col-xs-6 col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <div class="desc"><img src="{{asset(image)|imagine_filter('gallery')}}" class="img-responsive">
+                                <div class="cta text-center">
+                                    <p><a class="group-cl" href="{{asset(image)}}" role="button"><span>Xem chi tiết</span></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-sm-pull-9">
+            <div id="search" class="search">
+                <form role="search" class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" placeholder="Search for recipes" class="form-control">            
+                        <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+                    </div>
+                </form>
+            </div>
+            <aside id="sidebar">
+                {{ render(controller("KampongSiteBundle:Block:leftMenu")) }}
+            </aside>
+            {{ render(controller("KampongSiteBundle:Block:leftBanner")) }}
+        </div>
+    </div>
+
+{% endblock %}
+{% block jsscript %}
+    {{parent()}}
+     <script src="{{asset('js/frontend/jquery.colorbox-min.js') }}"></script>
+     <script>
+         $(".group-cl").colorbox({rel:'group-cl', transition:"fade"});
+    </script>
+{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{asset('css/frontend/colorbox.css')}}">
+{% endblock %}

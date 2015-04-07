@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="admin_categorymenu" path="/">
+        <default key="_controller">AseagleAdminBundle:CategoryMenu:index</default>
+        <default key="_class">Aseagle\Bundle\AdminBundle\Controller\CategoryMenuController</default>
+        <default key="_manager">category</default>
+        <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\CategoryMenuFilter</default>
+        <default key="_columns">["id","title","created","enabled"]</default>    
+        <default key="_filter">{"type":2}</default>    
+        <default key="_view">AseagleAdminBundle:CategoryMenu:index.html.twig</default>    
+    </route>  
+    <route id="admin_categorymenu_new" path="/new/{id}">
+        <default key="_controller">AseagleAdminBundle:Base:new</default>
+        <default key="_class">Aseagle\Bundle\AdminBundle\Controller\CategoryMenuController</default>
+        <default key="_manager">category</default>
+        <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Type\CategoryMenuType</default>
+        <default key="_view">AseagleAdminBundle:CategoryMenu:new.html.twig</default>
+        <default key="id" xsi:nil="true" />        
+        <requirement key="id">\d+</requirement>
+    </route>
+</routes>

@@ -1,0 +1,91 @@
+<h2 class="title-2"><span>Nhận xét<span>(2)</span></span></h2>
+<div class="comment-block">
+    <div class="row">
+        <div class="col-sm-12">
+            
+            {% for comment in comments%}
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE0LjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;" class="media-object">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div class="inner">
+                        <div class="btn-reply">Reply</div>
+                        <h4 class="media-heading">{{comment.fullname}}</h4>
+                        {{comment.comment}}
+                        {#<div class="block-star">
+                            <ul class="list-inline pull-left">
+                                <li><img src="{{asset("bundles/kampongsite/images/star.png")}}" alt="star"/>
+                                </li>
+                                <li><img src="{{asset("bundles/kampongsite/images/star.png")}}" alt="star"/>
+                                </li>
+                                <li><img src="{{asset("bundles/kampongsite/images/star.png")}}" alt="star"/>
+                                </li>
+                                <li><img src="{{asset("bundles/kampongsite/images/star.png")}}" alt="star"/>
+                                </li>
+                                <li><img src="{{asset("bundles/kampongsite/images/star.png")}}" alt="star"/>
+                                </li>
+                            </ul>
+                        </div>#}
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+            <div class="media">
+                <div class="media-left"><a href="#"><img data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE0LjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;" class="media-object"></a></div>
+                <div class="media-body">
+                    <div class="inner">
+                        <div class="btn-reply">Reply</div>
+                        <h4 class="media-heading">Media heading</h4>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
+                    <div class="media">
+                        <div class="media-left"><a href="#"><img data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE0LjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;" class="media-object"></a></div>
+                        <div class="media-body">
+                            <div class="inner">
+                                <div class="btn-reply">Reply</div>
+                                <h4 class="media-heading">Nested media heading</h4>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="title-2"><span>Thêm nhận xét</span></h2>
+    <form class="row">
+        <div class="col-sm-6 form-group">
+            <label for="name">Tên</label>        
+            <input id="name" type="text" class="form-control">      
+        </div>
+        <div class="col-sm-6 form-group">
+            <label for="email">Email</label>        
+            <input id="email" type="email" class="form-control">
+        </div>
+        {#<div class="col-sm-12 form-group">
+            <label for="star">Đánh giá</label>
+            <div class="block-star">
+                <ul class="list-inline pull-left">
+                    <li><img src="images/star-grey.png" alt="star"/>
+                    </li>
+                    <li><img src="images/star-grey.png" alt="star"/>
+                    </li>
+                    <li><img src="images/star-grey.png" alt="star"/>
+                    </li>
+                    <li><img src="images/star-grey.png" alt="star"/>
+                    </li>
+                    <li><img src="images/star-grey.png" alt="star"/>
+                    </li>
+                </ul>
+            </div>
+        </div>#}
+        <div class="col-sm-12 form-group">
+            <label for="msg">Viết nhận xét</label> 
+            <textarea id="msg" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-submit">Gửi nhận xét</button>
+        </div>
+    </form>
+</div>

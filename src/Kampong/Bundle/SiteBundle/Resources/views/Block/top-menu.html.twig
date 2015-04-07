@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default">
+    <!-- Brand and toggle get grouped for better mobile display-->
+    <div class="navbar-header">
+        <button type="button" data-toggle="collapse" data-target="#mainNavbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span>            <span class="icon-bar"></span>            <span class="icon-bar"></span>            <span class="icon-bar"></span></button>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling-->
+    <div id="mainNavbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li {%if route == 'kampong_site_homepage'%}class="active"{%endif%}>
+                <a href="{{path('kampong_site_homepage')}}" title="Trang chủ">Trang chủ</a>
+            </li>
+            <li {%if route == 'kampong_site_aboutus'%}class="active"{%endif%} >
+                <a href="{{path('kampong_site_aboutus')}}" title="Giới thiệu">Giới thiệu</a>
+            </li>
+            <li {%if route == 'kampong_site_food_all'%}class="active"{%endif%}>
+                <a href="{{path('kampong_site_food_all')}}" title="Thực đơn">Thực đơn</a>
+            </li>
+            <li {%if route == 'kampong_site_news'%}class="active"{%endif%}>
+                <a href="{{path('kampong_site_news')}}" title="Tin tức &amp; Sự kiện">Tin tức & Sự kiện</a>
+            </li>
+            <li {%if route == 'kampong_site_gallery'%}class="active"{%endif%}>
+                <a href="{{path('kampong_site_gallery')}}" title="Hình ảnh">Hình ảnh</a>
+            </li>
+            <li {%if route == 'kampong_site_contact'%}class="active"{%endif%}>
+                <a href="{{path('kampong_site_contact')}}" title="Liên hệ">Liên hệ</a>
+            </li>
+        </ul>
+    </div>
+</nav>

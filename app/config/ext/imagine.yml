@@ -5,7 +5,32 @@ liip_imagine:
 
     filter_sets:
         cache: ~
-        avatar:
-            quality: 90
+        food_list:
+            quality: 100
             filters:
-                thumbnail: { size: [200, 200], mode: outbound }
+                thumbnail: { size: [214, 214], mode: outbound }
+                
+        banner_homepage_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [250, 100], mode: outbound }
+                
+        left_banner:
+            quality: 100
+            filters:
+                thumbnail: { size: [236, 100], mode: outbound }
+                
+        othernews_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [110, 83], mode: inbound }
+                
+        news_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [260, 160], mode: outbound }
+                
+        gallery:
+            quality: 100
+            filters:
+                thumbnail: { size: [214, 214], mode: outbound }

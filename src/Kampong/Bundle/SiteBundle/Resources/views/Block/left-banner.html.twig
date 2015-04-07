@@ -1,0 +1,21 @@
+{% set site_settings = settings.getAll()%}
+<div class="sale-off">
+    <h2 class="title-1"><span>Khuyến mãi</span></h2>
+    {% for banner in banners %}
+    <a href="{{banner.link}}" title="{{banner.name}}"><img src="{{asset('uploads/'~banner.image)|imagine_filter('left_banner')}}" alt="image"/></a>
+    {% endfor %}
+</div>
+<div class="share">
+    <h2 class="title-1"><span>Chia sẻ</span></h2>
+    <div class="row">
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=396857703805670&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+       <div class="fb-like-box" data-href="{%if site_settings.facebook_page is defined%}{{site_settings.facebook_page}}{%else%}https://www.facebook.com/FacebookDevelopers{%endif%}" data-width="270" data-height="270" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+    </div>
+</div>

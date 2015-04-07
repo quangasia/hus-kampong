@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
 use Aseagle\Bundle\CoreBundle\Helper\Html;
-use Aseagle\Bundle\ContentBundle\Entity\Content;
+use Aseagle\Backend\Entity\Content;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**

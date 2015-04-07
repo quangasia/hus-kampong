@@ -38,8 +38,10 @@ class LoadAclData implements FixtureInterface, ContainerAwareInterface
             array ('name' => 'Post Manager', 'class' => 'Aseagle\Bundle\AdminBundle\Controller\ArticleController', 'type' => 1),
             array ('name' => 'Category Manager', 'class' => 'Aseagle\Bundle\AdminBundle\Controller\CategoryController', 'type' => 1),
             array ('name' => 'Page Manager', 'class' => 'Aseagle\Bundle\AdminBundle\Controller\PageController', 'type' => 1),
-            array ('name' => 'Setting Manager', 'class' => 'Aseagle\Bundle\AdminBundle\Controller\SetttingController', 'type' => 1),
+            array ('name' => 'Setting Manager', 'class' => 'Aseagle\Bundle\AdminBundle\Controller\SettingController', 'type' => 1),
             array ('name' => 'Banner Manager', 'class' => 'Aseagle\Bundle\AdminBundle\Controller\BannerController', 'type' => 1),
+            array ('name' => 'Menu Manager', 'class' => 'Aseagle\Bundle\AdminBundle\Controller\CategoryMenuController', 'type' => 1),
+            array ('name' => 'Food Manager', 'class' => 'Aseagle\Bundle\AdminBundle\Controller\FoodController', 'type' => 1),
         );
 
         $manager = $this->container->get('user_acl_manager');

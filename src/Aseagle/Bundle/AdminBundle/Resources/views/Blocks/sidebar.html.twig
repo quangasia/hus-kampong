@@ -50,6 +50,21 @@
                     </li>
                 </ul>
             </li>   
+            
+            {% if app.request.get('_route') in ['admin_categorymenu', 'admin_categorymenu_new', 'admin_food', 'admin_food_new'] %}
+            <li class="active open"><a href="javascript:;"> <i class="icon-pin"></i> <span class="title">{{ 'Menu Manager'|trans }}</span> 
+                 <span class="selected"></span>  
+                 <span class="arrow open"></span>
+            {% else %}    
+            <li><a href="javascript:;"> <i class="icon-pin"></i> <span class="title">{{ 'Menu Manager'|trans }}</span> <span class="arrow "></span>
+            {% endif %}
+            </a>
+                <ul class="sub-menu">
+                    {{ menuItem('admin_categorymenu', ['admin_categorymenu', 'admin_categorymenu_new'], 'Menu Manager'|trans, "icon-grid")|raw }}
+                    {{ menuItem('admin_food', ['admin_food', 'admin_food_new'], 'Food Manager'|trans, "icon-present")|raw }}
+                </ul>
+            </li>  
+            
             {% if app.request.get('_route') in ['admin_setting', 'admin_setting_new'] %}
             <li class="last active">
 				<a href="javascript:;">

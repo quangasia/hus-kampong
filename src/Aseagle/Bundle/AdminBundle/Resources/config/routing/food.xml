@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+  
+    <route id="admin_food" path="/">
+        <default key="_controller">AseagleAdminBundle:Food:index</default>
+        <default key="_manager">content</default>
+        <default key="_class">Aseagle\Bundle\AdminBundle\Controller\FoodController</default>
+        <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\FoodFilter</default>
+        <default key="_columns">["id","title","author","pageView","created","enabled"]</default>    
+        <default key="_filter">{"type":3}</default>    
+        <default key="_view">AseagleAdminBundle:Food:index.html.twig</default>    
+    </route>
+    <route id="admin_food_new" path="/new/{id}">
+        <default key="_controller">AseagleAdminBundle:Base:new</default>
+        <default key="_class">Aseagle\Bundle\AdminBundle\Controller\FoodController</default>
+        <default key="_manager">content</default>
+        <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Type\FoodType</default>
+        <default key="_view">AseagleAdminBundle:Food:new.html.twig</default>
+        <default key="id" xsi:nil="true" />
+        <requirement key="id">\d+</requirement>
+    </route>
+    <route id="admin_food_upload" path="/upload">
+        <default key="_controller">AseagleAdminBundle:Food:upload</default>
+    </route>
+    <route id="admin_food_delete_media" path="/media/delete">
+        <default key="_controller">AseagleAdminBundle:Food:deleteMedia</default>
+    </route>
+</routes>

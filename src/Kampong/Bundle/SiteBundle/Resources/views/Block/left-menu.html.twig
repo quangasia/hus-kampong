@@ -1,0 +1,27 @@
+<h2 class="title"><span class="fa fa-list-ul"></span><span>Thực đơn</span></h2>
+<div role="tablist" class="panel-group">
+    {% if categories[0] is defined %}
+        {% for key,parentCat in categories[0] %}
+            <div class="panel panel-default">
+                <div id="collapseListGroupHeading1" role="tab" class="panel-heading">
+                    <h4 class="panel-title">
+                        {%if categories[parentCat.id] is defined%}
+                        <a data-toggle="collapse" href="#collapseListGroup{{key}}" aria-expanded="true" aria-controls="collapseListGroup{{key}}" class="collapsed"><span>{{parentCat.title}}</span><span class="fa fa-plus"></span></a>
+                        {%else%}
+                        <a class="collapsed" href="{{path('kampong_site_food', {catid:parentCat.id, slug:parentCat.slug})}}"><span>{{parentCat.title}}</span></a>
+                        {%endif%}
+                    </h4>
+                </div>
+               {%if categories[parentCat.id] is defined%}
+                <div id="collapseListGroup{{key}}" role="tabpanel" aria-labelledby="collapseListGroupHeading{{key}}" aria-expanded="true" class="panel-collapse collapse">
+                    <ul class="list-group">
+                        {% for child in categories[parentCat.id]%}
+                        <li class="list-group-item"><a href="{{path('kampong_site_food', {catid:child.id, slug:child.slug})}}" title="Món chính">{{child.title}}</a></li>
+                        {% endfor%}
+                    </ul>
+                </div>
+                {%endif%}
+            </div>
+        {% endfor%}
+    {% endif%}
+</div>

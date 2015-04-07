@@ -23,16 +23,14 @@ class TwigExtension extends \Twig_Extension
         'admin_group' => 'Aseagle\Bundle\AdminBundle\Controller\GroupController',
         'admin_user' => 'Aseagle\Bundle\AdminBundle\Controller\UserController',
         'admin_acl' => 'Aseagle\Bundle\AdminBundle\Controller\AclController',
-        'admin_brand' => 'Aseagle\Bundle\AdminBundle\Controller\BrandController',
         'admin_category' => 'Aseagle\Bundle\AdminBundle\Controller\CategoryController',
-        'admin_productcategory' => 'Aseagle\Bundle\AdminBundle\Controller\ProductCategoryController',
-        'admin_product' => 'Aseagle\Bundle\AdminBundle\Controller\ProductController',
+        'admin_categorymenu' => 'Aseagle\Bundle\AdminBundle\Controller\CategoryMenuController',
         'admin_article' => 'Aseagle\Bundle\AdminBundle\Controller\ArticleController',
         'admin_page' => 'Aseagle\Bundle\AdminBundle\Controller\PageController',
         'elfinder' => 'Aseagle\Bundle\AdminBundle\Controller\ArticleController',
-        'admin_order' => 'Aseagle\Bundle\AdminBundle\Controller\OrderController',
         'admin_setting' => 'Aseagle\Bundle\AdminBundle\Controller\SettingController',
         'admin_banner' => 'Aseagle\Bundle\AdminBundle\Controller\BannerController',
+        'admin_food' => 'Aseagle\Bundle\AdminBundle\Controller\FoodController',
     );
     
     /**
@@ -48,6 +46,13 @@ class TwigExtension extends \Twig_Extension
     public function getFunctions() {
         return array(
             new \Twig_SimpleFunction('menuItem', array($this, 'menuItem'))
+        );
+    }
+    
+    public function getFilters()
+    {
+        return array(
+            new \Twig_SimpleFilter('repeat', array($this, 'repeat'))
         );
     }
     
@@ -74,7 +79,19 @@ class TwigExtension extends \Twig_Extension
         
         return $html;
     }
- 
+    
+    /**
+     * Repeats a string.
+     *
+     * @see     http://php.net/manual/en/function.str-repeat.php
+     *
+     * @param   string      $string     String to repeat.
+     * @param   integer     $num        Number of times.
+     */
+    public function repeat($string, $num)
+    {
+        return str_repeat($string, $num);
+    }
     
     /* (non-PHPdoc)
      * @see Twig_ExtensionInterface::getName()

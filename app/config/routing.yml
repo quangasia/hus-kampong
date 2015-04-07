@@ -1,6 +1,10 @@
+kampong_site:
+    resource: "@KampongSiteBundle/Resources/config/routing.xml"
+    prefix:   /
+
 aseagle_front:
     resource: "@AseagleFrontBundle/Resources/config/routing.xml"
-    prefix:   /
+    prefix:   /front
 
 aseagle_admin:
     resource: "@AseagleAdminBundle/Resources/config/routing.xml"

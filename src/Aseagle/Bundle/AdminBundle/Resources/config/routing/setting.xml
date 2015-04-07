@@ -7,7 +7,7 @@
     <route id="admin_setting" path="/">
         <default key="_controller">AseagleAdminBundle:Setting:index</default>
         <default key="_class">Aseagle\Bundle\AdminBundle\Controller\SettingController</default>
-        <default key="_manager">setting_manager</default>
+        <default key="_manager">setting</default>
         <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\SettingFilter</default>
         <default key="_columns">["id","name","key","value"]</default>    
         <default key="_view">AseagleAdminBundle:Setting:index.html.twig</default>    
@@ -15,7 +15,7 @@
     <route id="admin_setting_new" path="/new/{id}">
         <default key="_controller">AseagleAdminBundle:Base:new</default>
         <default key="_class">Aseagle\Bundle\AdminBundle\Controller\SettingController</default>
-        <default key="_manager">setting_manager</default>
+        <default key="_manager">setting</default>
         <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Type\SettingType</default>
         <default key="_view">AseagleAdminBundle:Setting:new.html.twig</default>
         <default key="id" xsi:nil="true" />        

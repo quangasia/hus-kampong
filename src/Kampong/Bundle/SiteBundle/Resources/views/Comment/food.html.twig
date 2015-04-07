@@ -1,0 +1,52 @@
+<h2 class="title-2"><span>Nhận xét<span>({{comments|length}})</span></span></h2>
+<div class="comment-block">
+    <div class="row">
+        <div class="col-sm-12" id="commentContainer" data-prototype="{% filter escape %}{% include 'KampongSiteBundle:Comment:element.html.twig' %}{% endfilter %}">
+            {% for comment in comments%}
+                {{'<div class="media"><div class="media-left"><div style="width:64px;">&nbsp;</div></div><div class="media-body">'|repeat(comment.lvl) }}
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img data-src="{{asset('img/avatar.png')}}" src="{{asset('img/avatar.png')}}" data-holder-rendered="true" style="width: 64px; height: 64px;" class="media-object">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="inner">
+                            {% set frm = form%}
+{#                            <div class="btn-reply" data-prototype="{% filter escape %}{% include 'KampongSiteBundle:Comment:form.html.twig' with {pid: pid, cid: comment.id} %}{% endfilter %}">Reply</div>#}
+                            <h4 class="media-heading"><strong>{{comment.fullname}}</strong></h4>
+                            {{comment.comment}}
+                        </div>
+                        <div id="frm{{comment.id}}" class="media hide"></div>
+                    </div>
+                </div>
+                {{ '</div></div>'|repeat(comment.lvl) }}
+            {%endfor%}
+        </div>
+    </div>
+    <h2 class="title-2"><span>Thêm nhận xét</span></h2>
+    <form class="row" id="commentForm" action="{{path('kampong_site_comment_add', {pid: pid})}}" method="post">
+        <div class="col-sm-6 form-group">
+            <label for="name">Tên</label>   
+            {{ form_widget(form.fullname) }}
+        </div>
+        <div class="col-sm-6 form-group">
+            <label for="email">Email</label>        
+            {{ form_widget(form.email) }}
+        </div>
+        <div class="col-sm-12 form-group">
+            <label for="star">Đánh giá</label>
+            <div class="block-star">
+                <ul class="list-inline pull-left" id="rate"></ul>
+            </div>
+            {{ form_widget(form.ratePoint) }}
+        </div>
+        <div class="col-sm-12 form-group">
+            <label for="msg">Viết nhận xét</label> 
+            {{ form_widget(form.comment) }}
+        </div>
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-submit">Gửi nhận xét</button>
+        </div>
+    </form>
+</div>

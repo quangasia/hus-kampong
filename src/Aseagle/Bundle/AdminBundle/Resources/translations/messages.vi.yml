@@ -64,6 +64,17 @@ Page Manager: Quản lý trang
 Order Manager: Quản lý đặt hàng
 System Manager: Quản lý hệ thống
 Setting Manager: Cấu hình chung
+Menu Manager: Quản lý thực đơn
+Food Manager: Quản lý món ăn
+
+#Food manager
+Menu: Thực đơn
+Menus: Danh sách thực đơn
+Food: Món ăn
+Foods: Danh sách món ăn
+Parent Menu: Thuộc thực đơn
+Feature: Nổi bật
+
 
 #User manager
 users listing: danh sách thành viên
@@ -192,6 +203,9 @@ Banner Picture: Hình ảnh
 Level: Tầng
 Banner Manager: Quản lý Banner
 Picture: Hình ảnh
+Homepage Slide: Slide trang chủ
+Promotion: Banner khuyến mãi
+Position: Vị trí
 
 #Dashboard
 Total Products: Sản phẩm

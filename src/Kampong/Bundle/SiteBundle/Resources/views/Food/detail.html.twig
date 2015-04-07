@@ -1,0 +1,133 @@
+{% extends "KampongSiteBundle::layout.html.twig" %}
+{% set site_settings = settings.getAll()%}
+{% set url =  app.request.scheme ~'://' ~ app.request.httpHost ~ path('kampong_site_food_detail', {id:detail.id, slug:detail.slug})%}
+
+
+{%block head%}
+        <title>{%if site_settings['meta_title'] is defined%} {{site_settings['meta_title']}}{%endif%} - {{detail.title}}</title>
+        <meta name="description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortDescription}}{%endif%}">
+        <meta name="keywords" content="{{detail.metaKeywords}}">
+
+        <meta property="og:title" content="{%if detail.metaTitle != ''%}{{detail.metaTitle}}{%else%}{{detail.title}}{%endif%}" />
+        <meta property="og:description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortDescription}}{%endif%}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="{{url}}" />
+        <meta property="og:image" content="{{asset("uploads/" ~ detail.picture)|imagine_filter('food_list')}}" />         
+{%endblock%}
+
+
+
+{% block slider %}
+    {{render(controller('KampongSiteBundle:Block:headBanner', {position:4}))}}
+    {% endblock %}
+    {% block body %}
+    <div class="row">
+        <div class="col-sm-9 col-sm-push-3">
+            <div class="detail-block">
+                <div class="detail-title">
+                    <div class="inner">
+                        <h2>{{detail.title|raw}}</h2>
+                        <div class="block-star">
+                            <ul class="list-inline pull-left">
+                                {%for i in 1..5%}
+                                    {%if i <= detail.ratePoint%}
+                                    <li><img src="{{asset("bundles/kampongsite/images/star.png")}}" alt="star"/></li>
+                                    {% else%}
+                                    <li><img src="{{asset("bundles/kampongsite/images/star-grey.png")}}" alt="star"/></li>
+                                    {%endif%}
+                                {% endfor %}
+                            </ul>
+                            <span class="review">({%if detail.rateCount%}{{detail.rateCount}}{%else%}0{%endif%} reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slideshow">
+                    <div id="mySlideshow" data-ride="carousel" class="carousel slide">
+                        <div role="listbox" class="carousel-inner">
+                            <div class="item active"><a data-video data-src="//www.youtube.com/embed/kPDnw3_1GOI" title="Play" href="javascript:void(0);"><span class="btn-play"></span></a><img alt="" src="{{asset("bundles/kampongsite/images/upload/banner-1.jpg")}}"></div>
+                            <div class="item"><a data-video data-src="//www.youtube.com/embed/kPDnw3_1GOI" title="Play" href="javascript:void(0);"><span class="btn-play"></span></a><img alt="" src="{{asset("bundles/kampongsite/images/upload/banner-2.jpg")}}"></div>
+                            <div class="item"><a data-video data-src="//www.youtube.com/embed/kPDnw3_1GOI" title="Play" href="javascript:void(0);"><span class="btn-play"></span></a><img alt="" src="{{asset("bundles/kampongsite/images/upload/banner-3.jpg")}}"></div>
+                        </div>
+                        <!-- Controls--><a href="#mySlideshow" role="button" data-slide="prev" class="left carousel-control"><span aria-hidden="true" class="fa fa-chevron-left"></span><span class="sr-only">Previous </span></a><a href="#mySlideshow" role="button" data-slide="next" class="right carousel-control"><span aria-hidden="true" class="fa fa-chevron-right">  </span><span class="sr-only">Next</span></a>
+                    </div>
+                </div>
+                <div class="detail-content">
+                    <div class="info">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="cooking-time">
+                                    <p>Thời gian chuẩn bị</p>
+                                    <p>{{detail.time}} phút</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="order pull-left">
+                                    <p>Đặt món ăn</p>
+                                    <p>{{site_settings.order_phonenumber}}</p>
+                                </div>
+{#                                <a href="javascript:window.print()" role="button" class="btn print pull-right">Print</a>#}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="desc">
+                                    <p>{{detail.content|raw}}</p>
+                                </div>
+                                <div class="social-tool style-1">
+                                    <ul class="list-inline">
+                                        <li class="facebook"><a target="blank" title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url}}"><span class="fa fa-facebook"></span>Facebook</a></li>
+                                        <li class="twitter"><a target="blank" title="Twitter" href="https://twitter.com/home?status={{url}}"><span class="fa fa-twitter"></span>Twitter</a></li>
+                                        <li class="google-plus"><a target="blank" title="Google plus" href="https://plus.google.com/share?url={{url}}"><span class="fa fa-google-plus"></span>Google Plus</a></li>
+                                        {% set urlpic = app.request.scheme ~'://' ~ app.request.httpHost ~ asset("uploads/" ~ detail.picture)|imagine_filter('food_list')%}
+                                        <li class="pinterest"><a target="blank" title="Pinterest" href="https://pinterest.com/pin/create/button/?url={{detail.title}}&media={{urlpic}}&description={{detail.shortDescription}}"><span class="fa fa-pinterest"></span>Pinterest</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="title-2"><span>Món ngon</span></h2>
+            <div class="product-block">
+                <div class="row">
+                    {% for post in otherFoods%}
+                        {% if post.id != postId%}
+                        <div class="col-xs-6 col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                                <div class="desc">
+                                    <img src="{{asset("uploads/" ~ post.picture)|imagine_filter('food_list')}}" alt="{{post.title|raw}}" class="img-responsive">
+                                    <div class="cta text-center">
+                                        <p><a href="{{path('kampong_site_food_detail', {id:post.id, slug:post.slug})}}" role="button"><span>Xem chi tiết</span></a></p>
+                                    </div>
+                                </div>
+                                <div class="caption">
+                                    <h3><a href="{{path('kampong_site_food_detail', {id:post.id, slug:post.slug})}}" title="{{post.title|raw}}">{{post.title|raw}}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        {%endif%}
+                    {% endfor%}
+                </div>
+            </div>
+            {{ render(controller("KampongSiteBundle:Comment:food", {pid: detail.id})) }}
+        </div>
+        <div class="col-sm-3 col-sm-pull-9">
+            <div id="search" class="search">
+                <form role="search" class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" placeholder="Search for recipes" class="form-control">            
+                        <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+                    </div>
+                </form>
+            </div>
+            <aside id="sidebar">
+                {{ render(controller("KampongSiteBundle:Block:leftMenu")) }}
+            </aside>
+            {{ render(controller("KampongSiteBundle:Block:leftBanner")) }}
+        </div>
+    </div>
+
+{% endblock %}

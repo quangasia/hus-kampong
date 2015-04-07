@@ -1,0 +1,86 @@
+<?php
+namespace Kampong\Bundle\SiteBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Aseagle\Backend\Entity\Category;
+use Aseagle\Backend\Entity\Banner;
+
+/**
+ * BlockController
+ *
+ * @author  Quang Tran <quang.tran@aseagle.com>
+ * @access  public
+ * @package Kampong
+ */
+class BlockController extends Controller
+{
+
+    public function topMenuAction($route)
+    {
+        return $this->render('KampongSiteBundle:Block:top-menu.html.twig', array('route' => $route));
+    }
+
+    public function homepageSlideAction()
+    {
+        $banners = $this->get('backend')->getBannerManager()->getRepository()->findBy(array(
+            'enabled' => true,
+            'position' => Banner::TYPE_HOMEPAGE_SLIDE
+        ));
+
+        return $this->render('KampongSiteBundle:Block:homepage-slide.html.twig', array(
+                    'banners' => $banners
+        ));
+    }
+
+    public function mapAction()
+    {
+
+        return $this->render('KampongSiteBundle:Block:map.html.twig');
+    }
+
+    public function leftBannerAction()
+    {
+        $banners = $this->get('backend')->getBannerManager()->getRepository()->findBy(array(
+            'enabled' => true,
+            'position' => Banner::TYPE_BANNER_LEFT
+        ));
+        return $this->render('KampongSiteBundle:Block:left-banner.html.twig', array(
+                    'banners' => $banners
+        ));
+    }
+
+    public function leftMenuAction()
+    {
+        $entities = $this->get('backend')->getCategoryManager()->getRepository()->findBy(array(
+            'enabled' => true,
+            'type' => Category::TYPE_MENU,
+                ), array('ordering' => 'ASC'));
+
+        $categories = $brandCats = array();
+        foreach ($entities as $entity) {
+            if ($entity->getParent() == null) {
+                $categories[0][] = $entity;
+            } else {
+                $categories[$entity->getParent()->getId()][] = $entity;
+            }
+        }
+
+        return $this->render('KampongSiteBundle:Block:left-menu.html.twig', array(
+                    'categories' => $categories
+        ));
+    }
+    
+    public function commentAction($postId)
+    {
+        return $this->render('KampongSiteBundle:Block:comment.html.twig');
+    }
+
+    public function headBannerAction($position)
+    {           
+        $banner = $this->get('backend')->getBannerManager()->getRepository()->findOneBy(array(
+                        'enabled' => true,
+                        'position' => $position
+                   )); 
+        return $this->render('KampongSiteBundle:Block:head-banner.html.twig', array('banner' => $banner));     
+    }
+}

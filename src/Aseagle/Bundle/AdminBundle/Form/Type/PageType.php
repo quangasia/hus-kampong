@@ -105,7 +105,7 @@ class PageType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array ( 
-            'data_class' => 'Aseagle\Bundle\ContentBundle\Entity\Content', 
+            'data_class' => 'Aseagle\Backend\Entity\Content', 
         ));
     }
 

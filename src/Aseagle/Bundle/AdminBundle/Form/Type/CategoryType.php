@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
 use Aseagle\Bundle\AdminBundle\Form\Event\CategorySubscriber;
-use Aseagle\Bundle\ContentBundle\Entity\Category;
+use Aseagle\Backend\Entity\Category;
 
 /**
  * CategoryType
@@ -63,7 +63,7 @@ class CategoryType extends AbstractType {
         ))->add('parent', null, array ( 
             'label' => 'Parent Category',
             'property' => 'propertyName',
-            'class' => 'AseagleContentBundle:Category',
+            'class' => 'AseagleBackend:Category',
             'empty_value' => "Select...",
             'query_builder' => function(EntityRepository $er) {
                 $qBuider = $er->createQueryBuilder('o')                  
@@ -112,7 +112,7 @@ class CategoryType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array ( 
-            'data_class' => 'Aseagle\Bundle\ContentBundle\Entity\Category', 
+            'data_class' => 'Aseagle\Backend\Entity\Category', 
         ));
     }
 

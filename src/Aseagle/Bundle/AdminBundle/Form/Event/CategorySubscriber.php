@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
 use Aseagle\Bundle\CoreBundle\Helper\Html;
-use Aseagle\Bundle\ContentBundle\Entity\Category;
+use Aseagle\Backend\Entity\Category;
 
 /**
  * CategorySubscriber
@@ -78,7 +78,7 @@ class CategorySubscriber implements EventSubscriberInterface
             $form->add('parent', null, array ( 
                 'label' => 'Parent Category',
                 'property' => 'propertyName',
-                'class' => 'AseagleContentBundle:Category',
+                'class' => 'AseagleBackend:Category',
                 'empty_value' => "Select...",
                 'query_builder' => function(EntityRepository $er) use ($categoryId) {
                     return $er->createQueryBuilder('o')

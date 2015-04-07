@@ -11,5 +11,9 @@
             <argument type="service" id="service_container" />
         </service>
         <service id="aseagle.image" class="Aseagle\Bundle\CoreBundle\Service\AseagleImage" />
+        
+        <service id="backend" class="Aseagle\Backend\Service">
+            <argument type="service" id="service_container" />
+        </service>
     </services>   
 </container>

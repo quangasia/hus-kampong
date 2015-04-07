@@ -1,64 +1,65 @@
 {% extends 'AseagleAdminBundle::layout.html.twig' %} 
 
 {% block javascript %}
-{{ parent() }}
-{{ elfinder_tinymce_init4('default', {'width':'1024', 'height': '450', 'title':'Files Manager'|trans} ) }}
-{{ tinymce_init() }}
+    {{ parent() }}
+    {{ elfinder_tinymce_init4('default', {'width':'1024', 'height': '450', 'title':'Files Manager'|trans} ) }}
+    {{ tinymce_init() }}
 
-<script type="text/javascript">
-$('.btnSelectImage').on("click",function() {
-    var childWin = window.open("{{path('elfinder', {'instance': 'form'})}}?id=content_picture", "popupWindow", "height=450, width=900");
-});
-function setValue(value, element_id) {
-    $('.fileinput-preview > img').attr('src', '/uploads/' + value.replace(/\\/g, '\/'));
-    if ($('.fileinput-preview').hasClass('hide')) $('.fileinput-preview').removeClass('hide');
-    $('[data-type="elfinder-input-field"]').val(value.replace(/\\/g, '\/'));
-}    
-</script>
+    <script type="text/javascript">
+        $('.btnSelectImage').on("click", function () {
+            var childWin = window.open("{{path('elfinder', {'instance': 'form'})}}?id=content_picture", "popupWindow", "height=450, width=900");
+        });
+        function setValue(value, element_id) {
+            $('.fileinput-preview > img').attr('src', '/uploads/' + value.replace(/\\/g, '\/'));
+            if ($('.fileinput-preview').hasClass('hide'))
+                $('.fileinput-preview').removeClass('hide');
+            $('[data-type="elfinder-input-field"]').val(value.replace(/\\/g, '\/'));
+        }
+    </script>
 {% endblock %}
 
 {% block content %}
-<!-- BEGIN FORM-->
-{% form_theme form 'AseagleAdminBundle:Form:fields.html.twig' %}
-<form action="" id="form_validated_2" method="POST" class="horizontal-form" novalidate="novalidate">
-    <div class="portlet light bordered">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-briefcase font-green-sharp"></i> <span class="caption-subject font-green-sharp bold uppercase">{{ 'Banner'|trans }}</span>
+    <!-- BEGIN FORM-->
+    {% form_theme form 'AseagleAdminBundle:Form:fields.html.twig' %}
+    <form action="" id="form_validated_2" method="POST" class="horizontal-form" novalidate="novalidate">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-briefcase font-green-sharp"></i> <span class="caption-subject font-green-sharp bold uppercase">{{ 'Banner'|trans }}</span>
+                </div>
+                <div class="actions">                  
+                    <a href="{{ path('admin_banner') }}" class="btn btn-circle btn-default"> <i class="fa fa-angle-left"></i> <span class="hidden-480"> {{ 'Back'|trans }}</span></a>
+                    <button type="submit" class="btn btn-circle green-haze"><i class="fa fa-check"></i> {{ 'Save'|trans }}</button>
+                    <button type="submit" name="saveedit" class="btn btn-circle green-haze"><i class="fa fa-check-circle"></i> {{ 'Save & Continute Edit'|trans }}</button> 
+                </div>
             </div>
-            <div class="actions">                  
-                <a href="{{ path('admin_banner') }}" class="btn btn-circle btn-default"> <i class="fa fa-angle-left"></i> <span class="hidden-480"> {{ 'Back'|trans }}</span></a>
-                <button type="submit" class="btn btn-circle green-haze"><i class="fa fa-check"></i> {{ 'Save'|trans }}</button>
-                <button type="submit" name="saveedit" class="btn btn-circle green-haze"><i class="fa fa-check-circle"></i> {{ 'Save & Continute Edit'|trans }}</button> 
+            <div class="portlet-body form">
+                <div class="form-body">
+                    <div class="form-group">
+                        {{ form_label(form.image) }}
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-preview thumbnail {% if form.image.vars.data == '' %}hide{% endif %}" data-trigger="fileinput" style="width: 20%;">
+                                {% if form.image.vars.data != '' %}
+                                    <img src="{{ asset('/uploads/' ~ form.image.vars.data)|imagine_filter('banner_homepage_thumb') }}" />
+                                {% else %}
+                                    <img />
+                                {% endif %}
+                            </div>
+                            <div>    	
+                                {{ form_widget(form.image) }}
+                                <a href="#" class="btn blue btnSelectImage">{{ 'Select Image'|trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_widget(form) }}                  
+                </div>
+                <div class="form-actions right">
+                    <button type="button" class="btn default">{{ 'Cancel'|trans }}</button>
+                    <button type="submit" class="btn blue">
+                        <i class="fa fa-check"></i> {{ 'Save'|trans }}
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="portlet-body form">
-            <div class="form-body">
-                <div class="form-group">
-                    {{ form_label(form.image) }}
-                    <div class="fileinput fileinput-new" data-provides="fileinput">
-						<div class="fileinput-preview thumbnail {% if form.image.vars.data == '' %}hide{% endif %}" data-trigger="fileinput" style="width: 20%;">
-						    {% if form.image.vars.data != '' %}
-						    <img src="{{ asset('/uploads/' ~ form.picture.vars.data)|imagine_filter('article_thumb') }}" />
-						    {% else %}
-						    <img />
-						    {% endif %}
-						</div>
-						<div>    	
-						    {{ form_widget(form.image) }}
-							<a href="#" class="btn blue btnSelectImage">{{ 'Select Image'|trans }}</a>
-						</div>
-					</div>
-				</div>
-                {{ form_widget(form) }}                  
-            </div>
-            <div class="form-actions right">
-                <button type="button" class="btn default">{{ 'Cancel'|trans }}</button>
-                <button type="submit" class="btn blue">
-                    <i class="fa fa-check"></i> {{ 'Save'|trans }}
-                </button>
-            </div>
-        </div>
-    </div>
- </form>
+    </form>
 {% endblock %}

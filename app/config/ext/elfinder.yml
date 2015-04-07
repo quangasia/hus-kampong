@@ -31,7 +31,7 @@ fm_elfinder:
                         path: uploads/files
                         upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
                         upload_deny: ['all']
-                        upload_max_size: 2M
+                        upload_max_size: 5M
                         
         simple:
             locale: "%locale%" # defaults to current request locale
@@ -47,4 +47,4 @@ fm_elfinder:
                         path: uploads/files
                         upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
                         upload_deny: ['all']
-                        upload_max_size: 2M
+                        upload_max_size: 5M

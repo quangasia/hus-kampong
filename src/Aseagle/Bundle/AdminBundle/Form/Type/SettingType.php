@@ -14,7 +14,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\ORM\EntityRepository;
 use Aseagle\Bundle\AdminBundle\Form\Event\SettingSubscriber;
 
 /**
@@ -68,7 +67,7 @@ class SettingType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array ( 
-            'data_class' => 'Aseagle\Bundle\ContentBundle\Entity\Setting', 
+            'data_class' => 'Aseagle\Backend\Entity\Setting', 
         ));
     }
 

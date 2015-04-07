@@ -1,0 +1,20 @@
+<div id="banner" class="banner">
+    <div id="myCarousel" data-ride="carousel" class="carousel slide">
+        <!-- Indicators-->
+        <ol class="carousel-indicators">
+            {% for key,banner in banners %}
+            <li data-target="#myCarousel" data-slide-to="{{key}}" {%if loop.index == 1%}class="active"{%endif%}></li>
+            {% endfor %}
+        </ol>
+        <div role="listbox" class="carousel-inner">
+            {% for banner in banners %}
+            <div class="item {%if loop.index == 1%}active{%endif%}">
+                <a data-video data-src="//www.youtube.com/embed/kPDnw3_1GOI" title="Play" href="javascript:void(0);">
+                    <span class="btn-play"></span>
+                </a>
+                <img alt="" src="{{asset('uploads/'~banner.image)}}">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

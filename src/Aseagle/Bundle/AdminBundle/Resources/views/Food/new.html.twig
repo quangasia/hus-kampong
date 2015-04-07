@@ -1,0 +1,158 @@
+{% extends 'AseagleAdminBundle::layout.html.twig' %} 
+
+{% block javascript %}
+    {{ parent() }}
+    {{ elfinder_tinymce_init4('default', {'width':'1024', 'height': '450', 'title':'Files Manager'|trans} ) }}
+    {{ tinymce_init() }}
+
+    <script type="text/javascript">
+        $('.btnSelectImage').on("click", function () {
+            var childWin = window.open("{{path('elfinder', {'instance': 'form'})}}?id=content_picture", "popupWindow", "height=450, width=900");
+        });
+        function setValue(value, element_id) {
+            $('.fileinput-preview > img').attr('src', '/uploads/' + value.replace(/\\/g, '\/'));
+            if ($('.fileinput-preview').hasClass('hide'))
+                $('.fileinput-preview').removeClass('hide');
+            $('[data-type="elfinder-input-field"]').val(value.replace(/\\/g, '\/'));
+        }
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <!-- BEGIN FORM-->
+    {% form_theme form 'AseagleAdminBundle:Form:fields.html.twig' %}
+    <form action="" id="form_validated_2" method="POST" class="horizontal-form" novalidate="novalidate">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-doc font-green-sharp"></i> <span class="caption-subject font-green-sharp bold uppercase">{{ 'Food'|trans }}</span>
+                        </div>
+                        <div class="actions">
+                            <a href="{{ path('admin_food') }}" class="btn btn-circle btn-default"> <i class="fa fa-angle-left"></i> <span class="hidden-480"> {{ 'Back'|trans }}</span></a>
+                            <button type="submit" class="btn btn-circle green-haze"><i class="fa fa-check"></i> {{ 'Save'|trans }}</button>
+                            <button type="submit" name="saveedit" class="btn btn-circle green-haze"><i class="fa fa-check-circle"></i> {{ 'Save & Continute Edit'|trans }}</button>        
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+
+                        <div class="form-body">
+                            {{ form_row(form.title) }}
+                            {{ form_row(form.slug) }}
+                            {{ form_row(form.shortDescription) }}
+                            {{ form_row(form.content) }}
+                            {{ form_row(form.time) }}
+                            {{ form_row(form.tags) }}
+                            {{ form_row(form.feature) }}
+                            {{ form_row(form.enabled) }}
+                        </div>
+                        <div class="form-actions right">
+                            {{ form_row(form._token) }}
+                            <button type="button" class="btn default">{{ 'Cancel'|trans }}</button>
+                            <button type="submit" class="btn blue">
+                                <i class="fa fa-check"></i> {{ 'Save'|trans }}
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-doc font-green-sharp"></i> <span class="caption-subject font-green-sharp bold uppercase">{{ 'Images'|trans }}</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body" id="tab_images">
+                        <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10" data-url="{{ path('admin_food_upload') }}">
+                            <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn yellow"> <i class="fa fa-plus"></i> {{ 'Select Files'|trans }}
+                            </a> <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn green"> <i class="fa fa-share"></i> {{ 'Upload Files'|trans }}
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div id="tab_images_uploader_filelist" class="col-md-12 col-sm-12"></div>
+                        </div>
+                        <table class="table table-bordered table-hover" data-product-image
+                               data-prototype="{% filter escape %}{% include 'AseagleAdminBundle:Media:image-prototype.html.twig' with {'form': form.images.vars.prototype} %}{% endfilter %}">
+                            <thead>
+                                <tr role="row" class="heading">
+                                    <th width="8%">{{ 'Image'|trans }}</th>
+                                    <th width="10%">{{ 'Ordering'|trans }}</th>
+                                    <th width="10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for image in form.images %} 
+                                    {% include 'AseagleAdminBundle:Media:image-prototype.html.twig' with {form: image} %} 
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject">{{ 'Featured Image'|trans }}</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="form-group">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-preview thumbnail {% if form.picture.vars.data == '' %}hide{% endif %}" data-trigger="fileinput" style="width: 100%;">
+                                    {% if form.picture.vars.data != '' %}
+                                        <img src="{{ asset('/uploads/' ~ form.picture.vars.data)}}" />
+                                    {% else %}
+                                        <img />
+                                    {% endif %}
+                                </div>
+                                <div>    	
+                                    {{ form_widget(form.picture) }}
+                                    <a href="#" class="btn blue btnSelectImage">{{ 'Select Image'|trans }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject">{{ 'Categories'|trans }}</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {{ form_widget(form.categories) }}
+                    </div>
+                </div> 
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject">{{ 'Meta'|trans }}</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        {{ form_row(form.metaTitle) }}
+                        {{ form_row(form.metaContent) }}
+                        {{ form_row(form.metaKeywords) }}
+                    </div>
+                </div>    
+
+
+            </div>
+        </div>
+    </form>
+{% endblock %}

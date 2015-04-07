@@ -6,7 +6,7 @@
   
     <route id="admin_article" path="/">
         <default key="_controller">AseagleAdminBundle:Article:index</default>
-        <default key="_manager">content_manager</default>
+        <default key="_manager">content</default>
         <default key="_class">Aseagle\Bundle\AdminBundle\Controller\ArticleController</default>
         <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\ArticleFilter</default>
         <default key="_columns">["id","title","author","pageView","created","enabled"]</default>    
@@ -16,7 +16,7 @@
     <route id="admin_article_new" path="/new/{id}">
         <default key="_controller">AseagleAdminBundle:Base:new</default>
         <default key="_class">Aseagle\Bundle\AdminBundle\Controller\ArticleController</default>
-        <default key="_manager">content_manager</default>
+        <default key="_manager">content</default>
         <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Type\ArticleType</default>
         <default key="_view">AseagleAdminBundle:Article:new.html.twig</default>
         <default key="id" xsi:nil="true" />

@@ -7,7 +7,7 @@
     <route id="admin_category" path="/">
         <default key="_controller">AseagleAdminBundle:Category:index</default>
         <default key="_class">Aseagle\Bundle\AdminBundle\Controller\CategoryController</default>
-        <default key="_manager">category_manager</default>
+        <default key="_manager">category</default>
         <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\CategoryFilter</default>
         <default key="_columns">["id","title","created","enabled"]</default>    
         <default key="_filter">{"type":1}</default>    
@@ -16,7 +16,7 @@
     <route id="admin_category_new" path="/new/{id}">
         <default key="_controller">AseagleAdminBundle:Base:new</default>
         <default key="_class">Aseagle\Bundle\AdminBundle\Controller\CategoryController</default>
-        <default key="_manager">category_manager</default>
+        <default key="_manager">category</default>
         <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Type\CategoryType</default>
         <default key="_view">AseagleAdminBundle:Category:new.html.twig</default>
         <default key="id" xsi:nil="true" />        

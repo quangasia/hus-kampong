@@ -10,14 +10,7 @@
  */
 namespace Aseagle\Bundle\AdminBundle\Controller;
 
-use Aseagle\Bundle\AdminBundle\Form\Type\BrandType;
-use Symfony\Component\HttpFoundation\Response;
 use Aseagle\Bundle\CoreBundle\Helper\Html;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
-use Aseagle\Bundle\EcommerceBundle\Entity\Brand;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * BannerController
@@ -41,13 +34,29 @@ class BannerController extends BaseController {
     protected function grid($entities) {
         $grid = array ();
         foreach ($entities as $item) {
+            switch($item->getPosition()) {
+                case 1:
+                    $pos = 'Slide Homepage';
+                    break;
+                case 2:
+                    $pos = 'Banner Promotion';
+                    break;
+                case 3:
+                    $pos = 'Banner News';
+                    break;
+                case 4:
+                    $pos = 'Banner Food';
+                    break;
+                default:
+            }
+
             $grid [] = array ( 
                 '<input type="checkbox" name="ids[]" class="check" value="' . $item->getId() . '"/>', 
                 Html::showImage($this->container, $item->getImage()), 
                 '<a href="' . $this->generateUrl('admin_banner_new', array ( 
                     'id' => $item->getId() 
                 )) . '">' . $item->getName() . '</a>', 
-                $item->getPosition(),
+                $pos,
                 is_object($item->getCreated()) ? $item->getCreated()->format('d/m/Y') : '', 
                 Html::showStatusInTable($this->container, $item->getEnabled()), 
                 Html::showActionButtonsInTable($this->container, array ( 

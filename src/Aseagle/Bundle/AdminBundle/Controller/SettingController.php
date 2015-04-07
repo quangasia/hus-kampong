@@ -10,9 +10,7 @@
  */
 namespace Aseagle\Bundle\AdminBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Aseagle\Bundle\CoreBundle\Helper\Html;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * SettingController

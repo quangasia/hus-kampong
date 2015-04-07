@@ -33,7 +33,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
-      settings: "@front_settings"
+      settings: "@site_settings"
 
 # Assetic Configuration
 assetic:
@@ -68,6 +68,14 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        mappings:
+            Backend:
+                mapping: true
+                type: annotation
+                dir: "%kernel.root_dir%/../src/Aseagle/Backend/Entity"
+                alias: AseagleBackend
+                prefix: Aseagle\Backend\Entity
+                is_bundle: false
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -76,3 +84,4 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    port: 587

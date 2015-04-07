@@ -6,7 +6,7 @@
     <route id="admin_page" path="/">
         <default key="_controller">AseagleAdminBundle:Page:index</default>
         <default key="_class">Aseagle\Bundle\AdminBundle\Controller\PageController</default>
-        <default key="_manager">content_manager</default>
+        <default key="_manager">content</default>
         <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\PageFilter</default>
         <default key="_columns">["id","title","created","enabled"]</default>    
         <default key="_filter">{"type":2}</default>    
@@ -15,7 +15,7 @@
     <route id="admin_page_new" path="/new/{id}">
         <default key="_controller">AseagleAdminBundle:Base:new</default>
         <default key="_class">Aseagle\Bundle\AdminBundle\Controller\PageController</default>
-        <default key="_manager">content_manager</default>
+        <default key="_manager">content</default>
         <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Type\PageType</default>
         <default key="_view">AseagleAdminBundle:Page:new.html.twig</default>
         <default key="id" xsi:nil="true" />

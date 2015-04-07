@@ -25,13 +25,11 @@
     <import resource="@AseagleAdminBundle/Resources/config/routing/user.xml" prefix="/user" />
     <import resource="@AseagleAdminBundle/Resources/config/routing/group.xml" prefix="/group" />
     <import resource="@AseagleAdminBundle/Resources/config/routing/article.xml" prefix="/post" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/food.xml" prefix="/food" />
     <import resource="@AseagleAdminBundle/Resources/config/routing/category.xml" prefix="/category" />
-    <import resource="@AseagleAdminBundle/Resources/config/routing/productcategory.xml" prefix="/category-product" />
+    <import resource="@AseagleAdminBundle/Resources/config/routing/categorymenu.xml" prefix="/category-menu" />
     <import resource="@AseagleAdminBundle/Resources/config/routing/page.xml" prefix="/page" />
-    <import resource="@AseagleAdminBundle/Resources/config/routing/brand.xml" prefix="/brand" />
-    <import resource="@AseagleAdminBundle/Resources/config/routing/product.xml" prefix="/product" />
     <import resource="@AseagleAdminBundle/Resources/config/routing/acl.xml" prefix="/acl" />
-    <import resource="@AseagleAdminBundle/Resources/config/routing/order.xml" prefix="/order" />
     <import resource="@AseagleAdminBundle/Resources/config/routing/setting.xml" prefix="/setting" />
     <import resource="@AseagleAdminBundle/Resources/config/routing/banner.xml" prefix="/banner" />
 </routes>

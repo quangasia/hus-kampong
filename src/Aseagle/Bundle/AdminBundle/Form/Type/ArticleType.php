@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
 use Aseagle\Bundle\AdminBundle\Form\Event\ArticleSubscriber;
-use Aseagle\Bundle\ContentBundle\Entity\Category;
+use Aseagle\Backend\Entity\Category;
 
 /**
  * ArticleType
@@ -80,7 +80,7 @@ class ArticleType extends AbstractType {
         ))->add('categories', null, array ( 
             'label' => 'Categories',
             'property' => 'propertyName',
-            'class' => 'AseagleContentBundle:Category',
+            'class' => 'AseagleBackend:Category',
             "expanded" => true,
             'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('o')
@@ -140,7 +140,7 @@ class ArticleType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array ( 
-            'data_class' => 'Aseagle\Bundle\ContentBundle\Entity\Content', 
+            'data_class' => 'Aseagle\Backend\Entity\Content', 
         ));
     }
 

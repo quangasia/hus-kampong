@@ -12,9 +12,6 @@ namespace Aseagle\Bundle\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Aseagle\Bundle\CoreBundle\Helper\Html;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\BrowserKit\Request;
 
 /**
@@ -50,17 +47,22 @@ class BaseController extends Controller {
             throw $this->createNotFoundException('Missing form argument');
         }
     
+        
+        $entityMgr = $this->get('backend')->getManager($manager);
+        if (is_null($entityMgr)) {
+            $entityMgr = $this->get($manager);
+        }
         $oid = $this->getRequest()->get('id', NULL);
         if (NULL !== $oid) {
             if ($this->getRequest()->get('_ignoreAcl', null) != null  && !$this->get('user_acl')->isAllow('EDIT', $class)) {
                 throw $this->createAccessDeniedException('Permission Denied');
             }
-            $entity = $this->get($manager)->getObject($oid);
+            $entity = $entityMgr->getObject($oid);
         } else {
             if (!$this->get('user_acl')->isAllow('CREATE', $class)) {
                 throw $this->createAccessDeniedException('Permission Denied');
             }
-            $entity = $this->get($manager)->createObject();
+            $entity = $entityMgr->createObject();
         }
     
         $form = $this->createForm(new $form($this->container), $entity);
@@ -69,7 +71,7 @@ class BaseController extends Controller {
             $form->bind($this->getRequest());
             if ($form->isValid()) {
                 /* Save object */
-                $this->get($manager)->save($entity);
+                $entityMgr->save($entity);
     
                 if (NULL == $oid) {
                     /* If a new object */
@@ -129,6 +131,11 @@ class BaseController extends Controller {
             throw $this->createNotFoundException('Missing form argument');
         }
         
+        $entityMgr = $this->get('backend')->getManager($manager);
+        if (is_null($entityMgr)) {
+            $entityMgr = $this->get($manager);
+        }
+        
         $filterForm = $this->createForm(new $form());
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST' && $request->isXmlHttpRequest()) {
@@ -181,8 +188,8 @@ class BaseController extends Controller {
                 $order [$orderMapping [$orderColumnNumber [0] ['column']]] = $orderDir [0] ['dir'];
             }
             
-            $entities = $this->get($manager)->getRepository()->getList($filters, $order, $limit, $offset);
-            $total = $this->get($manager)->getRepository()->getTotal($filters);
+            $entities = $entityMgr->getRepository()->getList($filters, $order, $limit, $offset);
+            $total = $entityMgr->getRepository()->getTotal($filters);
             $grid = $this->grid($entities);
             
             $response ['data'] = $grid;
@@ -218,7 +225,12 @@ class BaseController extends Controller {
      */
     protected function delete($ids, $manager) {
         if (! empty($ids)) {
-            $entities = $this->get($manager)->getRepository()->findBy(array ( 
+            $entityMgr = $this->get('backend')->getManager($manager);
+            if (is_null($entityMgr)) {
+                $entityMgr = $this->get($manager);
+            }
+
+            $entities = $entityMgr->getRepository()->findBy(array ( 
                 'id' => $ids 
             ));
             
@@ -231,7 +243,7 @@ class BaseController extends Controller {
                     );
                 } else {
                     try {
-                        $this->get($manager)->delete($entity);
+                        $entityMgr->delete($entity);
                     } catch (\Doctrine\DBAL\DBALException $e) {
                         $msg = $this->container->get('translator')->trans('Error! please deteted or updated the related items before remove this records');
                         return array ( 
@@ -262,7 +274,11 @@ class BaseController extends Controller {
      */
     protected function setStatus($ids, $manager, $type = 'publish') {
         if (! empty($ids)) {
-            $entities = $this->get($manager)->getRepository()->findBy(array ( 
+            $entityMgr = $this->get('backend')->getManager($manager);
+            if (is_null($entityMgr)) {
+                $entityMgr = $this->get($manager);
+            }
+            $entities = $entityMgr->getRepository()->findBy(array ( 
                 'id' => $ids 
             ));
             switch ($type) {
@@ -270,7 +286,7 @@ class BaseController extends Controller {
                     $records = 0;
                     foreach ($entities as $entity) {
                         $entity->setEnabled(true);
-                        $this->get($manager)->save($entity);
+                        $entityMgr->save($entity);
                         $records ++;
                     }
                     
@@ -286,7 +302,7 @@ class BaseController extends Controller {
                     $records = 0;
                     foreach ($entities as $entity) {
                         $entity->setEnabled(false);
-                        $this->get($manager)->save($entity);
+                        $entityMgr->save($entity);
                         $records ++;
                     }
                     

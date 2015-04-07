@@ -14,8 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\ORM\EntityRepository;
-use Aseagle\Bundle\ContentBundle\Entity\Category;
+use Aseagle\Backend\Entity\Banner;
 
 /**
  * BannerType
@@ -63,12 +62,19 @@ class BannerType extends AbstractType {
                 'placeholder' => 'Image',
                 'data-type' => 'elfinder-input-field'
             ) 
-        ))->add('position', 'text', array ( 
-            'label' => 'Level', 
+        ))->add('position', 'choice', array ( 
+            'label' => 'Position', 
             'attr' => array ( 
                 'class' => 'form-control', 
-                'placeholder' => 'Level'
-            ) 
+                'placeholder' => 'Position'
+            ),
+            'choices' => array ( 
+                Banner::TYPE_HOMEPAGE_SLIDE => 'Homepage Slide', 
+                Banner::TYPE_BANNER_LEFT => 'Promotion',
+                Banner::TYPE_BANNER_NEWS => 'Banner News',  
+                Banner::TYPE_BANNER_FOOD => 'Banner Food', 
+            ),
+            
         ))
         ->add('enabled', 'choice', array ( 
             'label' => 'Status',
@@ -91,7 +97,7 @@ class BannerType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array ( 
-            'data_class' => 'Aseagle\Bundle\ContentBundle\Entity\Banner', 
+            'data_class' => 'Aseagle\Backend\Entity\Banner', 
         ));
     }
 

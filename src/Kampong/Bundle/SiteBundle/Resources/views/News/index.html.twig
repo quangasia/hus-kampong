@@ -1,0 +1,53 @@
+{% extends "KampongSiteBundle::layout.html.twig" %}
+{% block slider %}
+{{render(controller('KampongSiteBundle:Block:headBanner', {position:3}))}}    
+{% endblock %}
+    {% block body %}
+
+    <div class="row">
+        <div class="col-sm-9 col-sm-push-3">
+            <h2 class="title">Tin tức & Sự kiện</h2>
+            <div class="news-events">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% for post in posts%}
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="{{path('kampong_site_news_detail', {id:post.id, slug:post.slug})}}" title="">
+                                    {% if post.picture != ''%}
+                                    <img src="{{asset("uploads/" ~ post.picture)|imagine_filter('news_thumb')}}" alt="new" class="media-object"/>
+                                    {% else %}
+                                    <img src="{{asset("bundles/kampongsite/images/upload/new.jpg")}}" alt="new" class="media-object"/>
+                                    {% endif%}
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="desc">
+                                    <h4 class="media-heading"><a href="{{path('kampong_site_news_detail', {id:post.id, slug:post.slug})}}" title="Top aligned media">{{post.title|raw}}</a></h4>
+                                    <p>{{post.shortDescription|raw}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {{paging|raw}}
+        </div>
+        <div class="col-sm-3 col-sm-pull-9">
+            <div id="search" class="search">
+                <form role="search" class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" placeholder="Search for recipes" class="form-control">            
+                        <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+                    </div>
+                </form>
+            </div>
+            <aside id="sidebar">
+                {{ render(controller("KampongSiteBundle:Block:leftMenu")) }}
+            </aside>
+            {{ render(controller("KampongSiteBundle:Block:leftBanner")) }}
+        </div>
+    </div>
+
+{% endblock %}

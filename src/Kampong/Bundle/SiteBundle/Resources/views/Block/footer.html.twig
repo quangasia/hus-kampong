@@ -1,0 +1,52 @@
+{% set site_settings = settings.getAll()%}
+<div class="footer-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3"><img src="{{ asset('bundles/kampongsite/images/logo-footer.png')}}" alt="Logo" class="logo"/>
+                <address><strong>Restaurant Address:</strong>
+                    <p>{%if site_settings.footer_address is defined%}{{site_settings.footer_address|raw}}{%endif%}</p>
+                </address>
+            </div>
+            <div class="col-sm-3">
+                <h2>Contact us</h2>
+                <div class="contact-detail">
+                    <div class="item"><strong>Telephone Enquiry:</strong>
+                        <p>{%if site_settings.phone_number is defined%}{{site_settings.phone_number|raw}}{%endif%}</p>
+                    </div>
+                    <div class="item"><strong>Email Enquiry:</strong>
+                        <p>{%if site_settings.contact_email is defined%}{{site_settings.contact_email|raw}}{%endif%}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <h2>About us</h2>
+                <p><i>{%if site_settings.footer_about_us is defined%}{{site_settings.footer_about_us|raw}}{%endif%}</i></p>
+            </div>
+            <div class="col-sm-3">
+                <h2>Open Hours</h2>
+                <div class="list-hours">
+                    {%if site_settings.footer_open_hours is defined%}{{site_settings.footer_open_hours|raw}}{%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer-bot">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8">
+                <copyright>© Copyright 2015 by KAMPONG. All Rights Reserved.</copyright>
+            </div>
+            <div class="col-xs-4 col-sm-4">
+                <div class="social-tool text-right">
+                    <ul class="list-inline">
+                        <li><span>Share</span></li>
+                        <li><a title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://kampong.akadigital.vn/" class="fa fa-facebook"></a></li>
+                        <li><a title="Twitter" href="http://twitter.com/share?text=Kampong" class="fa fa-twitter"></a></li>
+                        <li><a title="Google plus" href="https://plus.google.com/share?url=http://kampong.akadigital.vn" class="fa fa-google-plus"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
