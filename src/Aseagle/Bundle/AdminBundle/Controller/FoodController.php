@@ -116,6 +116,7 @@ class FoodController extends BaseController {
         
         if (! empty($_FILES)) {
             if ($_FILES ["file"] ["error"] || ! is_uploaded_file($_FILES ["file"] ["tmp_name"])) {
+                var_dump($_FILES["file"]); die;
                 die('{"jsonrpc" : "2.0", "error" : {"code": 103, "message": "Failed to move uploaded file."}, "id" : "id"}');
             }
             
@@ -158,7 +159,7 @@ class FoodController extends BaseController {
             $response->result = "OK";
             $response->id = time();
             $response->src = '/uploads/products/' . $image->getPath();
-            $response->name = $image->getName();
+            //$response->name = $image->getName();
             $response->path = $imgName;
             
             // Return Success JSON-RPC response

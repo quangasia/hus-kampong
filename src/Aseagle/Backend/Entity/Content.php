@@ -139,6 +139,13 @@ class Content {
      */
     private $time;
 
+ 
+    /**
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="content")
+     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
+     */
+    private $images;
+
     /**
      * Set title
      *
@@ -698,5 +705,38 @@ class Content {
     public function getRateCount()
     {
         return $this->rateCount;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \Aseagle\Backend\Entity\Media $images
+     * @return Content
+     */
+    public function addImage(\Aseagle\Backend\Entity\Media $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \Aseagle\Backend\Entity\Media $images
+     */
+    public function removeImage(\Aseagle\Backend\Entity\Media $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

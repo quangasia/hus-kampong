@@ -25,7 +25,8 @@
     <route id="admin_food_upload" path="/upload">
         <default key="_controller">AseagleAdminBundle:Food:upload</default>
     </route>
-    <route id="admin_food_delete_media" path="/media/delete">
+    <route id="admin_food_media_delete" path="/media/delete/{id}">
         <default key="_controller">AseagleAdminBundle:Food:deleteMedia</default>
+        <default key="id" xsi:nil="true" />  
     </route>
 </routes>

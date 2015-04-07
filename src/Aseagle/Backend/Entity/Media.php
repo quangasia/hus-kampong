@@ -34,7 +34,7 @@ class Media
     private $type;
      
     /**
-     * @ORM\ManyToOne(targetEntity="Content")
+     * @ORM\ManyToOne(targetEntity="Content", cascade={"persist"})
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      */
     private $content;
@@ -45,11 +45,16 @@ class Media
      * @ORM\Column(name="ctime", type="datetime", nullable=true)
      */
     private $created;
-    
+
     /**
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
      */
     private $enabled;
+
+    public function __toString()
+    {
+        return $this->path;
+    }
 
     /**
      * Get id

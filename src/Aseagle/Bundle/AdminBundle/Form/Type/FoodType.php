@@ -141,6 +141,16 @@ class FoodType extends AbstractType {
             'attr' => array ( 
                 'class' => 'form-control' 
             ) 
+        ))->add('images', 'collection', array ( 
+            'label' => 'Images',
+            'type' => new ImageType(),            
+            'attr' => array ( 
+                'class' => 'form-control', 
+                'placeholder' => 'Images' 
+            ),
+            'allow_add' => true,
+            'by_reference' => true,
+            'allow_delete' => true
         ));
         
         $builder->addEventSubscriber(new FoodSubscriber($this->container));

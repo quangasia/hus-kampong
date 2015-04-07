@@ -27,33 +27,13 @@ class ImageType extends AbstractType {
      * @see \Symfony\Component\Form\AbstractType::buildForm()
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('name', null, array ( 
-            'label' => 'Name', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Name',
-                'data-image-label' => ''
-            ),
-            'required' => true 
-        ))->add('path', 'hidden', array ( 
+        $builder->add('path', 'hidden', array ( 
             'label' => 'Path', 
             'attr' => array ( 
                 'class' => 'form-control', 
                 'placeholder' => 'Path',
                 'data-image-path' => ''
             ) 
-        ))->add('ordering', null, array ( 
-            'label' => 'Ordering', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Ordering' 
-            )
-        ))->add('thumb', 'checkbox', array ( 
-            'label' => 'Thumb',
-            'required' => false,           
-            'attr' => array ( 
-                'class' => 'form-control' 
-            )
         ));
         
     }
@@ -64,7 +44,7 @@ class ImageType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array ( 
-            'data_class' => 'Aseagle\Bundle\EcommerceBundle\Entity\Image', 
+            'data_class' => 'Aseagle\Backend\Entity\Media', 
         ));
     }
 

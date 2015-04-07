@@ -15,6 +15,11 @@
                 $('.fileinput-preview').removeClass('hide');
             $('[data-type="elfinder-input-field"]').val(value.replace(/\\/g, '\/'));
         }
+        
+        jQuery(document).ready(function() { 
+            Ecommerce.init();
+        });
+
     </script>
 
 {% endblock %}
@@ -73,13 +78,12 @@
                         <div class="row">
                             <div id="tab_images_uploader_filelist" class="col-md-12 col-sm-12"></div>
                         </div>
-                        <table class="table table-bordered table-hover" data-product-image
+                        <table class="table table-bordered" data-product-image
                                data-prototype="{% filter escape %}{% include 'AseagleAdminBundle:Media:image-prototype.html.twig' with {'form': form.images.vars.prototype} %}{% endfilter %}">
                             <thead>
                                 <tr role="row" class="heading">
-                                    <th width="8%">{{ 'Image'|trans }}</th>
-                                    <th width="10%">{{ 'Ordering'|trans }}</th>
-                                    <th width="10%"></th>
+                                    <th width="80%">{{ 'Image'|trans }}</th>
+                                    <th width="20%"></th>
                                 </tr>
                             </thead>
                             <tbody>

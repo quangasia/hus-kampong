@@ -68,5 +68,26 @@ class FoodSubscriber implements EventSubscriberInterface
         }
         $article->setType(Content::TYPE_FOOD);
         
+        $images = $article->getImages();
+        foreach ($images as $image) {
+            $image->setContent($article);
+            $image->setType(1);
+            //$this->container->get('backend')->getMediaManager()->save($image, false);
+            $this->container->get('doctrine')->getManager()->persist($image);
+        }
+
+        if (null !== $article->getId()) {
+            $imageDir = $this->container->get('kernel')->getRootDir() . '/../web/uploads/products/';
+            $imgList = $this->container->get('backend')->getMediaManager()->getRepository()->findBy(array('content'=>$article->getId()));
+            foreach ($imgList as $image) {
+                if (!$article->getImages()->contains($image)) {
+                    if (file_exists($imageDir . $image->getPath())) {
+//                        unlink($imageDir . $image->getPath());
+                        $this->container->get('backend')->getMediaManager()->delete($image);
+                    }
+                }
+            }
+
+        }
     }
 }
