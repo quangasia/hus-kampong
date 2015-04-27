@@ -39,4 +39,7 @@
         <requirement key="pid">\d+</requirement>
         <requirement key="cid">\d+</requirement>
     </route>
+    <route id="kampong_site_recruitment" path="/recruitment">
+        <default key="_controller">KampongSiteBundle:Default:recruitment</default>
+    </route>
 </routes>

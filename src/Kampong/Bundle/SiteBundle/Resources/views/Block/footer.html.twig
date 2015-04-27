@@ -3,27 +3,28 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3"><img src="{{ asset('bundles/kampongsite/images/logo-footer.png')}}" alt="Logo" class="logo"/>
-                <address><strong>Restaurant Address:</strong>
+                <address><strong>{{'Restaurant Address'|trans}}:</strong>
                     <p>{%if site_settings.footer_address is defined%}{{site_settings.footer_address|raw}}{%endif%}</p>
                 </address>
             </div>
             <div class="col-sm-3">
-                <h2>Contact us</h2>
+                <h2>{{'Contact us'|trans}}</h2>
                 <div class="contact-detail">
-                    <div class="item"><strong>Telephone Enquiry:</strong>
+                    <div class="item"><strong>{{'Telephone Enquiry'|trans}}:</strong>
                         <p>{%if site_settings.phone_number is defined%}{{site_settings.phone_number|raw}}{%endif%}</p>
                     </div>
-                    <div class="item"><strong>Email Enquiry:</strong>
+                    <div class="item"><strong>{{'Email Enquiry'|trans}}:</strong>
                         <p>{%if site_settings.contact_email is defined%}{{site_settings.contact_email|raw}}{%endif%}</p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
-                <h2>About us</h2>
-                <p><i>{%if site_settings.footer_about_us is defined%}{{site_settings.footer_about_us|raw}}{%endif%}</i></p>
+                <h2>{{'Rave Reviews'|trans}}</h2>
+                <p style="font-size: 16px;">{%if site_settings.footer_about_us is defined%}{{site_settings.footer_about_us|raw}}{%endif%}</p>
+                <p id="ratefooter"></p>
             </div>
             <div class="col-sm-3">
-                <h2>Open Hours</h2>
+                <h2>{{'Open Hours'|trans}}</h2>
                 <div class="list-hours">
                     {%if site_settings.footer_open_hours is defined%}{{site_settings.footer_open_hours|raw}}{%endif%}
                 </div>
@@ -41,7 +42,7 @@
                 <div class="social-tool text-right">
                     <ul class="list-inline">
                         <li><span>Share</span></li>
-                        <li><a title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://kampong.akadigital.vn/" class="fa fa-facebook"></a></li>
+                        <li><a title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://kampong.akadigital.vn/iapp.php" class="fa fa-facebook"></a></li>
                         <li><a title="Twitter" href="http://twitter.com/share?text=Kampong" class="fa fa-twitter"></a></li>
                         <li><a title="Google plus" href="https://plus.google.com/share?url=http://kampong.akadigital.vn" class="fa fa-google-plus"></a></li>
                     </ul>

@@ -3,12 +3,14 @@
 namespace Kampong\Bundle\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
 
     const CONTACT_PAGE_ID = 2;
     const ABOUTUS_PAGE_ID = 5;
+    const RECRUITMENT_PAGE_ID = 63;
 
     public function indexAction()
     {
@@ -16,9 +18,15 @@ class DefaultController extends Controller
         $contentManager = $this->get('backend')->getContentManager();
         $foods = $contentManager->getRepository()->getList(array('enabled' => true, 'feature' => true), array('created' => 'DESC'));
 
-        return $this->render('KampongSiteBundle:Default:index.html.twig', array(
+        $content = $this->renderView('KampongSiteBundle:Default:index.html.twig', array(
                     'foods' => $foods
         ));
+        $response = new Response($content, Response::HTTP_OK);
+        return $response;
+
+        /*return $this->render('KampongSiteBundle:Default:index.html.twig', array(
+                    'foods' => $foods
+                ));*/
     }
 
     public function contactAction()
@@ -39,8 +47,8 @@ class DefaultController extends Controller
                     $mailer = $this->get('mailer');
                     $message = $mailer->createMessage()
                             ->setSubject('[Liên hệ][' . $data['fullname'] . '] ' . $data['title'])
-                            ->setFrom($setting->getValue())
-                            ->setTo('quang.tranminh@hotmail.com')
+                            ->setFrom($data['email'])
+                            ->setTo($setting->getValue())
                             ->setBody(
                             $this->renderView('KampongSiteBundle:Email:contact.html.twig', array(
                                 'data' => $data
@@ -68,7 +76,7 @@ class DefaultController extends Controller
         return $this->render('KampongSiteBundle:Default:aboutus.html.twig', array(
                     'detail' => $aboutusContent
         ));
-    }
+    } 
 
     public function galleryAction()
     {
@@ -81,6 +89,18 @@ class DefaultController extends Controller
         return $this->render('KampongSiteBundle:Default:gallery.html.twig', array(
                     'images' => $images
         ));
+    }
+
+    public function recruitmentAction()
+    {
+        /* @var $contentManager \Aseagle\Backend\Manager\ContentManager */
+        $contentManager = $this->get('backend')->getContentManager();
+        $recruitmentContent = $contentManager->getRepository()->find(self::RECRUITMENT_PAGE_ID);
+
+        return $this->render('KampongSiteBundle:Default:recruitment.html.twig', array(
+                    'detail' => $recruitmentContent
+        ));
+
     }
 
 }

@@ -16,7 +16,7 @@
         <meta property="og:title" content="{%if site_settings['meta_title'] is defined%} {{site_settings['meta_title']}}{%endif%}" />
         <meta property="og:description" content="{%if site_settings['meta_description'] is defined%} {{site_settings['meta_description']}}{%endif%}" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="http://kampong.akadigital.vn{{asset('bundles/kampongsite/images/logo.png')}}" />
+        <meta property="og:image" content="http://kampong.akadigital.vn{{asset('bundles/kampongsite/images/logo-share.png')}}" />
         <meta property="og:url"    content="http://kampong.akadigital.vn/" />
         {%endblock%}
         <meta name="robots" content="index, follow">
@@ -45,13 +45,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-7 col-sm-6 col-sm-offset-3">
-                                    <div class="hotline text-right"><span class="fa fa-phone-square"></span><span>Hotline: {%if site_settings.hotline is defined%}{{site_settings.hotline|raw}}{%endif%}</span></div>
+                                    <div class="hotline text-right"><span class="fa fa-phone-square"></span><span>Giao hàng tận nơi: {%if site_settings.hotline is defined%}{{site_settings.hotline|raw}}{%endif%}</span></div>
                                 </div>
                                 <div class="col-xs-5 col-sm-3">
                                     <div class="social-tool text-right">
                                         <ul class="list-inline">
                                             <li><span>Share</span></li>
-                                            <li><a title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://kampong.akadigital.vn/" class="fa fa-facebook"></a></li>
+                                            <li><a title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://kampong.akadigital.vn/app.php" class="fa fa-facebook"></a></li>
                                             <li><a title="Twitter" href="http://twitter.com/share?text=Kampong" class="fa fa-twitter"></a></li>
                                             <li><a title="Google plus" href="https://plus.google.com/share?url=http://kampong.akadigital.vn" class="fa fa-google-plus"></a></li>
                                         </ul>
@@ -90,6 +90,24 @@
         <script src="{{asset('js/frontend/rate.min.js') }}"></script>
         <script src="{{asset('js/frontend/app.js') }}"></script>
         {% endblock %}
+        <script>
+         $("#ratefooter").jRate({
+        rating: {%if site_settings['rate'] is defined%} {{site_settings['rate']}}{%else%}5{%endif%},
+        startColor: 'yellow',
+        endColor: 'yellow',
+        width: 20,
+        height: 20,
+        precision: 0,
+        onChange: function(rating) {
+            $('.ratePoint').val(rating);
+            console.log("OnChange: Rating: "+rating);
+        },
+        onSet: function(rating) {
+            console.log("OnSet: Rating: "+rating);
+        }
+    });
+
+        </script>
         <!--[if lt IE 8]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
         <noscript>JavaScript is off. Please enable to view full site.</noscript>
     </body>

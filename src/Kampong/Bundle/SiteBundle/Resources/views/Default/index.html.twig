@@ -3,6 +3,9 @@
 {% block body %}
     <div class="row">
         <div class="col-sm-9 col-sm-push-3">
+            <aside id="sidebar" class="hidden-sm hidden-md hidden-lg">
+                {{ render(controller("KampongSiteBundle:Block:leftMenu")) }}
+            </aside>
             <h2 class="title">Món ngon</h2>
             <div class="product-block">
                 <div class="row">
@@ -26,7 +29,7 @@
         </div>
         <div class="col-sm-3 col-sm-pull-9">
             {% include "KampongSiteBundle:Block:search.html.twig" %}
-            <aside id="sidebar">
+            <aside id="sidebar" class="hidden-xs">
                 {{ render(controller("KampongSiteBundle:Block:leftMenu")) }}
             </aside>
             {{ render(controller("KampongSiteBundle:Block:leftBanner")) }}

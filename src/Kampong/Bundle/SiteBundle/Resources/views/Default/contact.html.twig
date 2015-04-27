@@ -1,7 +1,7 @@
 {% extends "KampongSiteBundle::layout.html.twig" %}
 {% block slider %}
-    <div id="banner" class="banner"><img alt="" src="{{asset("bundles/kampongsite/images/upload/banner-new.jpg")}}" class="img-responsive"></div>
-    {% endblock %}
+    {{render(controller('KampongSiteBundle:Block:headBanner', {position:3}))}}    
+{% endblock %}
     {% block body %}
     <div class="row">
         <div class="col-sm-9 col-sm-push-3">
