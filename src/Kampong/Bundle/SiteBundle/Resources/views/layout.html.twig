@@ -1,4 +1,5 @@
 {% set site_settings = settings.getAll()%}
+{% set site_languages = languages.getLanguages()%}
 <!DOCTYPE html>
 <!--[if IE 8]><html lang="en" class="no-js ie ie8"><![endif]-->
 <!--[if IE 9]><html lang="en" class="no-js ie ie9"><![endif]-->
@@ -40,6 +41,17 @@
                             </a>
                         </div>
                         <div class="col-sm-10">
+                            <div class="row">
+                                <ul class="slang">
+                                    {% for lang in site_languages%}
+                                        <li>
+                                           <a href="{{path('kampong_site_switch_lang', {_locale: lang.code} )}}" />
+                                                <img src="{{asset('bundles/kampongsite/images/flags/' ~ lang.code ~'.png')}}" />
+                                            </a>
+                                        </li>
+                                    {% endfor%}
+                                </ul>
+                            </div>
                             <div class="row">
                                 {{ render(controller("KampongSiteBundle:Block:topMenu", {route: app.request.get('_route') }))}}
                             </div>

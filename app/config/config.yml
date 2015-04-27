@@ -34,6 +34,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
       settings: "@site_settings"
+      languages: "@site_language"
 
 # Assetic Configuration
 assetic:
