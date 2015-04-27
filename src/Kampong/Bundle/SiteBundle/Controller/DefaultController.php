@@ -103,4 +103,20 @@ class DefaultController extends Controller
 
     }
 
+    public function switchLanguageAction($_locale)
+    {
+        $request = $this->getRequest();
+        $request->getSession()->set('_locale', $_locale); 
+        $request->setLocale($_locale);
+        
+        $referer = $request->headers->get('referer');
+        
+        
+        if ($referer == null) {
+            $referer = $this->generateUrl('kampong_site_homepage');
+        } 
+        
+        return $this->redirect($referer);
+    }
+
 }

@@ -9,6 +9,7 @@ use Aseagle\Backend\Manager\BannerManager;
 use Aseagle\Backend\Manager\CategoryManager;
 use Aseagle\Backend\Manager\CommentManager;
 use Aseagle\Backend\Manager\MediaManager;
+use Aseagle\Backend\Manager\LanguageManager;
 
 /**
  * Service class
@@ -23,6 +24,7 @@ class Service
     protected $_bannerManager = null;
     protected $_mediaManager = null;
     protected $_commentManager = null;
+    protected $_languageManager = null;
     
     /**
      * __construct
@@ -113,6 +115,20 @@ class Service
     }
 
     /**
+     * getLanguageManager
+     *
+     * @return LanguageManager
+     */
+    public function getLanguageManager()
+    {
+        if (is_null($this->_languageManager)) {
+            $this->_languageManager = new LanguageManager($this->_entityManager);
+        }
+
+        return $this->_languageManager;
+    }
+
+    /**
      * getManager
      * 
      * @param string $key
@@ -140,6 +156,9 @@ class Service
                 break;
             case 'media':
                 $manager = $this->getMediaManager();
+                break;
+            case 'language':
+                $manager = $this->getLanguageManager();
                 break;
             default :
                 $manager = null;

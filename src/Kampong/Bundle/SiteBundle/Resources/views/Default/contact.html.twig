@@ -5,38 +5,38 @@
     {% block body %}
     <div class="row">
         <div class="col-sm-9 col-sm-push-3">
-            <h2 class="title">Thông tin liên hệ</h2>
+            <h2 class="title">{{'Contact Information'|trans}}</h2>
             {{detail.content|raw}}
-            <h2 class="title">Form liên hệ</h2>
-            {%if notice is not null%}<p>{{notice}}</p><br />{%endif%}
+            <h2 class="title">{{'Contact Form'|trans}}</h2>
+            {%if notice is not null%}<p>{{notice|trans}}</p><br />{%endif%}
             <form class="row contact-form" method="POST">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="name">Tên<sup>*</sup></label>
+                        <label for="name">{{'Fullname'|trans}}<sup>*</sup></label>
                         {{form_widget(form.fullname)}}
                     </div>
                     <div class="form-group">
-                        <label for="email">Email<sup>* </sup></label>
+                        <label for="email">{{'Email'|trans}}<sup>* </sup></label>
                         {{form_widget(form.email)}}
                     </div>
                     <div class="form-group">
-                        <label for="phone">Số điện thoại<sup>*</sup></label>
+                        <label for="phone">{{'Phone Number'|trans}}<sup>*</sup></label>
                         {{form_widget(form.phone)}}
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="subject">Tiêu đề<sup>*</sup></label>
+                        <label for="subject">{{'Title'|trans}}<sup>*</sup></label>
                         {{form_widget(form.title)}}
                     </div>
                     <div class="form-group">
-                        <label for="msg">Nội dung<sup>*</sup></label>
+                        <label for="msg">{{'Content'|trans}}<sup>*</sup></label>
                         {{form_widget(form.content)}}
                     </div>
                 </div>
                 <div class="col-sm-12 text-center">    
                     {{form_widget(form._token)}}
-                    <button type="submit" class="btn btn-send"><span>Gửi</span><span class="fa fa-angle-right fa-2"></span></button>
+                    <button type="submit" class="btn btn-send"><span>{{'Send'|trans}}</span><span class="fa fa-angle-right fa-2"></span></button>
                 </div>
             </form>
         </div>

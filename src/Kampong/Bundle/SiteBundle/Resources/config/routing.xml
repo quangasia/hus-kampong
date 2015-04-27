@@ -42,4 +42,8 @@
     <route id="kampong_site_recruitment" path="/recruitment">
         <default key="_controller">KampongSiteBundle:Default:recruitment</default>
     </route>
+    <route id="kampong_site_switch_lang" path="/switch_lang/{_locale}">
+        <default key="_controller">KampongSiteBundle:Default:switchLanguage</default>
+        <default key="_locale" xsi:nil="true" />
+    </route>
 </routes>
