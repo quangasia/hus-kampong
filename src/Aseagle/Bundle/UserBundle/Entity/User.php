@@ -800,4 +800,14 @@ class User implements UserInterface, AdvancedUserInterface, \Serializable
     {
         return $this->system;
     }
+
+    /**
+     * Get system
+     *
+     * @return boolean 
+     */
+    public function getSystem()
+    {
+        return $this->system;
+    }
 }

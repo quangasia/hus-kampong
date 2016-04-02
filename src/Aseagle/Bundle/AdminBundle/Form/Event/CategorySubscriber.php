@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
 use Aseagle\Bundle\CoreBundle\Helper\Html;
 use Aseagle\Backend\Entity\Category;
+use Aseagle\Backend\Entity\ContentLanguage;
 
 /**
  * CategorySubscriber
@@ -24,14 +25,16 @@ use Aseagle\Backend\Entity\Category;
  */
 class CategorySubscriber implements EventSubscriberInterface
 {
-    protected $container;
+    protected $_container;
+    protected $_contentType;
     
     /**
      * @param ContainerInterface $container
      */
-    public function __construct(ContainerInterface $container) 
+    public function __construct(ContainerInterface $container, $contentType) 
     {
-        $this->container = $container;
+        $this->_container = $container;
+        $this->_contentType = $contentType;
     }
     
     /**
@@ -52,25 +55,19 @@ class CategorySubscriber implements EventSubscriberInterface
     public function preBind(FormEvent $event)
     {
         $data = $event->getData();
-        $data['slug'] = empty($data['slug']) ? Html::slugify($data['title']) : Html::slugify($data['slug']);
-          
-        /* Replacing new value for slug field */
-        $event->setData($data);
-    }
+        foreach ($data['contentLangs'] as $key => $cl) {
+            $cl['slug'] =  empty($cl['slug']) ? Html::slugify($cl['title']) : Html::slugify($cl['slug']);
+            $data['contentLangs'][$key] = $cl;
+        }
+     }
     
-    /**
-     * @param FormEvent $event
-     */
-    public function postBind(FormEvent $event) {
-        $category = $event->getData();
-        $category->setType(Category::TYPE_POST);
-    }
     
     /**
      * @param FormEvent $event
      */
     public function preSet(FormEvent $event) 
     {
+        $contentType = $this->_contentType;
         $category = $event->getData();
         $form = $event->getForm();
         if (NULL != $category->getId()) {
@@ -80,10 +77,10 @@ class CategorySubscriber implements EventSubscriberInterface
                 'property' => 'propertyName',
                 'class' => 'AseagleBackend:Category',
                 'empty_value' => "Select...",
-                'query_builder' => function(EntityRepository $er) use ($categoryId) {
+                'query_builder' => function(EntityRepository $er) use ($categoryId, $contentType) {
                     return $er->createQueryBuilder('o')
                         ->where('o.type = :type')
-                        ->setParameter(':type', Category::TYPE_POST)
+                        ->setParameter(':type', $contentType)
                         ->andWhere('o.enabled = 1')
                         ->andWhere('o.id <> :id')
                         ->setParameter(':id', $categoryId)
@@ -94,6 +91,41 @@ class CategorySubscriber implements EventSubscriberInterface
                     'placeholder' => 'Category' 
                 ) 
             ));
-        } 
+        }
+        
+        $languages = $this->_container->get('backend')->getLanguageManager()->getLanguages();
+        $langCodes = array();
+        foreach ($languages as $lang) {
+            $langCodes[$lang['code']] = $lang['code'];
+        }
+        
+        $contentLangs = $category->getContentLangs();
+        if (!is_null($contentLangs) && $category->getContentLangs()->count() > 0) {
+
+        } else {
+            foreach ($langCodes as $code) {
+                $lang = new ContentLanguage();
+                $lang->setLang($code);
+                $category->addContentLang($lang);
+            }   
+        }
+
+
     }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function postBind(FormEvent $event) {
+        $category = $event->getData();
+        foreach ($category->getContentLangs() as $contentLang) {
+            $contentLang->setCategory($category);
+            $slug = $contentLang->getSlug();
+            $slug =  empty($slug) ? Html::slugify($contentLang->getTitle()) : Html::slugify($contentLang->getSlug());
+            $contentLang->setSlug($slug);
+            $this->_container->get('doctrine')->getManager()->persist($contentLang);
+        }
+        $category->setType($this->_contentType);
+    }
+
 }

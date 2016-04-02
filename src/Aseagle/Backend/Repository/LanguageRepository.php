@@ -104,6 +104,16 @@ class LanguageRepository extends EntityRepository {
             return $query->getQuery()->getResult();
         }
     } 
+
+    public function getLanguages()
+    {       
+        $query = $this->createQueryBuilder('l')
+                ->andWhere('l.active = true');
+        
+        $dql = $query->getQuery()->setDQL(str_replace('WHERE', 'INDEX BY l.code WHERE', $query->getDQL()));
+
+        return $dql->getArrayResult();
+    }
 }
 
 

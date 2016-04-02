@@ -68,4 +68,62 @@ class DefaultController extends Controller {
         ));
     }
 
+    public function migrateAction() {
+/*        $lang = new \Aseagle\Backend\Entity\Language();
+        $lang->setCode('vi')
+            ->setIsDefault(true)
+            ->setName('Tiếng Việt')
+            ->setActive(true);
+        $this->get('backend')->getLanguageManager()->save($lang);
+
+        $lang = new \Aseagle\Backend\Entity\Language();
+        $lang->setCode('en')
+            ->setIsDefault(false)
+            ->setName('English')
+            ->setActive(true);
+        $this->get('backend')->getLanguageManager()->save($lang);
+ 
+
+        $langs = $this->get('backend')->getLanguageManager()->getLanguages();
+        
+        $contentManager = $this->get('backend')->getContentManager();
+        $contents = $contentManager->getRepository()->findAll();
+        foreach ($contents as $content) {
+            foreach ($langs as $key=>$lang) {
+                $contentLang = new \Aseagle\Backend\Entity\ContentLanguage();
+                $contentLang->setTitle($content->getTitle())
+                    ->setSlug($content->getSlug())
+                    ->setLang($key)
+                    ->setShortText($content->getShortDescription())
+                    ->setLongText($content->getContent())
+                    ->setMetaTitle($content->getMetaTitle())
+                    ->setMetaContent($content->getMetaContent())
+                    ->setMetaKeyWords($content->getMetaKeywords())
+                    ->setContent($content);
+                $this->get('doctrine')->getManager()->persist($contentLang);
+                $this->get('doctrine')->getManager()->flush();
+
+            }
+        }
+
+        $categoryManager = $this->get('backend')->getCategoryManager();
+        $categories = $categoryManager->getRepository()->findAll();
+        foreach ($categories as $category) {
+            foreach ($langs as $key=>$lang) {
+                $contentLang = new \Aseagle\Backend\Entity\ContentLanguage();
+                $contentLang->setTitle($category->getTitle())
+                    ->setSlug($category->getSlug())
+                    ->setLang($key)
+                    ->setLongText($category->getDescription())
+                    ->setCategory($category);
+                $this->get('doctrine')->getManager()->persist($contentLang);
+                $this->get('doctrine')->getManager()->flush();
+
+            }
+        }
+
+
+        echo "Done";
+ */
+    }
 }

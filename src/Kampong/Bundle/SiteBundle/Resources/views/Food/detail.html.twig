@@ -1,15 +1,15 @@
 {% extends "KampongSiteBundle::layout.html.twig" %}
 {% set site_settings = settings.getAll()%}
-{% set url =  app.request.scheme ~'://' ~ app.request.httpHost ~ path('kampong_site_food_detail', {id:detail.id, slug:detail.slug})%}
+{% set url =  app.request.scheme ~'://' ~ app.request.httpHost ~ path('kampong_site_food_detail', {id:detail[0].id, slug:detail.slug})%}
 
 
 {%block head%}
         <title>{%if site_settings['meta_title'] is defined%} {{site_settings['meta_title']}}{%endif%} - {{detail.title}}</title>
-        <meta name="description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortDescription}}{%endif%}">
+        <meta name="description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortText}}{%endif%}">
         <meta name="keywords" content="{{detail.metaKeywords}}">
 
         <meta property="og:title" content="{%if detail.metaTitle != ''%}{{detail.metaTitle}}{%else%}{{detail.title}}{%endif%}" />
-        <meta property="og:description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortDescription}}{%endif%}" />
+        <meta property="og:description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortText}}{%endif%}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{url}}" />
         <meta property="og:image" content="{{asset("uploads/" ~ detail.picture)|imagine_filter('food_list')}}" />         
@@ -30,22 +30,22 @@
                         <div class="block-star">
                             <ul class="list-inline pull-left">
                                 {%for i in 1..5%}
-                                    {%if i <= detail.ratePoint%}
+                                    {%if i <= detail[0].ratePoint%}
                                     <li><img src="{{asset("bundles/kampongsite/images/star.png")}}" alt="star"/></li>
                                     {% else%}
                                     <li><img src="{{asset("bundles/kampongsite/images/star-grey.png")}}" alt="star"/></li>
                                     {%endif%}
                                 {% endfor %}
                             </ul>
-                            <span class="review">({%if detail.rateCount%}{{detail.rateCount}}{%else%}0{%endif%} reviews)</span>
+                            <span class="review">({%if detail[0].rateCount%}{{detail[0].rateCount}}{%else%}0{%endif%} reviews)</span>
                         </div>
                     </div>
                 </div>
-                {%if detail.images|length > 0%}
+                {%if detail[0].images|length > 0%}
                 <div class="slideshow">
                     <div id="mySlideshow" data-ride="carousel" class="carousel slide">
                         <div role="listbox" class="carousel-inner">
-                            {%for image in detail.images%}
+                            {%for image in detail[0].images%}
                             <div class="item {%if loop.index==1%}active{%endif%}">
                                 <a data-video title="Play" href="javascript:void(0);"><span class="btn-play"></span></a>
                                 <img alt="" src="{{asset("uploads/products/" ~ image.path)}}">
@@ -59,15 +59,21 @@
                 <div class="detail-content">
                     <div class="info">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="cooking-time">
-                                    <p>Thời gian chuẩn bị</p>
-                                    <p>{{detail.time}} phút</p>
+                                    <p>{{'Prepare Time'|trans}}</p>
+                                    <p>{{detail[0].time}} {{'minute'|trans}}</p>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <div class="cooking-price">
+                                    <p>{{'Price'|trans}}</p>
+                                    <p><strong style="color:red">{{detail[0].price}}</strong></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
                                 <div class="order pull-left">
-                                    <p>Đặt món ăn</p>
+                                    <p>{{'Order'|trans}}</p>
                                     <p>{{site_settings.order_phonenumber}}</p>
                                 </div>
 {#                                <a href="javascript:window.print()" role="button" class="btn print pull-right">Print</a>#}
@@ -78,7 +84,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="desc">
-                                    <p>{{detail.content|raw}}</p>
+                                    <p>{{detail.longText|raw}}</p>
                                 </div>
                                 <div class="social-tool style-1">
                                     <ul class="list-inline">
@@ -86,7 +92,7 @@
                                         <li class="twitter"><a target="blank" title="Twitter" href="https://twitter.com/home?status={{url}}"><span class="fa fa-twitter"></span>Twitter</a></li>
                                         <li class="google-plus"><a target="blank" title="Google plus" href="https://plus.google.com/share?url={{url}}"><span class="fa fa-google-plus"></span>Google Plus</a></li>
                                         {% set urlpic = app.request.scheme ~'://' ~ app.request.httpHost ~ asset("uploads/" ~ detail.picture)|imagine_filter('food_list')%}
-                                        <li class="pinterest"><a target="blank" title="Pinterest" href="https://pinterest.com/pin/create/button/?url={{detail.title}}&media={{urlpic}}&description={{detail.shortDescription}}"><span class="fa fa-pinterest"></span>Pinterest</a></li>
+                                        <li class="pinterest"><a target="blank" title="Pinterest" href="https://pinterest.com/pin/create/button/?url={{detail.title}}&media={{urlpic}}&description={{detail.shortText}}"><span class="fa fa-pinterest"></span>Pinterest</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -94,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <h2 class="title-2"><span>Món ngon</span></h2>
+            <h2 class="title-2"><span>{{'Good Food'|trans}}</span></h2>
             <div class="product-block">
                 <div class="row">
                     {% for post in otherFoods%}
@@ -104,7 +110,7 @@
                                 <div class="desc">
                                     <img src="{{asset("uploads/" ~ post.picture)|imagine_filter('food_list')}}" alt="{{post.title|raw}}" class="img-responsive">
                                     <div class="cta text-center">
-                                        <p><a href="{{path('kampong_site_food_detail', {id:post.id, slug:post.slug})}}" role="button"><span>Xem chi tiết</span></a></p>
+                                        <p><a href="{{path('kampong_site_food_detail', {id:post.id, slug:post.slug})}}" role="button"><span>{{'Detail'|trans}}</span></a></p>
                                     </div>
                                 </div>
                                 <div class="caption">

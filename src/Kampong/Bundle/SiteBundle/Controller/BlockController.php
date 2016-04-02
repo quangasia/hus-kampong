@@ -51,17 +51,16 @@ class BlockController extends Controller
 
     public function leftMenuAction($id = null)
     {
-        $entities = $this->get('backend')->getCategoryManager()->getRepository()->findBy(array(
-            'enabled' => true,
-            'type' => Category::TYPE_MENU,
-                ), array('ordering' => 'ASC'));
+        $entities = $this->get('backend')
+            ->getCategoryManager()
+            ->getRepository()->getMenuByLocale($this->getRequest()->getLocale());
 
         $categories = $brandCats = array();
         foreach ($entities as $entity) {
-            if ($entity->getParent() == null) {
+            if ($entity[0]->getParent() == null) {
                 $categories[0][] = $entity;
             } else {
-                $categories[$entity->getParent()->getId()][] = $entity;
+                $categories[$entity[0]->getParent()->getId()][] = $entity;
             }
         }
 

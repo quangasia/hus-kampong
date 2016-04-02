@@ -40,6 +40,7 @@ class SettingController extends BaseController {
                 )) . '">' . $item->getName() . '</a>',
                 $item->getKey(),
                 $item->getValue(),
+                $item->getLocale(),
                 Html::showActionButtonsInTable($this->container, array (
                     'edit' => $this->generateUrl('admin_setting_new', array (
                         'id' => $item->getId()

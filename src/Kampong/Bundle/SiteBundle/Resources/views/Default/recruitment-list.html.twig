@@ -5,25 +5,25 @@
     {% block body %}
     <div class="row">
         <div class="col-sm-9 col-sm-push-3">
-            <h2 class="title">{{'News'|trans}}</h2>
+            <h2 class="title">{{'Recruitment'|trans}}</h2>
             <div class="news-events">
                 <div class="row">
                     <div class="col-sm-12">
                         {% for post in posts%}
                         <div class="media">
                             <div class="media-left">
-                                <a href="{{path('kampong_site_news_detail', {id:post.id, slug:post.slug})}}" title="">
+                                <a href="{{path('kampong_site_recruitment_detail', {id:post.id, slug:post.slug})}}" title="">
                                     {% if post.picture != ''%}
                                     <img src="{{asset("uploads/" ~ post.picture)|imagine_filter('news_thumb')}}" alt="new" class="media-object"/>
                                     {% else %}
-                                    <img src="{{asset("bundles/kampongsite/images/upload/new.jpg")}}" alt="new" class="media-object"/>
+                                    <img width="250" src="{{asset("bundles/kampongsite/images/upload/recruit.jpg")}}" alt="new" class="media-object"/>
                                     {% endif%}
                                 </a>
                             </div>
                             <div class="media-body">
                                 <div class="desc">
-                                    <h4 class="media-heading"><a href="{{path('kampong_site_news_detail', {id:post.id, slug:post.slug})}}" title="Top aligned media">{{post.title|raw}}</a></h4>
-                                    <p>{{post.shortText|raw}}</p>
+                                    <h4 class="media-heading"><a href="{{path('kampong_site_recruitment_detail', {id:post.id, slug:post.slug})}}" title="Top aligned media">{{post.title|raw}}</a></h4>
+                                    <p>{% autoescape %}{{post.longText[:300]|striptags|raw}} ...{% endautoescape %}</p>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,6 @@
                     </div>
                 </div>
             </div>
-            {{paging|raw}}
         </div>
         <div class="col-sm-3 col-sm-pull-9">
             {% include "KampongSiteBundle:Block:search.html.twig" %}

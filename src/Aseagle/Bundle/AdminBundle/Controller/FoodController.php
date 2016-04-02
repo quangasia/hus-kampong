@@ -33,15 +33,15 @@ class FoodController extends BaseController {
         $grid = array ();
         foreach ($entities as $item) {
             $grid [] = array (
-                '<input type="checkbox" name="ids[]" class="check" value="' . $item->getId() . '"/>',
-                '<a href="'.$this->generateUrl('admin_food_new', array ('id' => $item->getId())).'">' . $item->getTitle() . '</a>',
-                is_object($item->getAuthor()) ? $item->getAuthor()->getFullname() : '_',
-                (NULL != $item->getPageView()) ? $item->getPageView() : 0,
-                is_object($item->getCreated()) ? $item->getCreated()->format('d/m/Y') : '',
-                Html::showStatusInTable($this->container, $item->getEnabled()),
+                '<input type="checkbox" name="ids[]" class="check" value="' . $item[0]->getId() . '"/>',
+                '<a href="'.$this->generateUrl('admin_food_new', array ('id' => $item[0]->getId())).'">' . $item['title'] . '</a>',
+                is_object($item[0]->getAuthor()) ? $item[0]->getAuthor()->getFullname() : '_',
+                (NULL != $item[0]->getPageView()) ? $item[0]->getPageView() : 0,
+                is_object($item[0]->getCreated()) ? $item[0]->getCreated()->format('d/m/Y') : '',
+                Html::showStatusInTable($this->container, $item[0]->getEnabled()),
                 Html::showActionButtonsInTable($this->container, array (
                     'edit' => $this->generateUrl('admin_food_new', array (
-                        'id' => $item->getId()
+                        'id' => $item[0]->getId()
                     ))
                 ))
             );

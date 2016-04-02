@@ -1,4 +1,4 @@
-<h2 class="title-2"><span>Nhận xét<span>({{comments|length}})</span></span></h2>
+<h2 class="title-2"><span>{{'Comment'|trans}}<span>({{comments|length}})</span></span></h2>
 <div class="comment-block">
     <div class="row">
         <div class="col-sm-12" id="commentContainer" data-prototype="{% filter escape %}{% include 'KampongSiteBundle:Comment:element.html.twig' %}{% endfilter %}">
@@ -24,29 +24,29 @@
             {%endfor%}
         </div>
     </div>
-    <h2 class="title-2"><span>Thêm nhận xét</span></h2>
+    <h2 class="title-2"><span>{{'Add Comment'|trans}}</span></h2>
     <form class="row" id="commentForm" action="{{path('kampong_site_comment_add', {pid: pid})}}" method="post">
         <div class="col-sm-6 form-group">
-            <label for="name">Tên</label>   
+            <label for="name">{{'Fullname'|trans}}</label>   
             {{ form_widget(form.fullname) }}
         </div>
         <div class="col-sm-6 form-group">
-            <label for="email">Email</label>        
+            <label for="email">{{'Email'|trans}}</label>        
             {{ form_widget(form.email) }}
         </div>
         <div class="col-sm-12 form-group">
-            <label for="star">Đánh giá</label>
+            <label for="star">{{'Review'|trans}}</label>
             <div class="block-star">
                 <ul class="list-inline pull-left" id="rate"></ul>
             </div>
             {{ form_widget(form.ratePoint) }}
         </div>
         <div class="col-sm-12 form-group">
-            <label for="msg">Viết nhận xét</label> 
+            <label for="msg">{{'Write your comment'|trans}}</label> 
             {{ form_widget(form.comment) }}
         </div>
         <div class="col-sm-12">
-            <button type="submit" class="btn btn-submit">Gửi nhận xét</button>
+            <button type="submit" class="btn btn-submit">{{'Send'|trans}}</button>
         </div>
     </form>
 </div>

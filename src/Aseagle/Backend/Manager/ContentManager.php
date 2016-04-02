@@ -21,12 +21,14 @@ class ContentManager implements ObjectManagerInterface {
      * @var \Doctrine\ORM\EntityManager
      */
     protected $entityManager;
+    protected $container;
 
     /**
      * @param \Doctrine\ORM\EntityManager $manager
      */
-    public function __construct(\Doctrine\ORM\EntityManager $manager) {
+    public function __construct(\Doctrine\ORM\EntityManager $manager, $container) {
         $this->entityManager = $manager;
+        $this->_container = $container;
     }
 
     /* (non-PHPdoc)
@@ -54,8 +56,8 @@ class ContentManager implements ObjectManagerInterface {
      * @param object $object
      */
     public function save($object) {
-        $this->entityManager->persist($object);
-        $this->entityManager->flush();
+        $this->_container->get('doctrine')->getManager()->persist($object);
+        $this->_container->get('doctrine')->getManager()->flush();
     }
 
     /**

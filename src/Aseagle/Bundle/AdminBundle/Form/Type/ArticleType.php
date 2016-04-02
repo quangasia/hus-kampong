@@ -15,8 +15,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
-use Aseagle\Bundle\AdminBundle\Form\Event\ArticleSubscriber;
+use Aseagle\Bundle\AdminBundle\Form\Event\ContentSubscriber;
 use Aseagle\Backend\Entity\Category;
+use Aseagle\Backend\Entity\Content;
 
 /**
  * ArticleType
@@ -24,7 +25,7 @@ use Aseagle\Backend\Entity\Category;
  * @author Quang Tran <quang.tran@aseagle.com>
  */
 class ArticleType extends AbstractType {
-    
+
     /**
      * @var ContainerInterface
      */
@@ -44,33 +45,7 @@ class ArticleType extends AbstractType {
      * @see \Symfony\Component\Form\AbstractType::buildForm()
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('title', null, array ( 
-            'label' => 'Title', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Title',
-            ),
-            'required' => true 
-        ))->add('slug', null, array ( 
-            'label' => 'Slug', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Slug' 
-            ) 
-        ))->add('shortDescription', null, array ( 
-            'label' => 'Short Description', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Short Description',
-            ) 
-        ))->add('content', null, array ( 
-            'label' => 'Content', 
-            'attr' => array ( 
-                'class' => 'form-control tinymce', 
-                'placeholder' => 'Content',
-                'data-theme' => 'advanced' 
-            ) 
-        ))->add('picture', 'hidden', array ( 
+        $builder->add('picture', 'hidden', array ( 
             'label' => 'Picture', 
             'attr' => array ( 
                 'class' => 'form-control', 
@@ -88,50 +63,30 @@ class ArticleType extends AbstractType {
                     ->setParameter(':type', Category::TYPE_POST)
                     ->orderBy('o.root, o.lft, o.ordering', 'ASC');
             },
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Categories' 
-            ) 
-        ))->add('tags', null, array ( 
-            'label' => 'Tags', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Tags' 
-            ) 
-        ))->add('metaTitle', null, array ( 
-            'label' => 'Meta Title', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Meta Title' 
-            ) 
-        ))->add('metaContent', 'textarea', array ( 
-            'label' => 'Meta Description', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Meta Description' 
-            ),
-            'required' => false 
-        ))->add('metaKeywords', null, array ( 
-            'label' => 'Meta Keywords', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Meta Keywords' 
-            ) 
-        ))->add('enabled', 'choice', array ( 
-            'label' => 'Status',
-            'required' => false, 
-            'empty_value' => 'Select...', 
-            'choices' => array ( 
-                '1' => 'Publish', 
-                '0' => 'Un-publish' 
-            ), 
-            'attr' => array ( 
-                'class' => 'form-control' 
-            ) 
-        ));
-        
-        $builder->addEventSubscriber(new ArticleSubscriber($this->container));
-        
+                'attr' => array ( 
+                    'class' => 'form-control', 
+                    'placeholder' => 'Categories' 
+                ) 
+            ))->add('enabled', 'choice', array ( 
+                'label' => 'Status',
+                'required' => false, 
+                'empty_value' => 'Select...', 
+                'choices' => array ( 
+                    '1' => 'Publish', 
+                    '0' => 'Un-publish' 
+                ), 
+                'attr' => array ( 
+                    'class' => 'form-control' 
+                ) 
+            ))->add('contentLangs', 'collection', array(
+                'type' => new ContentLanguageType(),
+                'allow_add'    => true,
+                'by_reference' => false,
+                'allow_delete' => true,
+            ));
+
+        $builder->addEventSubscriber(new ContentSubscriber($this->container, Content::TYPE_POST));
+
     }
 
     /*

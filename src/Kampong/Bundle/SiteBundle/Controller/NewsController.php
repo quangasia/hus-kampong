@@ -16,11 +16,12 @@ class NewsController extends Controller
         $page = $this->getRequest()->get('page', 1);
         $limit = $this->container->getParameter('front_item_per_page', 6);
         $offset = ($page - 1) * $limit;
-        
+
+        $locale = $this->getRequest()->getLocale(); 
         $posts = $contentManager->getRepository()->getList(
-                array('enabled' => true, 'type' => Content::TYPE_POST),
+                array('enabled' => true, 'type' => Content::TYPE_POST, 'locale'=>$locale),
                 array('created' => 'DESC'), $limit, $offset);
-        $total = $contentManager->getRepository()->getTotal(array('enabled' => true, 'type' => Content::TYPE_POST));
+        $total = $contentManager->getRepository()->getTotal(array('enabled' => true, 'type' => Content::TYPE_POST, 'locale'=>$locale));
 
         return $this->render('KampongSiteBundle:News:index.html.twig', array(
             'posts' => $posts,
@@ -34,14 +35,17 @@ class NewsController extends Controller
         if ($id == 0) {
             $this->createNotFoundException();
         }
+
+        $locale = $this->getRequest()->getLocale();
         /* @var $productManager \Aseagle\Backend\Manager\ContentManager */
         $contentManager = $this->get('backend')->getContentManager();
-        $detail = $contentManager->getRepository()->find($id);
+        $detail = $contentManager->getRepository()->getPost($id, $locale);
 
-        $otherPosts = $contentManager->getRepository()->findBy(
+        $otherPosts = $contentManager->getRepository()->getList(
                 array(
             'enabled' => true,
             'type' => Content::TYPE_POST,
+            'locale' => $locale,
                 ), array(
             'created' => 'DESC'
                 ), 7, 0

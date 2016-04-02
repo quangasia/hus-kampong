@@ -34,15 +34,15 @@ class CategoryMenuController extends BaseController {
         $grid = array ();
         foreach ($entities as $item) {
             $grid [] = array ( 
-                '<input type="checkbox" name="ids[]" class="check" value="' . $item->getId() . '"/>', 
+                '<input type="checkbox" name="ids[]" class="check" value="' . $item[0]->getId() . '"/>', 
                 '<a href="' . $this->generateUrl('admin_categorymenu_new', array ( 
-                    'id' => $item->getId() 
-                )) . '">' . $item->propertyName() . '</a>', 
-                is_object($item->getCreated()) ? $item->getCreated()->format('d/m/Y') : '', 
-                Html::showStatusInTable($this->container, $item->getEnabled()), 
+                    'id' => $item[0]->getId() 
+                )) . '">' . str_repeat("—", $item[0]->getLvl()) ." ". $item['title'] . '</a>', 
+                is_object($item[0]->getCreated()) ? $item[0]->getCreated()->format('d/m/Y') : '', 
+                Html::showStatusInTable($this->container, $item[0]->getEnabled()), 
                 Html::showActionButtonsInTable($this->container, array ( 
                     'edit' => $this->generateUrl('admin_categorymenu_new', array ( 
-                        'id' => $item->getId() 
+                        'id' => $item[0]->getId() 
                     )) 
                 )) 
             );

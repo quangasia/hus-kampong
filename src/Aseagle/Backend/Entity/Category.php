@@ -16,32 +16,17 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Aseagle\Backend\Repository\ContentRepository")
+ * @ORM\Entity(repositoryClass="Aseagle\Backend\Repository\CategoryRepository")
  * @ORM\HasLifecycleCallbacks
  */
 Class Category {
     const TYPE_POST = 1;
     const TYPE_MENU = 2;
-    
-    /**
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @ORM\Column(name="slug", type="string", length=255)
-     */
-    private $slug;
 
     /**
      * @ORM\Column(name="type", type="integer", nullable=true)
      */
     private $type;
-
-    /**
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private $description;
 
     /**
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
@@ -116,52 +101,11 @@ Class Category {
      */
     private $system;
       
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Category
+    /** 
+     * @ORM\OneToMany(targetEntity="ContentLanguage", mappedBy="category", cascade={"all"})
+     * @ORM\JoinColumn(name="cat_id", referencedColumnName="id")
      */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Category
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
+    private $contentLangs;
 
     /**
      * Set type
@@ -294,12 +238,6 @@ Class Category {
      */
     public function updatedTimestamp()
     {
-        /*Updated the slug string*/
-        if (NULL != $this->getSlug()) {
-            $this->slug = $this->title;
-        }        
-        $this->slug = Html::slugify($this->slug);
-        
         /*Updated timestamp*/
         $this->setUpdated(new \DateTime(date('Y-m-d H:i:s')));
         if (NULL === $this->getCreated()) {
@@ -307,12 +245,13 @@ Class Category {
         }
     }
     
-    /**
-     * @return string
-     */
     public function propertyName()
     {
-        return str_repeat("—", $this->lvl) . " " . $this->title;
+        $title = '';
+        if (count($this->contentLangs)) {
+            $title = $this->contentLangs[0]->getTitle();
+        }
+        return str_repeat("—", $this->lvl) . " " . $title;
     }
     
 
@@ -560,5 +499,38 @@ Class Category {
     public function getPicture()
     {
         return $this->picture;
+    }
+
+    /**
+     * Add contentLangs
+     *
+     * @param \Aseagle\Backend\Entity\ContentLanguage $contentLangs
+     * @return Category
+     */
+    public function addContentLang(\Aseagle\Backend\Entity\ContentLanguage $contentLangs)
+    {
+        $this->contentLangs[] = $contentLangs;
+
+        return $this;
+    }
+
+    /**
+     * Remove contentLangs
+     *
+     * @param \Aseagle\Backend\Entity\ContentLanguage $contentLangs
+     */
+    public function removeContentLang(\Aseagle\Backend\Entity\ContentLanguage $contentLangs)
+    {
+        $this->contentLangs->removeElement($contentLangs);
+    }
+
+    /**
+     * Get contentLangs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContentLangs()
+    {
+        return $this->contentLangs;
     }
 }

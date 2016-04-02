@@ -167,6 +167,11 @@ class BaseController extends Controller {
             
             $filterForm->bind($request);
             $filters = $filterForm->getData();
+
+            $locale = $request->getLocale();
+            if (in_array($manager, array('content', 'category'))) {
+                $filters['locale'] = $request->getLocale();
+            }
             
             $jsonFilters = $this->getRequest()->get('_filter', '{}');
             $options = json_decode($jsonFilters, true);

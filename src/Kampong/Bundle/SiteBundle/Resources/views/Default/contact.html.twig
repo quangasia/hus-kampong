@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-9 col-sm-push-3">
             <h2 class="title">{{'Contact Information'|trans}}</h2>
-            {{detail.content|raw}}
+            {{detail.longText|raw}}
             <h2 class="title">{{'Contact Form'|trans}}</h2>
             {%if notice is not null%}<p>{{notice|trans}}</p><br />{%endif%}
             <form class="row contact-form" method="POST">

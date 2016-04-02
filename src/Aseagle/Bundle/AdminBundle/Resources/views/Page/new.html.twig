@@ -4,6 +4,18 @@
 {{ parent() }}
 {{ elfinder_tinymce_init4('default', {'width':'1024', 'height': '450', 'title':'Files Manager'|trans} ) }}
 {{ tinymce_init() }}
+<script type="text/javascript">
+$('.btnSelectImage').on("click",function() {
+    var childWin = window.open("{{path('elfinder', {'instance': 'form'})}}?id=content_picture", "popupWindow", "height=450, width=900");
+});
+function setValue(value, element_id) {
+    $('.fileinput-preview > img').attr('src', '/uploads/' + value.replace(/\\/g, '\/'));
+    if ($('.fileinput-preview').hasClass('hide')) $('.fileinput-preview').removeClass('hide');
+    $('[data-type="elfinder-input-field"]').val(value.replace(/\\/g, '\/'));
+}    
+</script>
+
+
 {% endblock %}
 
 {% block content %}
@@ -24,11 +36,32 @@
                     </div>
                 </div>
                 <div class="portlet-body form">
-                    
                         <div class="form-body">
-                            {{ form_row(form.title) }}
-                            {{ form_row(form.slug) }}
-                            {{ form_row(form.content) }}
+                            <div class="tabbable-custom nav-justified">
+                                <ul class="nav nav-tabs nav-justified">
+                                    {% set site_languages = languages.getLanguages()%}
+                                    {% for contentLang in form.contentLangs %}
+                                       {% if contentLang.vars.value.lang in site_languages|keys %}
+                                    <li {% if site_languages[contentLang.vars.value.lang].isDefault %}class="active"{%endif%}>
+                                        <a href="#{{contentLang.vars.value.lang}}" data-toggle="tab">{{site_languages[contentLang.vars.value.lang].name}}</a>
+                                    </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+
+                                <div class="tab-content">
+                                    {% for contentLang in form.contentLangs %}
+                                    <div class="tab-pane{% if site_languages[contentLang.vars.value.lang].isDefault %} active{%endif%}" id="{{contentLang.vars.value.lang}}">
+                                        {{ form_row(contentLang.title) }}
+                                        {{ form_row(contentLang.slug) }}
+                                        {{ form_row(contentLang.longText) }}
+                                        {{ form_row(contentLang.metaTitle) }}
+                                        {{ form_row(contentLang.metaContent) }}
+                                        {{ form_row(contentLang.metaKeywords) }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div> 
                             {{ form_row(form.enabled) }}
                         </div>
                         <div class="form-actions right">
@@ -42,11 +75,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">            
+        <div class="col-md-3">
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption">
-                        <span class="caption-subject">{{ 'Meta'|trans }}</span>
+                        <span class="caption-subject">{{ 'Featured Image'|trans }}</span>
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
@@ -54,13 +87,24 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    {{ form_row(form.metaTitle) }}
-                    {{ form_row(form.metaContent) }}
-                    {{ form_row(form.metaKeywords) }}
+                    <div class="form-group">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+    						<div class="fileinput-preview thumbnail {% if form.picture.vars.data == '' %}hide{% endif %}" data-trigger="fileinput" style="width: 100%;">
+    						    {% if form.picture.vars.data != '' %}
+    						    <img src="{{ asset('/uploads/' ~ form.picture.vars.data)}}" />
+    						    {% else %}
+    						    <img />
+    						    {% endif %}
+    						</div>
+    						<div>    	
+    						    {{ form_widget(form.picture) }}
+    							<a href="#" class="btn blue btnSelectImage">{{ 'Select Image'|trans }}</a>
+    						</div>
+    					</div>
+					</div>
+                    
                 </div>
-            </div>    
-        
-        
+            </div>
         </div>
     </div>
  </form>

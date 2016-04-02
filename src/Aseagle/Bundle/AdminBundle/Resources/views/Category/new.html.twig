@@ -23,7 +23,38 @@
         </div>
         <div class="portlet-body form">
             <div class="form-body">
-                {{ form_widget(form) }}                  
+
+                <div class="tabbable-custom nav-justified">
+                {{ form_row(form.parent) }} 
+                                <ul class="nav nav-tabs nav-justified">
+                                    {% set site_languages = languages.getLanguages()%}
+                                    {% for contentLang in form.contentLangs %}
+                                       {% if contentLang.vars.value.lang in site_languages|keys %}
+                                    <li {% if site_languages[contentLang.vars.value.lang].isDefault %}class="active"{%endif%}>
+                                        <a href="#{{contentLang.vars.value.lang}}" data-toggle="tab">{{site_languages[contentLang.vars.value.lang].name}}</a>
+                                    </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+
+                                <div class="tab-content">
+                                    {% for contentLang in form.contentLangs %}
+                                    <div class="tab-pane{% if site_languages[contentLang.vars.value.lang].isDefault %} active{%endif%}" id="{{contentLang.vars.value.lang}}">
+                                        {{ form_row(contentLang.title) }}
+                                        {{ form_row(contentLang.slug) }}
+                                        {{ form_row(contentLang.longText) }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div> 
+
+
+
+
+                {{ form_row(form.ordering) }} 
+                {{ form_row(form.enabled) }} 
+                {{ form_row(form._token) }} 
+                 
             </div>
             <div class="form-actions right">
                 <button type="button" class="btn default">{{ 'Cancel'|trans }}</button>

@@ -2,11 +2,11 @@
 
 {%block head%}                 
         <title>{{detail.title}}</title>
-        <meta name="description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortDescription}}{%endif%}">
+        <meta name="description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortText}}{%endif%}">
         <meta name="keywords" content="{{detail.metaKeywords}}">
   
         <meta property="og:title" content="{%if detail.metaTitle != ''%}{{detail.metaTitle}}{%else%}{{detail.title}}{%endif%}" />
-        <meta property="og:description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortDescription}}{%endif%}" />
+        <meta property="og:description" content="{%if detail.metaContent !=''%}{{detail.metaContent}}{%else%}{{detail.shortText}}{%endif%}" />
         <meta property="og:type" content="article" />                                                                                                               
         <meta property="og:image" content="{{asset("uploads/" ~ detail.picture)|imagine_filter('food_list')}}" /> 
 {%endblock%}
@@ -18,15 +18,15 @@
     {% block body %}
     <div class="row">
         <div class="col-sm-9 col-sm-push-3">
-            <h2 class="title">Tin tức & sự kiện</h2>
+            <h2 class="title">{{"News"|trans}}</h2>
             <div class="news-detail-block">
                 <h3 class="new-title">{{detail.title|raw}}</h3>
                 <div class="description">
-                    {{detail.content|raw}}
+                    {{detail.longText|raw}}
                 </div>
             </div>
             <div class="other-news">
-                <h2 class="title-2"><span>Các tin khác</span></h2>
+                <h2 class="title-2"><span>{{'Other News'|trans}}</span></h2>
                 <div class="row">
                     {% for post in otherPosts%}
                         {% if post.id != postId%}
@@ -44,7 +44,7 @@
                                 <div class="media-body">
                                     <div class="desc">
                                         <h4 class="media-heading"><a href="{{path('kampong_site_news_detail', {id:post.id, slug:post.slug})}}" title="{{post.title|raw}}">{{post.title|raw}}</a></h4>
-                                        <p>{{post.shortDescription|raw}}</p>
+                                        <p>{{post.shortText|raw}}</p>
                                     </div>
                                 </div>
                             </div>

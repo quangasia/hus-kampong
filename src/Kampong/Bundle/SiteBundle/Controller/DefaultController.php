@@ -4,6 +4,7 @@ namespace Kampong\Bundle\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Aseagle\Backend\Entity\Content;
 
 class DefaultController extends Controller
 {
@@ -16,7 +17,7 @@ class DefaultController extends Controller
     {
         /* @var $productManager \Aseagle\Backend\Manager\ContentManager */
         $contentManager = $this->get('backend')->getContentManager();
-        $foods = $contentManager->getRepository()->getList(array('enabled' => true, 'feature' => true), array('created' => 'DESC'));
+        $foods = $contentManager->getRepository()->getFoodOnHomepageByLocale($this->getRequest()->getLocale());
 
         $content = $this->renderView('KampongSiteBundle:Default:index.html.twig', array(
                     'foods' => $foods
@@ -31,10 +32,11 @@ class DefaultController extends Controller
 
     public function contactAction()
     {
+        $locale = $this->getRequest()->getLocale();
         /* @var $productManager \Aseagle\Backend\Manager\ContentManager */
         $contentManager = $this->get('backend')->getContentManager();
         $settingManager = $this->get('backend')->getSettingManager();
-        $contactDetail = $contentManager->getRepository()->find(self::CONTACT_PAGE_ID);
+        $contactDetail = $contentManager->getRepository()->getPost(self::CONTACT_PAGE_ID, $locale);
         $setting = $settingManager->getRepository()->findOneByKey('contact_email');
 
         $message = '';
@@ -69,14 +71,15 @@ class DefaultController extends Controller
 
     public function aboutUsAction()
     {
+        $locale = $this->getRequest()->getLocale();
         /* @var $productManager \Aseagle\Backend\Manager\ContentManager */
         $contentManager = $this->get('backend')->getContentManager();
-        $aboutusContent = $contentManager->getRepository()->find(self::ABOUTUS_PAGE_ID);
+        $aboutusContent = $contentManager->getRepository()->getPost(self::ABOUTUS_PAGE_ID, $locale);
 
         return $this->render('KampongSiteBundle:Default:aboutus.html.twig', array(
                     'detail' => $aboutusContent
         ));
-    } 
+     } 
 
     public function galleryAction()
     {
@@ -91,11 +94,13 @@ class DefaultController extends Controller
         ));
     }
 
-    public function recruitmentAction()
+    public function recruitmentDetailAction()
     {
+        $locale = $this->getRequest()->getLocale();
+        $id = $this->getRequest()->get('id');
         /* @var $contentManager \Aseagle\Backend\Manager\ContentManager */
         $contentManager = $this->get('backend')->getContentManager();
-        $recruitmentContent = $contentManager->getRepository()->find(self::RECRUITMENT_PAGE_ID);
+        $recruitmentContent = $contentManager->getRepository()->getPost($id, $locale);
 
         return $this->render('KampongSiteBundle:Default:recruitment.html.twig', array(
                     'detail' => $recruitmentContent
@@ -103,6 +108,30 @@ class DefaultController extends Controller
 
     }
 
+    public function recruitmentAction()
+    {
+        /* @var $productManager \Aseagle\Backend\Manager\ContentManager */
+        $contentManager = $this->get('backend')->getContentManager();
+        
+        $page = $this->getRequest()->get('page', 1);
+        $limit = $this->container->getParameter('front_item_per_page', 6);
+        $offset = ($page - 1) * $limit;
+
+        $locale = $this->getRequest()->getLocale(); 
+        $posts = $contentManager->getRepository()->getList(
+                array('enabled' => true, 'type' => Content::TYPE_PAGE, 'locale'=>$locale), 
+                array('created' => 'DESC'), null, null);
+        foreach ($posts as $key => $post) {
+            if (in_array($post['id'], array(2, 5))) {
+                unset($posts[$key]);
+            }
+        }
+
+        return $this->render('KampongSiteBundle:Default:recruitment-list.html.twig', array(
+            'posts' => $posts,
+        ));
+    }
+    
     public function switchLanguageAction($_locale)
     {
         $request = $this->getRequest();
@@ -117,6 +146,29 @@ class DefaultController extends Controller
         } 
         
         return $this->redirect($referer);
+    }
+    
+    /**
+     * Paging product
+     *
+     * @param type $total
+     * @param type $current
+     * @param type $template
+     */
+    protected function paging($total, $current=1, $template='KampongSiteBundle:Block:pagination.html.twig')
+    {
+        $perPage = $this->container->getParameter('front_item_per_page');
+        $lastPage = ceil($total / $perPage);
+        $previousPage = $current > 1 ? $current - 1 : 1;
+        $nextPage = $current < $lastPage ? $current + 1 : $lastPage;
+    
+        return $this->renderView($template, array(
+            'lastPage' => $lastPage,
+            'previousPage' => $previousPage,
+            'currentPage' => $current,
+            'nextPage' => $nextPage,
+            'total' => $total
+        ));
     }
 
 }

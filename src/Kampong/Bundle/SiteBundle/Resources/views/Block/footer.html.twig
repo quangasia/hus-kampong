@@ -2,19 +2,14 @@
 <div class="footer-top">
     <div class="container">
         <div class="row">
-            <div class="col-sm-3"><img src="{{ asset('bundles/kampongsite/images/logo-footer.png')}}" alt="Logo" class="logo"/>
-                <address><strong>{{'Restaurant Address'|trans}}:</strong>
-                    <p>{%if site_settings.footer_address is defined%}{{site_settings.footer_address|raw}}{%endif%}</p>
-                </address>
+            <div class="col-sm-2"><img src="{{ asset('bundles/kampongsite/images/logo-footer.png')}}" alt="Logo" class="logo"/>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <h2>{{'Contact us'|trans}}</h2>
                 <div class="contact-detail">
-                    <div class="item"><strong>{{'Telephone Enquiry'|trans}}:</strong>
-                        <p>{%if site_settings.phone_number is defined%}{{site_settings.phone_number|raw}}{%endif%}</p>
-                    </div>
-                    <div class="item"><strong>{{'Email Enquiry'|trans}}:</strong>
-                        <p>{%if site_settings.contact_email is defined%}{{site_settings.contact_email|raw}}{%endif%}</p>
+                    {%if site_settings.footer_address is defined%}{{site_settings.footer_address|raw}}{%endif%}
+                    <div class="item">
+                        <p>{{'Email Enquiry'|trans}}: {%if site_settings.contact_email is defined%}{{site_settings.contact_email|raw}}{%endif%}</p>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@
             <aside id="sidebar" class="hidden-sm hidden-md hidden-lg">
                 {{ render(controller("KampongSiteBundle:Block:leftMenu")) }}
             </aside>
-            <h2 class="title">Thực Đơn</h2>
+            <h2 class="title">{{'Menu'|trans}}</h2>
             <div class="product-block">
                 <div class="row">
                     {% for food in foods%}
@@ -17,7 +17,7 @@
                         <div class="thumbnail">
                             <div class="desc"><img src="{{asset("uploads/" ~ food.picture)|imagine_filter('food_list')}}" alt="{{food.title}}" class="img-responsive">
                                 <div class="cta text-center">
-                                    <p><a href="{{path('kampong_site_food_detail', {id:food.id, slug:food.slug})}}" role="button"><span>Xem chi tiết</span></a></p>
+                                    <p><a href="{{path('kampong_site_food_detail', {id:food.id, slug:food.slug})}}" role="button"><span>{{'Detail'|trans}}</span></a></p>
                                 </div>
                             </div>
                             <div class="caption">

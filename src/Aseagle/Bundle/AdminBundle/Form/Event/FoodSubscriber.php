@@ -83,8 +83,8 @@ class FoodSubscriber implements EventSubscriberInterface
                 if (!$article->getImages()->contains($image)) {
                     if (file_exists($imageDir . $image->getPath())) {
                         unlink($imageDir . $image->getPath());
-                        $this->container->get('backend')->getMediaManager()->delete($image);
                     }
+                    $this->container->get('backend')->getMediaManager()->delete($image);
                 }
             }
 

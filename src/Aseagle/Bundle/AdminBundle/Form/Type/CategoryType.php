@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
 use Aseagle\Bundle\AdminBundle\Form\Event\CategorySubscriber;
 use Aseagle\Backend\Entity\Category;
+use Aseagle\Bundle\AdminBundle\Form\Type\ContentLanguageType;
 
 /**
  * CategoryType
@@ -47,20 +48,7 @@ class CategoryType extends AbstractType {
      * @see \Symfony\Component\Form\AbstractType::buildForm()
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('title', null, array ( 
-            'label' => 'Title', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Title',
-            ),
-            'required' => true 
-        ))->add('slug', null, array ( 
-            'label' => 'Slug', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Slug' 
-            ) 
-        ))->add('parent', null, array ( 
+        $builder->add('parent', null, array ( 
             'label' => 'Parent Category',
             'property' => 'propertyName',
             'class' => 'AseagleBackend:Category',
@@ -75,19 +63,13 @@ class CategoryType extends AbstractType {
             'attr' => array ( 
                 'class' => 'form-control', 
                 'placeholder' => 'Category' 
-            ) 
-        ))->add('description', null, array ( 
-            'label' => 'Description', 
-            'attr' => array ( 
-                'class' => 'form-control tinymce', 
-                'placeholder' => 'Description',
-                'data-theme' => 'simple' 
-            ) 
+            ), 
+            'required' => false
         ))->add('ordering', null, array ( 
-            'label' => 'Order', 
+            'label' => 'Ordering', 
             'attr' => array ( 
                 'class' => 'form-control', 
-                'placeholder' => 'Order' 
+                'placeholder' => 'Ordering' 
             ) 
         ))->add('enabled', 'choice', array ( 
             'label' => 'Status',
@@ -100,9 +82,14 @@ class CategoryType extends AbstractType {
             'attr' => array ( 
                 'class' => 'form-control' 
             ) 
+        ))->add('contentLangs', 'collection', array(
+            'type' => new ContentLanguageType(),
+            'allow_add'    => true,
+            'by_reference' => false,
+            'allow_delete' => true,
         ));
         
-        $builder->addEventSubscriber(new CategorySubscriber($this->container));
+        $builder->addEventSubscriber(new CategorySubscriber($this->container, Category::TYPE_POST));
         
     }
 

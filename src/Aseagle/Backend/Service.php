@@ -57,7 +57,7 @@ class Service
     public function getContentManager()
     {
         if (is_null($this->_contentManager)) {
-            $this->_contentManager = new ContentManager($this->_entityManager);
+            $this->_contentManager = new ContentManager($this->_entityManager, $this->_container);
         }
         return $this->_contentManager;
     }

@@ -43,24 +43,39 @@ class ContentRepository extends EntityRepository {
      */
     public function search($criteria, $orderBy, $limit, $offset, $count = false) {
         $query = $this->createQueryBuilder('o');
+        $where = 'where';
         if ($count) {
             $query->select('COUNT(o.id)');
+            if (isset($criteria['locale'])) {
+                unset($criteria['locale']);
+            }
         }
-        
-        $where = 'where';
+        elseif (isset($criteria['locale'])) {
+            $query->select('o, o.id, o.picture,cl.title, cl.slug, cl.shortText, cl.longText, cl.metaTitle, cl.metaContent, cl.metaKeywords')
+                ->leftJoin('o.contentLangs','cl')
+                ->where('cl.lang = :code')->setParameter('code', $criteria['locale']);
+            if (isset($criteria['title'])) { 
+                $query->andWhere('cl.title LIKE :title')->setParameter('title', "%{$criteria['title']}%");
+                unset($criteria['title']);
+            }
+
+            unset($criteria['locale']);
+            $where = 'andWhere';
+        }
+
         foreach ($criteria as $key => $value) {
             if (is_numeric($value)) {
                 $query->$where("o.$key = :$key")->setParameter($key, $value);
             } elseif ($value instanceof \DateTime) {
                 switch ($key) {
-                    case 'created_from' :
-                        $query->$where("o.created >= :$key")->setParameter($key, $value->format('Y-m-d') . ' 00:00:00');
-                        break;
-                    case 'created_to' :
-                        $query->$where("o.created <= :$key")->setParameter($key, $value->format('Y-m-d') . ' 23:59:59');
-                        break;
-                    default :
-                        $query->$where("o.$key = :$key")->setParameter($key, $value->format('Y-m-d'));
+                case 'created_from' :
+                    $query->$where("o.created >= :$key")->setParameter($key, $value->format('Y-m-d') . ' 00:00:00');
+                    break;
+                case 'created_to' :
+                    $query->$where("o.created <= :$key")->setParameter($key, $value->format('Y-m-d') . ' 23:59:59');
+                    break;
+                default :
+                    $query->$where("o.$key = :$key")->setParameter($key, $value->format('Y-m-d'));
                 }
             } elseif (is_string($value)) {
                 if (strpos('%', $value) >= 0) {
@@ -69,10 +84,10 @@ class ContentRepository extends EntityRepository {
                     $query->$where("o.$key = :$key")->setParameter($key, $value);
                 }
             } elseif (is_array($value)) {
-                
+
                 $query->$where("o.$key IN (:$key)")->setParameter($key, $value);
             } elseif (is_object($value)) {
-                
+
                 $query->$where("o.$key = :$key")->setParameter($key, $value->getId());
             } else {
                 if ($value == null && $key == 'parent') {
@@ -83,35 +98,40 @@ class ContentRepository extends EntityRepository {
             }
             $where = 'andWhere';
         }
-        
         if (! empty($orderBy)) {
             foreach ($orderBy as $key => $value) {
-                $keyOrder [] = "o.$key";
+                if ($key != 'title') {
+                    $keyOrder [] = "o.$key";
+                } else {
+                    $keyOrder [] = "cl.$key";
+                }
                 $sortValue = $value;
+
             }
+
             $query->orderBy(implode(',', $keyOrder), $sortValue);
         }
-        
+
         if ($limit) {
             $query->setMaxResults((int) $limit);
             $query->setFirstResult((int) $offset);
         }
-        
+
         if ($count) {
             return $query->getQuery()->getSingleScalarResult();
         } else {
             return $query->getQuery()->getResult();
         }
     }
-    
+
     public function getPostByCategory($catId, $order, $limit, $offset, $count=false) {
         $query = $this->createQueryBuilder('o');
         if ($count) {
             $query->select('COUNT(o.id)');
         }
         $query->leftJoin('o.categories', 'c')
-              ->where('c.id = :cid')->setParameter(':cid', $catId);
-        
+            ->where('c.id = :cid')->setParameter(':cid', $catId);
+
         if (! empty($order)) {
             foreach ($order as $key => $value) {
                 $keyOrder [] = "o.$key";
@@ -119,18 +139,84 @@ class ContentRepository extends EntityRepository {
             }
             $query->orderBy(implode(',', $keyOrder), $sortValue);
         }
-        
+
         if ($limit) {
             $query->setMaxResults((int) $limit);
             $query->setFirstResult((int) $offset);
         }
-        
+
         if ($count) {
             return $query->getQuery()->getSingleScalarResult();
         } else {
             return $query->getQuery()->getResult();
         }
     }
+
+    public function getPosts($criteria, $order, $limit, $offset, $count=false) {
+        $query = $this->createQueryBuilder('o');
+        if ($count) {
+            $query->select('COUNT(o.id)');
+            if (isset($criteria['locale'])) {
+                unset($criteria['locale']);
+            }
+        }
+
+        if (isset($criteria['locale'])) {
+            $query->select('o, o.id, o.picture, cl.title, cl.slug, cl.shortText, cl.longText, cl.metaTitle, cl.metaContent, cl.metaKeywords')
+                ->leftJoin('o.contentLangs','cl')
+                ->where('cl.lang = :code')->setParameter('code', $criteria['locale'])
+                ->andWhere('o.enabled = true');
+        }
+
+        if (isset($criteria['catId'])) {
+            $query->leftJoin('o.categories', 'c')
+                ->andWhere('c.id = :cid')->setParameter(':cid', $criteria['catId']);
+        }
+
+        if (! empty($order)) {
+            foreach ($order as $key => $value) {
+                $keyOrder [] = "o.$key";
+                $sortValue = $value;
+            }
+            $query->orderBy(implode(',', $keyOrder), $sortValue);
+        }
+
+        if ($limit) {
+            $query->setMaxResults((int) $limit);
+            $query->setFirstResult((int) $offset);
+        }
+
+        if ($count) {
+            return $query->getQuery()->getSingleScalarResult();
+        } else {
+            return $query->getQuery()->getResult();
+        }
+    }
+
+    public function getFoodOnHomepageByLocale($locale)
+    {
+        $query = $this->createQueryBuilder('o');
+        $query->select('o, o.id, o.picture, cl.title, cl.slug, cl.shortText, cl.longText, cl.metaTitle, cl.metaContent, cl.metaKeywords')
+            ->leftJoin('o.contentLangs','cl')
+            ->where('cl.lang = :code')->setParameter('code', $locale)
+            ->andWhere('o.type = :type')->setParameter('type', 3)
+            ->andWhere('o.feature = true AND o.enabled = true');
+        $query->orderBy('o.created', 'DESC');
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function getPost($id, $locale) {
+        $query = $this->createQueryBuilder('o');
+        $query->select('o, o.id, o.picture, cl.title, cl.slug, cl.shortText, cl.longText, cl.metaTitle, cl.metaContent, cl.metaKeywords')
+            ->leftJoin('o.contentLangs','cl')
+            ->where('cl.lang = :code')->setParameter('code', $locale)
+            ->andWhere('o.id = :id')->setParameter('id', $id)
+            ->andWhere('o.enabled = true');
+        return $query->getQuery()->getSingleResult();
+    }
+
+
 }
 
 

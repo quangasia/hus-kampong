@@ -48,9 +48,7 @@ class LanguageListener implements EventSubscriberInterface
 
     public function getLanguages()
     {
-
-        $langRepo = $this->_container->get('backend')->getLanguageManager()->getRepository();
-        return $langRepo->findBy(array('active' => true), array('isDefault' => 'DESC'));
+        return $this->_container->get('backend')->getLanguageManager()->getLanguages();
     }
 }
 

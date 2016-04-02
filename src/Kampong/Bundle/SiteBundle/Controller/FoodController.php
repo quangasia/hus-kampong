@@ -14,11 +14,12 @@ class FoodController extends Controller
         $contentManager = $this->get('backend')->getContentManager();
         $categoryManager = $this->get('backend')->getCategoryManager();
         
+        $locale = $this->getRequest()->getLocale();
         $catId = $this->getRequest()->get('catid', 0);
         if ($catId == 0) {
             $this->createNotFoundException();
         }
-        $category = $categoryManager->getRepository()->find($catId);
+        $category = $categoryManager->getRepository()->getCategory($catId, $locale);
         if (is_null($category)) {
             $this->createNotFoundException();
         }
@@ -27,8 +28,8 @@ class FoodController extends Controller
         $limit = $this->container->getParameter('front_item_per_page', 6);
         $offset = ($page - 1) * $limit;
 
-        $foods = $contentManager->getRepository()->getPostByCategory($catId, array(), $limit, $offset);
-        $total = $contentManager->getRepository()->getPostByCategory($catId, array(), $limit, $offset, true);
+        $foods = $contentManager->getRepository()->getPosts(array('catId'=>$catId,'locale'=>$locale), array(), $limit, $offset);
+        $total = $contentManager->getRepository()->getPosts(array('catId'=>$catId,'locale'=>$locale), array(), null, null, true);
 
         return $this->render('KampongSiteBundle:Food:index.html.twig', array(
                     'foods' => $foods,
@@ -43,18 +44,22 @@ class FoodController extends Controller
         if ($id == 0) {
             $this->createNotFoundException();
         }
+        
+        $locale = $this->getRequest()->getLocale();
         /* @var $productManager \Aseagle\Backend\Manager\ContentManager */
         $contentManager = $this->get('backend')->getContentManager();
-        $detail = $contentManager->getRepository()->find($id);
+        $detail = $contentManager->getRepository()->getPost($id, $locale);
 
-        $otherFoods = $contentManager->getRepository()->findBy(
+        
+        $otherFoods = $contentManager->getRepository()->getList(
                 array(
             'enabled' => true,
             'type' => Content::TYPE_FOOD,
+            'locale' => $locale
                 ), array(
             'created' => 'DESC'
                 ), 6, 0
-        );
+            );
 
         if (is_null($detail)) {
             $this->createNotFoundException();
@@ -69,6 +74,7 @@ class FoodController extends Controller
 
     public function allAction()
     {
+        $locale = $this->getRequest()->getLocale();
         /* @var $productManager \Aseagle\Backend\Manager\ContentManager */
         $contentManager = $this->get('backend')->getContentManager();
 
@@ -77,9 +83,9 @@ class FoodController extends Controller
         $offset = ($page - 1) * $limit;
 
         $foods = $contentManager->getRepository()->getList(
-                array('enabled' => true, 'type' => Content::TYPE_FOOD), array('created' => 'desc'), $limit, $offset
+                array('enabled' => true, 'type' => Content::TYPE_FOOD, 'locale'=>$locale), array('created' => 'desc'), $limit, $offset
         );
-        $total = $contentManager->getRepository()->getTotal(array('enabled' => true, 'type' => Content::TYPE_FOOD));
+        $total = $contentManager->getRepository()->getTotal(array('enabled' => true, 'type' => Content::TYPE_FOOD, 'locale'=>$locale));
 
         return $this->render('KampongSiteBundle:Food:all.html.twig', array(
                     'foods' => $foods,

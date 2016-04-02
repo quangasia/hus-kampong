@@ -244,4 +244,14 @@ class UserGroup
     {
         return $this->system;
     }
+
+    /**
+     * Get system
+     *
+     * @return boolean 
+     */
+    public function getSystem()
+    {
+        return $this->system;
+    }
 }

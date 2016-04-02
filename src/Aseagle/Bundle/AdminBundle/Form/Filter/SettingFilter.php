@@ -50,7 +50,15 @@ class SettingFilter extends AbstractType {
                 'placeholder' => 'Key' 
             ),
             'required' => false
+        ))->add('locale', null, array ( 
+            'label' => 'Language', 
+            'attr' => array ( 
+                'class' => 'form-control form-filter input-sm', 
+                'placeholder' => 'Language' 
+            ),
+            'required' => false
         ));
+
     }
 
     /*

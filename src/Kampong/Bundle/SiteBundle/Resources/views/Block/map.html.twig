@@ -57,22 +57,29 @@
     </div>
     <input class="controls" type="text" id="pac-input" placeholder="Search"/>
     
+    {% set address = site_settings.map_address_show|split('|') %}
+    {% set latitudes = site_settings.map_latitude|split('|') %}
+    {% set longitudes = site_settings.map_longitude|split('|') %}
     
     <script type="text/javascript">
-        var content = '<div style="float:left; padding-right:3px; border-right:1px solid #eee;"><img src="{{asset('bundles/kampongsite/images/logo.png')}}" style="width:70px"/></div>';
-            content += '<div style="float:left; padding-left:3px;">{%if site_settings.map_address_show is defined%}{{site_settings.map_address_show|raw}}{%else%}<b>Kam Pong</b><br/>1 Nguy&#7877;n Th&#7883; Minh Khai<br/> H&#7891; Ch&iacute; Minh{%endif%}</div>';
-        
         function init_map() {
             var markers = [];
-            var myOptions = {zoom: 16, center: new google.maps.LatLng({{site_settings.map_latitude}}, {{site_settings.map_longitude}}), mapTypeId: google.maps.MapTypeId.ROADMAP, scrollwheel: true};
+            var myOptions = {zoom: 14, center: new google.maps.LatLng(21.007668, 105.841509), mapTypeId: google.maps.MapTypeId.ROADMAP, scrollwheel: true};
             map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
-            marker = new google.maps.Marker({map: map, position: new google.maps.LatLng({{site_settings.map_latitude}}, {{site_settings.map_longitude}})});
-            infowindow = new google.maps.InfoWindow({content: content});
-            google.maps.event.addListener(marker, "click", function () {
-                infowindow.open(map, marker);
-            });
-            infowindow.open(map, marker);
-
+            
+    
+            {% for key, addr in address %}
+                var content{{key}} = '<div style="float:left; padding-right:3px; border-right:1px solid #eee;"><img src="{{asset('bundles/kampongsite/images/logo.png')}}" style="width:70px"/></div>';
+                content{{key}} += '<div style="float:left; padding-left:3px;">{{address[key]|raw}}</div>';
+        
+                marker{{key}} = new google.maps.Marker({map: map, position: new google.maps.LatLng({{latitudes[key]}}, {{longitudes[key]}})});
+                infowindow = new google.maps.InfoWindow({content: content{{key}}});
+                google.maps.event.addListener(marker{{key}}, "click", function () {
+                    infowindow.open(map, marker{{key}});
+                });
+                infowindow.open(map, marker{{key}});
+            {% endfor %}
+    
             // Create the search box and link it to the UI element.
             var input = /** @type {HTMLInputElement} */(
             document.getElementById('pac-input'));

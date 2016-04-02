@@ -28,14 +28,16 @@ class Settings
 
     public function getAll()
     {
-        if (!isset($this->arrSetting)) {
-            $settings = $this->container->get('backend')->getSettingManager()->getRepository()->findAll();
-            $arrSetting = array();
+        $locale = $this->container->get('request')->getLocale();
+        if (!isset($this->arrSetting[$locale])) {
+            $settings = $this->container->get('backend')->getSettingManager()->getRepository()->findBy(array('locale'=>$locale));
+            $arrSetting[$locale] = array();
             foreach ($settings as $item) {
                 $arrSetting[$item->getKey()] = $item->getValue();
             }
+            $this->arrSetting[$locale] = $arrSetting;
         } else {
-            $arrSetting = $this->arrSetting;
+            $arrSetting = $this->arrSetting[$locale];
         }
      
         return $arrSetting;

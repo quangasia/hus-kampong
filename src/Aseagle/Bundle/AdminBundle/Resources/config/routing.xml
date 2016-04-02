@@ -32,4 +32,5 @@
     <import resource="@AseagleAdminBundle/Resources/config/routing/acl.xml" prefix="/acl" />
     <import resource="@AseagleAdminBundle/Resources/config/routing/setting.xml" prefix="/setting" />
     <import resource="@AseagleAdminBundle/Resources/config/routing/banner.xml" prefix="/banner" />
+    
 </routes>

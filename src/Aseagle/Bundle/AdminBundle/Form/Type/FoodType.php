@@ -15,8 +15,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
-use Aseagle\Bundle\AdminBundle\Form\Event\FoodSubscriber;
+use Aseagle\Bundle\AdminBundle\Form\Event\ContentSubscriber;
 use Aseagle\Backend\Entity\Category;
+use Aseagle\Backend\Entity\Content;
 
 /**
  * FoodType
@@ -44,37 +45,17 @@ class FoodType extends AbstractType {
      * @see \Symfony\Component\Form\AbstractType::buildForm()
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('title', null, array ( 
-            'label' => 'Title', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Title',
-            ),
-            'required' => true 
-        ))->add('slug', null, array ( 
-            'label' => 'Slug', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Slug' 
-            ) 
-        ))->add('shortDescription', null, array ( 
-            'label' => 'Short Description', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Short Description',
-            ) 
-        ))->add('content', null, array ( 
-            'label' => 'Content', 
-            'attr' => array ( 
-                'class' => 'form-control tinymce', 
-                'placeholder' => 'Content',
-                'data-theme' => 'advanced' 
-            ) 
-        ))->add('time', null, array ( 
+        $builder->add('time', null, array ( 
             'label' => 'Time', 
             'attr' => array ( 
                 'class' => 'form-control', 
                 'placeholder' => 'Time' 
+            ) 
+        ))->add('price', null, array ( 
+            'label' => 'Price', 
+            'attr' => array ( 
+                'class' => 'form-control', 
+                'placeholder' => 'Price' 
             ) 
         ))->add('picture', 'hidden', array ( 
             'label' => 'Picture', 
@@ -97,31 +78,6 @@ class FoodType extends AbstractType {
             'attr' => array ( 
                 'class' => 'form-control', 
                 'placeholder' => 'Categories' 
-            ) 
-        ))->add('tags', null, array ( 
-            'label' => 'Tags', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Tags' 
-            ) 
-        ))->add('metaTitle', null, array ( 
-            'label' => 'Meta Title', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Meta Title' 
-            ) 
-        ))->add('metaContent', 'textarea', array ( 
-            'label' => 'Meta Description', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Meta Description' 
-            ),
-            'required' => false 
-        ))->add('metaKeywords', null, array ( 
-            'label' => 'Meta Keywords', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Meta Keywords' 
             ) 
         ))->add('feature', 'checkbox', array ( 
             'label' => 'Feature',
@@ -151,9 +107,15 @@ class FoodType extends AbstractType {
             'allow_add' => true,
             'by_reference' => true,
             'allow_delete' => true
+        ))->add('contentLangs', 'collection', array(
+            'type' => new ContentLanguageType(),
+            'allow_add'    => true,
+            'by_reference' => false,
+            'allow_delete' => true,
         ));
         
-        $builder->addEventSubscriber(new FoodSubscriber($this->container));
+        
+        $builder->addEventSubscriber(new ContentSubscriber($this->container, Content::TYPE_FOOD));
         
     }
 

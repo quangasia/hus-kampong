@@ -34,6 +34,12 @@ class Setting
      */
     private $value;
 
+
+    /**
+     * @ORM\Column(type="text", length=200)
+     */
+    private $locale;
+
     /**
      * Get id
      *
@@ -111,5 +117,28 @@ class Setting
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Set locale
+     *
+     * @param string $locale
+     * @return Setting
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return string 
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }

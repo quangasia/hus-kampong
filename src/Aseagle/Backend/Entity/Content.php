@@ -24,23 +24,13 @@ class Content {
     const TYPE_POST = 1;
     const TYPE_PAGE = 2;
     const TYPE_FOOD = 3;
-    
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
-    /**
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @ORM\Column(name="slug", type="string", length=255)
-     */
-    private $slug;
 
     /**
      * @ORM\Column(name="type", type="integer", nullable=true)
@@ -48,39 +38,9 @@ class Content {
     private $type;
 
     /**
-     * @ORM\Column(name="content", type="text", nullable=true)
-     */
-    private $content;
-
-    /**
      * @ORM\Column(name="picture", type="string", length=512, nullable=true)
      */
     private $picture;
-
-    /**
-     * @ORM\Column(name="tags", type="string", length=512, nullable=true)
-     */
-    private $tags;
-    
-    /**
-     * @ORM\Column(name="short_description", type="text", nullable=true)
-     */
-    private $shortDescription;
-
-    /**
-     * @ORM\Column(name="meta_title", type="string", length=512, nullable=true)
-     */
-    private $metaTitle;
-
-    /**
-     * @ORM\Column(name="meta_content", type="string", length=512, nullable=true)
-     */
-    private $metaContent;
-
-    /**
-     * @ORM\Column(name="meta_keywords", type="string", length=512, nullable=true)
-     */
-    private $metaKeywords;
 
     /**
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
@@ -100,100 +60,63 @@ class Content {
      * @ORM\Column(name="ctime", type="datetime", nullable=true)
      */
     private $created;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Category")
      * @ORM\JoinTable(name="content_category")
      */
     private $categories;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Aseagle\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
-    
+
+    /** 
+     * @ORM\OneToMany(targetEntity="ContentLanguage", mappedBy="content", cascade={"all"})
+     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
+     */
+    private $contentLangs;
+
     /**
      * @ORM\Column(name="feature", type="boolean", nullable=true)
      */
     private $feature;
-    
+
     /**
      * @ORM\Column(name="system", type="boolean", nullable=true)
      */
     private $system;
-    
+
     /**
      * @ORM\Column(name="rate_point", type="float", nullable=true)
      */
     private $ratePoint;
-    
+
     /**
      * @ORM\Column(name="rate_count", type="integer", nullable=true)
      */
     private $rateCount;
-    
-    
+
+
     /**
      * @ORM\Column(name="time", type="integer", nullable=true)
      */
     private $time;
 
- 
     /**
-     * @ORM\OneToMany(targetEntity="Media", mappedBy="content")
+     * @ORM\Column(name="price", type="string", length=100, nullable=true)
+     */
+    private $price;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="content", cascade={"all"})
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      */
     private $images;
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Content
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Content
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set type
      *
      * @param integer $type
      * @return Content
@@ -213,29 +136,6 @@ class Content {
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return Content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string 
-     */
-    public function getContent()
-    {
-        return $this->content;
     }
 
     /**
@@ -259,98 +159,6 @@ class Content {
     public function getPicture()
     {
         return $this->picture;
-    }
-
-    /**
-     * Set tags
-     *
-     * @param string $tags
-     * @return Content
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return string 
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Set metaTitle
-     *
-     * @param string $metaTitle
-     * @return Content
-     */
-    public function setMetaTitle($metaTitle)
-    {
-        $this->metaTitle = $metaTitle;
-
-        return $this;
-    }
-
-    /**
-     * Get metaTitle
-     *
-     * @return string 
-     */
-    public function getMetaTitle()
-    {
-        return $this->metaTitle;
-    }
-
-    /**
-     * Set metaContent
-     *
-     * @param string $metaContent
-     * @return Content
-     */
-    public function setMetaContent($metaContent)
-    {
-        $this->metaContent = $metaContent;
-
-        return $this;
-    }
-
-    /**
-     * Get metaContent
-     *
-     * @return string 
-     */
-    public function getMetaContent()
-    {
-        return $this->metaContent;
-    }
-
-    /**
-     * Set metaKeywords
-     *
-     * @param string $metaKeywords
-     * @return Content
-     */
-    public function setMetaKeywords($metaKeywords)
-    {
-        $this->metaKeywords = $metaKeywords;
-
-        return $this;
-    }
-
-    /**
-     * Get metaKeywords
-     *
-     * @return string 
-     */
-    public function getMetaKeywords()
-    {
-        return $this->metaKeywords;
     }
 
     /**
@@ -431,25 +239,19 @@ class Content {
     {
         return $this->id;
     }
-    
+
     /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
     public function updatedTimestamp()
     {
-        /*Updated the slug string*/
-        if (NULL != $this->getSlug()) {
-            $this->slug = $this->title;
-        }
-        $this->slug = Html::slugify($this->slug);
-        
         $this->setUpdated(new \DateTime(date('Y-m-d H:i:s')));
         if (NULL === $this->getCreated()) {
             $this->setCreated(new \DateTime(date('Y-m-d H:i:s')));
         }
     }
-       
+
     /**
      * Set author
      *
@@ -472,7 +274,7 @@ class Content {
     {
         return $this->author;
     }
-    
+
 
     /**
      * Constructor
@@ -542,7 +344,7 @@ class Content {
     {
         return $this->pageView;
     }
-    
+
 
 
     /**
@@ -567,7 +369,7 @@ class Content {
     {
         return $this->system;
     }
-    
+
     /**
      * Get system
      *
@@ -577,7 +379,7 @@ class Content {
     {
         return $this->system;
     }
-    
+
     /**
      * Set feature
      *
@@ -591,7 +393,7 @@ class Content {
         return $this;
     }
 
-    
+
     /**
      * Get feature
      *
@@ -601,7 +403,7 @@ class Content {
     {
         return $this->feature;
     }
-    
+
     /**
      * Get feature
      *
@@ -611,8 +413,8 @@ class Content {
     {
         return $this->feature;
     }
-    
-    
+
+
 
 
     /**
@@ -659,6 +461,29 @@ class Content {
     public function getTime()
     {
         return $this->time;
+    }
+
+     /**
+     * Set price
+     *
+     * @param integer $price
+     * @return Content
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get time
+     *
+     * @return integer 
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 
     /**
@@ -738,5 +563,38 @@ class Content {
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Add contentLangs
+     *
+     * @param \Aseagle\Backend\Entity\ContentLanguage $contentLangs
+     * @return Content
+     */
+    public function addContentLang(\Aseagle\Backend\Entity\ContentLanguage $contentLangs)
+    {
+        $this->contentLangs[] = $contentLangs;
+
+        return $this;
+    }
+
+    /**
+     * Remove contentLangs
+     *
+     * @param \Aseagle\Backend\Entity\ContentLanguage $contentLangs
+     */
+    public function removeContentLang(\Aseagle\Backend\Entity\ContentLanguage $contentLangs)
+    {
+        $this->contentLangs->removeElement($contentLangs);
+    }
+
+    /**
+     * Get contentLangs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContentLangs()
+    {
+        return $this->contentLangs;
     }
 }

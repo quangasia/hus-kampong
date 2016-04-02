@@ -9,7 +9,7 @@
         <default key="_class">Aseagle\Bundle\AdminBundle\Controller\SettingController</default>
         <default key="_manager">setting</default>
         <default key="_form">\Aseagle\Bundle\AdminBundle\Form\Filter\SettingFilter</default>
-        <default key="_columns">["id","name","key","value"]</default>    
+        <default key="_columns">["id","name","key","value", "locale"]</default>    
         <default key="_view">AseagleAdminBundle:Setting:index.html.twig</default>    
     </route>  
     <route id="admin_setting_new" path="/new/{id}">

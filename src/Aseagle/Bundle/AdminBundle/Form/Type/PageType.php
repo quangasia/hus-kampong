@@ -15,7 +15,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
-use Aseagle\Bundle\AdminBundle\Form\Event\PageSubscriber;
+use Aseagle\Bundle\AdminBundle\Form\Event\ContentSubscriber;
+use Aseagle\Backend\Entity\Content;
 
 /**
  * PageType
@@ -43,44 +44,12 @@ class PageType extends AbstractType {
      * @see \Symfony\Component\Form\AbstractType::buildForm()
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('title', null, array ( 
-            'label' => 'Title', 
+        $builder->add('picture', 'hidden', array ( 
+            'label' => 'Picture', 
             'attr' => array ( 
                 'class' => 'form-control', 
-                'placeholder' => 'Title',
-            ),
-            'required' => true 
-        ))->add('slug', null, array ( 
-            'label' => 'Slug', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Slug' 
-            ) 
-        ))->add('content', null, array ( 
-            'label' => 'Content', 
-            'attr' => array ( 
-                'class' => 'form-control tinymce', 
-                'placeholder' => 'Content',
-                'data-theme' => 'advanced' 
-            ) 
-        ))->add('metaTitle', null, array ( 
-            'label' => 'Meta Title', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Meta Title' 
-            ) 
-        ))->add('metaContent', 'textarea', array ( 
-            'label' => 'Meta Description', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Meta Description' 
-            ),
-            'required' => false 
-        ))->add('metaKeywords', null, array ( 
-            'label' => 'Meta Keywords', 
-            'attr' => array ( 
-                'class' => 'form-control', 
-                'placeholder' => 'Meta Keywords' 
+                'placeholder' => 'Picture',
+                'data-type' => 'elfinder-input-field'
             ) 
         ))->add('enabled', 'choice', array ( 
             'label' => 'Status',
@@ -93,9 +62,14 @@ class PageType extends AbstractType {
             'attr' => array ( 
                 'class' => 'form-control' 
             ) 
+        ))->add('contentLangs', 'collection', array(
+            'type' => new ContentLanguageType(),
+            'allow_add'    => true,
+            'by_reference' => false,
+            'allow_delete' => true,
         ));
         
-        $builder->addEventSubscriber(new PageSubscriber($this->container));
+        $builder->addEventSubscriber(new ContentSubscriber($this->container, Content::TYPE_PAGE));
         
     }
 
